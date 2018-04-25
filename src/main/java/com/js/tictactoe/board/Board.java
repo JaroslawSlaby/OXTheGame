@@ -1,9 +1,9 @@
-package tictactoe.board;
+package com.js.tictactoe.board;
 
-import tictactoe.board.coords.Coordinates;
-import tictactoe.engine.Dimensions.Dimensions;
-import tictactoe.exceptions.WrongSizeException;
-import tictactoe.player.Sign;
+import com.js.tictactoe.board.coords.Coordinates;
+import com.js.tictactoe.engine.Dimensions.Dimensions;
+import com.js.tictactoe.exceptions.WrongSizeException;
+import com.js.tictactoe.player.Sign;
 
 public class Board extends BoardGenerator {
 

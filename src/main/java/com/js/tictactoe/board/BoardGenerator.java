@@ -1,7 +1,7 @@
-package tictactoe.board;
+package com.js.tictactoe.board;
 
-import tictactoe.engine.Dimensions.Dimensions;
-import tictactoe.player.Sign;
+import com.js.tictactoe.engine.Dimensions.Dimensions;
+import com.js.tictactoe.player.Sign;
 
 class BoardGenerator {
 

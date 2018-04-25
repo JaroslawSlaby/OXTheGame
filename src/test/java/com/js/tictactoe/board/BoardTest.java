@@ -1,11 +1,11 @@
-package tictactoe.board;
+package com.js.tictactoe.board;
 
+import com.js.tictactoe.board.coords.Coordinates;
+import com.js.tictactoe.exceptions.WrongIndexException;
+import com.js.tictactoe.exceptions.WrongSizeException;
+import com.js.tictactoe.player.Sign;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import tictactoe.board.coords.Coordinates;
-import tictactoe.exceptions.WrongIndexException;
-import tictactoe.exceptions.WrongSizeException;
-import tictactoe.player.Sign;
 
 public class BoardTest {
 

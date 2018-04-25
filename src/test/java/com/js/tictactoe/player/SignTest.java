@@ -1,4 +1,4 @@
-package tictactoe.player;
+package com.js.tictactoe.player;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;

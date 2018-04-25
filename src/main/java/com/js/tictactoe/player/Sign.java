@@ -1,4 +1,4 @@
-package tictactoe.player;
+package com.js.tictactoe.player;
 
 public enum Sign {
 
