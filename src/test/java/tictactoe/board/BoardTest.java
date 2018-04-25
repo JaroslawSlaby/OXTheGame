@@ -3,6 +3,7 @@ package tictactoe.board;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import tictactoe.board.coords.Coordinates;
+import tictactoe.exceptions.WrongIndexException;
 import tictactoe.exceptions.WrongSizeException;
 import tictactoe.player.Sign;
 
@@ -35,12 +36,13 @@ public class BoardTest {
     }
 
     @Test
-    public void insertCorrectSignToBoardInCorrectCoordinates() throws WrongSizeException {
+    public void insertCorrectSignToBoardInCorrectCoordinates() throws WrongSizeException, WrongIndexException {
         Board board = Board.getSquareBoard(DEFAULT_SIZE_OF_BOARD);
         Sign sign = Sign.X;
         Coordinates coordinates = Coordinates.parseCoordinates("1 2");
-        boolean isAdded = board.insert(coordinates, sign);
+        boolean isAdded = board.insertSign(coordinates, sign);
         Assert.assertEquals(true, isAdded);
     }
+
 
 }

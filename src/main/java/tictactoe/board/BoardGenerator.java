@@ -3,9 +3,11 @@ package tictactoe.board;
 import tictactoe.engine.Dimensions.Dimensions;
 import tictactoe.player.Sign;
 
-public class BoardGenerator {
+class BoardGenerator {
 
-    public static Sign[][] createEmptyBoard(Dimensions dimensions) {
-        return new Sign[dimensions.getWidth()][dimensions.getWidth()];
+    Sign[][] table;
+
+    void createEmptyBoard(Dimensions dimensions) {
+        table = new Sign[dimensions.getWidth()][dimensions.getWidth()];
     }
 }

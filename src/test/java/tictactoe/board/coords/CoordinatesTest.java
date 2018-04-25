@@ -2,6 +2,7 @@ package tictactoe.board.coords;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import tictactoe.exceptions.WrongIndexException;
 
 public class CoordinatesTest {
 
@@ -11,17 +12,22 @@ public class CoordinatesTest {
     private static final int SECOND_COORDINATE_INT = 2;
 
     @Test
-    public void parseCoordinatesFromCorrectString() {
+    public void parseCoordinatesFromCorrectString() throws WrongIndexException {
         Coordinates coordinates = Coordinates.parseCoordinates(FIRST_CORRECT_COORDINATE + " " + SECOND_CORRECT_COORDINATE);
         Assert.assertEquals(FIRST_COORDINATE_INT, coordinates.getIntegerX());
     }
 
     @Test
-    public void checkIfAllCoordinatesAreParsedCorrectly() {
+    public void checkIfAllCoordinatesAreParsedCorrectly() throws WrongIndexException {
         Coordinates coordinates = Coordinates.parseCoordinates(FIRST_CORRECT_COORDINATE + " " + SECOND_CORRECT_COORDINATE);
         int[] correct = {FIRST_COORDINATE_INT, SECOND_COORDINATE_INT};
         int[] fromCoordinates = {coordinates.getIntegerX(), coordinates.getIntegerY()};
         Assert.assertEquals(correct, fromCoordinates);
+    }
+
+    @Test(expectedExceptions = WrongIndexException.class)
+    public void insertCorrectSignToBoardInIncorrectCoordinates() throws WrongIndexException {
+        Coordinates.parseCoordinates("-1 -2");
     }
 
 }

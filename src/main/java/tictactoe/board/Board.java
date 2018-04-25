@@ -7,10 +7,8 @@ import tictactoe.player.Sign;
 
 public class Board extends BoardGenerator {
 
-    private Sign[][] table;
-
     private Board(Dimensions sizeOfBoard) {
-        this.table = createEmptyBoard(sizeOfBoard);
+        createEmptyBoard(sizeOfBoard);
     }
 
     public static Board getSquareBoard(int size) throws WrongSizeException {
@@ -39,7 +37,7 @@ public class Board extends BoardGenerator {
         return table.length;
     }
 
-    public boolean insert(Coordinates coordinates, Sign sign) {
+    public boolean insertSign(Coordinates coordinates, Sign sign) {
         int x = coordinates.getIntegerX();
         int y = coordinates.getIntegerY();
 
