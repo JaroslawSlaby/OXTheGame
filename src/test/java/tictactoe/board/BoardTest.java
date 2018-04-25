@@ -40,7 +40,7 @@ public class BoardTest {
         Sign sign = Sign.X;
         Coordinates coordinates = Coordinates.parseCoordinates("1 2");
         boolean isAdded = board.insert(coordinates, sign);
-
+        Assert.assertEquals(true, isAdded);
     }
 
 }

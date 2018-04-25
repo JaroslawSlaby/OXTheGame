@@ -40,6 +40,10 @@ public class Board {
     }
 
     public boolean insert(Coordinates coordinates, Sign sign) {
+        int x = coordinates.getIntegerX();
+        int y = coordinates.getIntegerY();
+
+        table[x][y] = sign;
         return true;
     }
 }
