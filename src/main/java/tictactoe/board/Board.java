@@ -5,12 +5,12 @@ import tictactoe.engine.Dimensions.Dimensions;
 import tictactoe.exceptions.WrongSizeException;
 import tictactoe.player.Sign;
 
-public class Board {
+public class Board extends BoardGenerator {
 
     private Sign[][] table;
 
     private Board(Dimensions sizeOfBoard) {
-        this.table = BoardGenerator.createEmptyBoard(sizeOfBoard);
+        this.table = createEmptyBoard(sizeOfBoard);
     }
 
     public static Board getSquareBoard(int size) throws WrongSizeException {
