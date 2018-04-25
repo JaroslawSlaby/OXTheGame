@@ -41,6 +41,7 @@ public class Board extends BoardGenerator {
         int x = coordinates.getIntegerX();
         int y = coordinates.getIntegerY();
 
+
         table[x][y] = sign;
         return true;
     }

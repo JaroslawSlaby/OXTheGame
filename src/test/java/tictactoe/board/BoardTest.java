@@ -41,8 +41,26 @@ public class BoardTest {
         Sign sign = Sign.X;
         Coordinates coordinates = Coordinates.parseCoordinates("1 2");
         boolean isAdded = board.insertSign(coordinates, sign);
-        Assert.assertEquals(true, isAdded);
+        Assert.assertTrue(isAdded);
     }
 
+    @Test(expectedExceptions = WrongIndexException.class)
+    public void insertCorrectSignToBoardInIncorrectCoordinates() throws WrongSizeException, WrongIndexException {
+        Board board = Board.getSquareBoard(DEFAULT_SIZE_OF_BOARD);
+        Sign sign = Sign.X;
+        Coordinates coordinates = Coordinates.parseCoordinates("-1 -2");
+        board.insertSign(coordinates, sign);
+    }
+
+    @Test
+    public void insertCorrectSignToFilledCellInBoard() throws WrongIndexException, WrongSizeException {
+        Board board = Board.getSquareBoard(DEFAULT_SIZE_OF_BOARD);
+        Sign sign = Sign.X;
+        Coordinates coordinates = Coordinates.parseCoordinates("1 2");
+        board.insertSign(coordinates, sign);
+        sign = sign.getOppositePlayer();
+        boolean isAdded = board.insertSign(coordinates, sign);
+        Assert.assertFalse(false);
+    }
 
 }

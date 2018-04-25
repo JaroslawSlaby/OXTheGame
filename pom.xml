@@ -5,6 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <properties>
+        <java.version>1.8</java.version>
+        <jar.plugin>3.1.0</jar.plugin>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -15,14 +17,14 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.7.0</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>${jar.plugin}</version>
                 <configuration>
                     <archive>
                         <manifest>
@@ -38,7 +40,7 @@
 
 
     <groupId>com.js.tic-tac-toe</groupId>
-    <artifactId>com.js.tic-tac-toe</artifactId>
+    <artifactId>OX</artifactId>
     <version>1.0-SNAPSHOT</version>
     <dependencies>
         <dependency>
@@ -47,6 +49,5 @@
             <version>RELEASE</version>
         </dependency>
     </dependencies>
-
 
 </project>
