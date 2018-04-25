@@ -1,15 +1,16 @@
 package tictactoe.board;
 
+import tictactoe.board.coords.Coordinates;
 import tictactoe.engine.Dimensions.Dimensions;
 import tictactoe.exceptions.WrongSizeException;
+import tictactoe.player.Sign;
 
 public class Board {
 
-    private Dimensions dimensionsOfBoard;
+    private Sign[][] table;
 
     private Board(Dimensions sizeOfBoard) {
-        this.dimensionsOfBoard = sizeOfBoard;
-
+        this.table = BoardGenerator.createEmptyBoard(sizeOfBoard);
     }
 
     public static Board getSquareBoard(int size) throws WrongSizeException {
@@ -31,10 +32,14 @@ public class Board {
     }
 
     public int getWidth() {
-        return dimensionsOfBoard.getWidth();
+        return table[0].length;
     }
 
     public int getHeight() {
-        return dimensionsOfBoard.getHeight();
+        return table.length;
+    }
+
+    public boolean insert(Coordinates coordinates, Sign sign) {
+        return true;
     }
 }

@@ -2,7 +2,9 @@ package tictactoe.board;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import tictactoe.board.coords.Coordinates;
 import tictactoe.exceptions.WrongSizeException;
+import tictactoe.player.Sign;
 
 public class BoardTest {
 
@@ -19,7 +21,7 @@ public class BoardTest {
     @Test
     public void createTwoDimensionalBoard() throws WrongSizeException {
         Board board = Board.getRectangleBoard(DEFAULT_WIDTH, DEFAULT_HEIGHT);
-        Assert.assertEquals(DEFAULT_HEIGHT, board.getHeight());
+        Assert.assertEquals(DEFAULT_WIDTH, board.getWidth());
     }
 
     @Test(expectedExceptions = WrongSizeException.class)
@@ -30,6 +32,15 @@ public class BoardTest {
     @Test(expectedExceptions = WrongSizeException.class)
     public void createRectangleBoardWithZeroDimension() throws WrongSizeException {
         Board.getRectangleBoard(0, 0);
+    }
+
+    @Test
+    public void insertCorrectSignToBoardInCorrectCoordinates() throws WrongSizeException {
+        Board board = Board.getSquareBoard(DEFAULT_SIZE_OF_BOARD);
+        Sign sign = Sign.X;
+        Coordinates coordinates = Coordinates.parseCoordinates("1 2");
+        boolean isAdded = board.insert(coordinates, sign);
+
     }
 
 }
