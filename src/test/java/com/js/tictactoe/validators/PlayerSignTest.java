@@ -32,4 +32,11 @@ public class PlayerSignTest {
         boolean isSignCorrect = validator.validate(null);
         Assert.assertFalse(isSignCorrect);
     }
+
+    @Test
+    public void createSignWithNumberAsInput() {
+        InputValidator validator = new PlayerSignValidator();
+        boolean isSignCorrect = validator.validate("1");
+        Assert.assertFalse(isSignCorrect);
+    }
 }
