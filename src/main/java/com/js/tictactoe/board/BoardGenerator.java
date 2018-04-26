@@ -19,4 +19,16 @@ class BoardGenerator {
             for (int j = 0; j < dimensions.getWidth(); j++)
                 table[i][j] = new EmptyCell();
     }
+
+    public void printBoard() {
+
+        for (Cell[] aTable : table) {
+            for (int j = 0; j < table[0].length; j++) {
+                System.out.print("| " + aTable[j].getValue() + " |");
+            }
+
+            System.out.print("\n");
+        }
+
+    }
 }
