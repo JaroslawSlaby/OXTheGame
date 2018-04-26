@@ -12,6 +12,11 @@ public enum Sign {
         public Sign getOppositePlayer() {
             return X;
         }
+    }, EMPTY(" ") {
+        @Override
+        public Sign getOppositePlayer() {
+            return EMPTY;
+        }
     };
 
     private String sign;

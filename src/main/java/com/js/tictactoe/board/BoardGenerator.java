@@ -1,13 +1,22 @@
 package com.js.tictactoe.board;
 
+import com.js.tictactoe.board.cell.Cell;
+import com.js.tictactoe.board.cell.EmptyCell;
 import com.js.tictactoe.engine.Dimensions.Dimensions;
-import com.js.tictactoe.player.Sign;
 
 class BoardGenerator {
 
-    Sign[][] table;
+    Cell[][] table;
 
     void createEmptyBoard(Dimensions dimensions) {
-        table = new Sign[dimensions.getWidth()][dimensions.getWidth()];
+        table = new Cell[dimensions.getHeight()][dimensions.getWidth()];
+        fillTableEmptyValues(dimensions);
+
+    }
+
+    private void fillTableEmptyValues(Dimensions dimensions) {
+        for (int i = 0; i < dimensions.getHeight(); i++)
+            for (int j = 0; j < dimensions.getWidth(); j++)
+                table[i][j] = new EmptyCell();
     }
 }

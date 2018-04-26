@@ -60,7 +60,7 @@ public class BoardTest {
         board.insertSign(coordinates, sign);
         sign = sign.getOppositePlayer();
         boolean isAdded = board.insertSign(coordinates, sign);
-        Assert.assertFalse(false);
+        Assert.assertFalse(isAdded);
     }
 
 }
