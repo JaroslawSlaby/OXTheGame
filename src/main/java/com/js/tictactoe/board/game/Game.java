@@ -12,11 +12,13 @@ public class Game {
     private Board board;
     private Sign signO;
     private Sign signX;
+    private int moves;
 
-    public Game(Board board, Sign signO, Sign signX) {
+    public Game(Board board, Sign signO, Sign signX, int moves) {
         this.board = board;
         this.signO = signO;
         this.signX = signX;
+        this.moves = moves;
     }
 
     public void runGame() throws WrongIndexException {
@@ -25,13 +27,18 @@ public class Game {
 
         Sign currentPlayer = signO;
         int i = 0;
-        while (i < 9) {
+        while (i < moves) {
             board.printBoard();
-            System.out.println("Player " + currentPlayer.toString() + " make your move");
-            String line = scanner.nextLine();
-            board.insertSign(Coordinates.parseCoordinates(line), currentPlayer);
+            boolean added;
+            do {
+                System.out.println("Player " + currentPlayer.toString() + " make your move [pattern: x y]");
+                String line = scanner.nextLine();
+                added = board.insertSign(Coordinates.parseCoordinates(line), currentPlayer);
+            } while (!added);
             currentPlayer = currentPlayer.getOppositePlayer();
             i++;
         }
+        board.printBoard();
+        System.out.println("Game ended!");
     }
 }

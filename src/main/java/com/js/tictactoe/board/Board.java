@@ -1,7 +1,5 @@
 package com.js.tictactoe.board;
 
-import com.js.tictactoe.board.cell.Cell;
-import com.js.tictactoe.board.cell.CellWithValue;
 import com.js.tictactoe.board.coords.Coordinates;
 import com.js.tictactoe.engine.Dimensions.Dimensions;
 import com.js.tictactoe.exceptions.WrongSizeException;
@@ -31,28 +29,20 @@ public class Board extends BoardGenerator {
         return new Board(new Dimensions(width, height));
     }
 
+    public boolean insertSign(Coordinates coordinates, Sign sign) {
+        return super.insertSign(coordinates, sign);
+    }
+
+    public void printBoard() {
+        super.printBoard();
+    }
+
     public int getWidth() {
         return table[0].length;
     }
 
     public int getHeight() {
         return table.length;
-    }
-
-    public boolean insertSign(Coordinates coordinates, Sign sign) {
-        int x = coordinates.getIntegerX();
-        int y = coordinates.getIntegerY();
-
-        if (table[x][y].isCellEmpty()) {
-            table[x][y] = new CellWithValue(sign);
-            return true;
-        }
-
-        return false;
-    }
-
-    public Cell[] returnRow(int rowNumber) {
-        return table[rowNumber];
     }
 
 }

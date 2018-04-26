@@ -1,8 +1,11 @@
 package com.js.tictactoe.board;
 
 import com.js.tictactoe.board.cell.Cell;
+import com.js.tictactoe.board.cell.CellWithValue;
 import com.js.tictactoe.board.cell.EmptyCell;
+import com.js.tictactoe.board.coords.Coordinates;
 import com.js.tictactoe.engine.Dimensions.Dimensions;
+import com.js.tictactoe.player.Sign;
 
 class BoardGenerator {
 
@@ -20,8 +23,23 @@ class BoardGenerator {
                 table[i][j] = new EmptyCell();
     }
 
-    public void printBoard() {
+    boolean insertSign(Coordinates coordinates, Sign sign) {
+        int x = coordinates.getIntegerX();
+        int y = coordinates.getIntegerY();
 
+        if (x > table.length || y > table[0].length) {
+            return false;
+        }
+
+        if (table[x][y].isCellEmpty()) {
+            table[x][y] = new CellWithValue(sign);
+            return true;
+        }
+
+        return false;
+    }
+
+    void printBoard() {
         for (Cell[] aTable : table) {
             for (int j = 0; j < table[0].length; j++) {
                 System.out.print("| " + aTable[j].getValue() + " |");
