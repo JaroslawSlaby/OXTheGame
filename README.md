@@ -1,4 +1,3 @@
 # OXTheGame
 
-
-Run game: java -jar tictactoe-1.0-SNAPSHOT.jar
++ to run this game paste `java -jar tictactoe-1.1k-SNAPSHOT.jar` and enjoy
