@@ -1,4 +1,4 @@
-package tictactoe.player;
+package com.js.tictactoe.player;
 
 public enum Sign {
 
@@ -11,6 +11,11 @@ public enum Sign {
         @Override
         public Sign getOppositePlayer() {
             return X;
+        }
+    }, EMPTY(" ") {
+        @Override
+        public Sign getOppositePlayer() {
+            return EMPTY;
         }
     };
 

@@ -1,9 +1,11 @@
-package tictactoe.board;
+package com.js.tictactoe.board;
 
-import tictactoe.board.coords.Coordinates;
-import tictactoe.engine.Dimensions.Dimensions;
-import tictactoe.exceptions.WrongSizeException;
-import tictactoe.player.Sign;
+import com.js.tictactoe.board.cell.Cell;
+import com.js.tictactoe.board.cell.CellWithValue;
+import com.js.tictactoe.board.coords.Coordinates;
+import com.js.tictactoe.engine.Dimensions.Dimensions;
+import com.js.tictactoe.exceptions.WrongSizeException;
+import com.js.tictactoe.player.Sign;
 
 public class Board extends BoardGenerator {
 
@@ -41,8 +43,16 @@ public class Board extends BoardGenerator {
         int x = coordinates.getIntegerX();
         int y = coordinates.getIntegerY();
 
+        if (table[x][y].isCellEmpty()) {
+            table[x][y] = new CellWithValue(sign);
+            return true;
+        }
 
-        table[x][y] = sign;
-        return true;
+        return false;
     }
+
+    public Cell[] returnRow(int rowNumber) {
+        return table[rowNumber];
+    }
+
 }

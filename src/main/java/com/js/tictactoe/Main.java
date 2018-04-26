@@ -1,4 +1,4 @@
-package tictactoe;
+package com.js.tictactoe;
 
 public class Main {
 

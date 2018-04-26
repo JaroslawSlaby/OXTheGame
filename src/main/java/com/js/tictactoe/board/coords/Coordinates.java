@@ -1,6 +1,6 @@
-package tictactoe.board.coords;
+package com.js.tictactoe.board.coords;
 
-import tictactoe.exceptions.WrongIndexException;
+import com.js.tictactoe.exceptions.WrongIndexException;
 
 public class Coordinates {
 

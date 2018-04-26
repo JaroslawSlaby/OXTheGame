@@ -1,4 +1,4 @@
-package tictactoe.exceptions;
+package com.js.tictactoe.exceptions;
 
 public class WrongIndexException extends Exception {
 

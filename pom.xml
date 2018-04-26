@@ -30,7 +30,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>tictactoe.Main</mainClass>
+                            <mainClass>com.js.tictactoe.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -39,9 +39,12 @@
     </build>
 
 
-    <groupId>com.js.tic-tac-toe</groupId>
-    <artifactId>OX</artifactId>
+    <groupId>com.js</groupId>
+    <artifactId>tictactoe</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <name>OXTheGame</name>
+    <description>Just a simple TicTacToe game like the other ones</description>
+
     <dependencies>
         <dependency>
             <groupId>org.testng</groupId>

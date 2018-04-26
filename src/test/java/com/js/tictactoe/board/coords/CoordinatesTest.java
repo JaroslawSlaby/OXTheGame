@@ -1,8 +1,8 @@
-package tictactoe.board.coords;
+package com.js.tictactoe.board.coords;
 
+import com.js.tictactoe.exceptions.WrongIndexException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import tictactoe.exceptions.WrongIndexException;
 
 public class CoordinatesTest {
 
