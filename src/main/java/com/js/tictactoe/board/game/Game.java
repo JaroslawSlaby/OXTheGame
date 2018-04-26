@@ -31,7 +31,7 @@ public class Game {
             board.printBoard();
             boolean added;
             do {
-                System.out.println("Player " + currentPlayer.toString() + " make your move [pattern: x y]");
+                System.out.println("Player " + currentPlayer.toString() + " make your move [pattern: x y] and x must be lower than " + board.getHeight() + ", y lower than " + board.getWidth());
                 String line = scanner.nextLine();
                 added = board.insertSign(Coordinates.parseCoordinates(line), currentPlayer);
             } while (!added);
