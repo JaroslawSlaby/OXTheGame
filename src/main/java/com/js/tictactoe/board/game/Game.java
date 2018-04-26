@@ -39,6 +39,6 @@ public class Game {
             i++;
         }
         board.printBoard();
-        System.out.println("Game ended!");
+        System.out.println("Game ended!1");
     }
 }
