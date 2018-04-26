@@ -63,4 +63,13 @@ public class BoardTest {
         Assert.assertFalse(isAdded);
     }
 
+    @Test
+    public void insertSingInCoordinatesBiggerThanTableSize() throws WrongSizeException, WrongIndexException {
+        Board board = Board.getSquareBoard(5);
+        Sign sign = Sign.O;
+        Coordinates coordinates = Coordinates.parseCoordinates("10 10");
+        boolean isAdded = board.insertSign(coordinates, sign);
+        Assert.assertFalse(isAdded);
+    }
+
 }

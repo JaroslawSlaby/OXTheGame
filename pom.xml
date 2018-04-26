@@ -8,6 +8,7 @@
         <java.version>1.8</java.version>
         <jar.plugin>3.1.0</jar.plugin>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <testng.version>6.13.1</testng.version>
     </properties>
 
     <build>
@@ -41,7 +42,7 @@
 
     <groupId>com.js</groupId>
     <artifactId>tictactoe</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.1-SNAPSHOT</version>
     <name>OXTheGame</name>
     <description>Just a simple TicTacToe game like the other ones</description>
 
@@ -49,7 +50,7 @@
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>RELEASE</version>
+            <version>${testng.version}</version>
         </dependency>
     </dependencies>
 
