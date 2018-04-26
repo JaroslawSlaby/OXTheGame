@@ -41,8 +41,8 @@ class BoardGenerator {
 
     void printBoard() {
         for (Cell[] aTable : table) {
-            for (int j = 0; j < table[0].length; j++) {
-                System.out.print("| " + aTable[j].getValue() + " |");
+            for (Cell cell : aTable) {
+                System.out.print("| " + cell.getValue() + " |");
             }
 
             System.out.print("\n");

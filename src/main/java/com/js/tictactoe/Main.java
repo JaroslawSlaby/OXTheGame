@@ -31,7 +31,9 @@ public class Main {
 
         try {
             int[] size = InputParser.parseStringInput(line);
-            Game game = new Game(Board.getRectangleBoard(size[0], size[1]), Sign.X, Sign.O, size[0] * size[1]);
+            int width = size[0];
+            int height = size[1];
+            Game game = new Game(Board.getRectangleBoard(width, height), Sign.X, Sign.O, size[0] * size[1]);
             game.runGame();
         } catch (WrongSizeException | WrongIndexException e) {
             e.printStackTrace();
