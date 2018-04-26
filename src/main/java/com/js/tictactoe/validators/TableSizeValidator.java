@@ -1,20 +1,22 @@
 package com.js.tictactoe.validators;
 
+import com.js.tictactoe.parser.InputParser;
+
 public class TableSizeValidator implements InputValidator {
 
     @Override
     public boolean validate(String input) {
-        if (input.contains(" ")) {
-            String size[] = input.trim().split("\\s+");
-            int x = Integer.parseInt(size[0]);
-            int y = Integer.parseInt(size[1]);
+        if (input != null && input.contains(" ")) {
+            int[] dimensions = InputParser.parseStringInput(input);
 
-            return x > 2 && y > 2;
+            return dimensions[0] > 2 && dimensions[1] > 2;
 
-        } else {
+        } else if (input != null) {
             int size = Integer.parseInt(input);
 
             return size > 2;
         }
+
+        return false;
     }
 }
