@@ -40,4 +40,11 @@ public class TableSizeValidatorTest {
         Assert.assertTrue(isTableSizeValid);
     }
 
+    @Test
+    public void validateTableSizeWithNullAsInput() {
+        InputValidator validator = new TableSizeValidator();
+        boolean isTableSizeValid = validator.validate(null);
+        Assert.assertFalse(isTableSizeValid);
+    }
+
 }
