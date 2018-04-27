@@ -55,16 +55,35 @@ public class Judge {
     }
 
     private boolean isWinnerInDiagonal1(int x, int y) {
-//
-//        for (int i = 0; i < board.getWidth(); i++) {
-//
-//        }
 
-        return false;
+        int counter = 1;
+
+        int min = x < y ? x : y;
+
+
+        int endLoop = (board.getWidth() > board.getHeight()) ? board.getHeight() : board.getWidth();
+
+
+        for (int startX = x - min; startX < endLoop - 1; startX++) {
+
+            for (int startY = y - min; startY < endLoop - 1; startY++) {
+
+                if (!board.getCell(startX, startY).isCellEmpty() && board.getCell(startX, startY).getValue().equals(board.getCell(startX + 1, startY + 1).getValue())) {
+                    counter++;
+                }
+            }
+        }
+
+
+        return counter == amount;
 
     }
 
     private boolean isWinnerInDiagonal2(int x, int y) {
-        return false;
+
+        int counter = 1;
+
+
+        return counter == amount;
     }
 }

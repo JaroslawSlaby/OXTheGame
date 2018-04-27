@@ -51,7 +51,9 @@ public class Board extends BoardGenerator {
 
     }
 
-
+    public Cell getCell(int x, int y) {
+        return table[x][y];
+    }
 
     public void printBoard() {
         super.printBoard();
