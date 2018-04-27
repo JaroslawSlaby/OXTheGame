@@ -97,16 +97,15 @@ public class Judge {
 
         int endLoop = (board.getWidth() > board.getHeight()) ? board.getHeight() : board.getWidth();
 
-        for (int i = startX; i < endLoop - 1; i++) {
+        for (int i = endLoop - 1; i > startX; i--) {
 
-            for (int j = y - startY; j < endLoop - 1; j++) {
+            for (int j = startY; j < endLoop - 1; j++) {
 
-                if (!board.getCell(i, j).isCellEmpty() && board.getCell(i, j).getValue().equals(board.getCell(i + 1, j + 1).getValue())) {
+                if (!board.getCell(i, j).isCellEmpty() && board.getCell(i, j).getValue().equals(board.getCell(i - 1, j + 1).getValue())) {
                     counter++;
                 }
             }
         }
-
 
         return counter >= amount;
     }
