@@ -9,7 +9,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class RowJudgeTest {
+public class JudgeTest {
     private Board board;
 
     @BeforeMethod

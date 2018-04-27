@@ -17,7 +17,6 @@ import java.util.Scanner;
 public class Game {
 
     private Board board;
-    private int moves;
 
     private Scanner scanner = new Scanner(System.in);
     private Player currentPlayer;
@@ -25,9 +24,8 @@ public class Game {
 
     private List<Player> players;
 
-    public Game(Board board, int moves) {
+    public Game(Board board) {
         this.board = board;
-        this.moves = moves;
     }
 
     public void runGame() {
@@ -36,9 +34,8 @@ public class Game {
 
         currentPlayer = players.get(0);
 
-        boolean isWinner = false;
+        boolean isWinner;
 
-        int i = 0;
         do {
 
             board.printBoard();
@@ -54,7 +51,6 @@ public class Game {
             isWinner = judge.isWinner();
 
             switchPlayers();
-            i++;
         } while (!isWinner);
         board.printBoard();
         System.out.println("Game ended!");

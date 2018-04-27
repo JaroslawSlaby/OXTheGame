@@ -23,7 +23,7 @@ public class Main {
             int[] size = InputParser.parseStringInput(line);
             int width = size[0];
             int height = size[1];
-            Game game = new Game(Board.getRectangleBoard(width, height), size[0] * size[1]);
+            Game game = new Game(Board.getRectangleBoard(width, height));
             game.runGame();
         } catch (WrongSizeException e) {
             e.printStackTrace();
@@ -37,7 +37,7 @@ public class Main {
 
 
         try {
-            System.out.println("Enter board size (All dimensions must be higher than 3) [pattern: x y]: ");
+            System.out.println("Enter board size (All dimensions must be higher than 3 or equal 3) [pattern: x y]: ");
             line = inputTableSize();
             validator.validate(line);
         } catch (NumberFormatException e) {
