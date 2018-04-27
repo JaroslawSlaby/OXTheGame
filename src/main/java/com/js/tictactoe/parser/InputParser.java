@@ -16,6 +16,7 @@ public class InputParser {
 
                 return new int[]{x, y};
             }
+
         } else {
 
             if (input.matches(regex)) {
