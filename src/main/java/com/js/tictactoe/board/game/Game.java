@@ -90,7 +90,7 @@ public class Game {
         try {
             int[] coords = InputParser.parseStringInput(line);
             return board.insertSign(Coordinates.parseCoordinates(coords), currentPlayer.getSign());
-        } catch (WrongIndexException e) {
+        } catch (WrongIndexException | NumberFormatException e) {
             System.out.println("Wrong coordinates, please try again.");
             line = scanner.nextLine();
             makeMove(line, currentPlayer);

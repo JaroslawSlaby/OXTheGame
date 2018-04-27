@@ -11,23 +11,13 @@ import com.js.tictactoe.validators.TableSizeValidator;
 import java.util.Scanner;
 
 public class Main {
-    static Scanner in = new Scanner(System.in);
+    private static Scanner in = new Scanner(System.in);
+    private static String line;
 
     public static void main(String[] args) {
 
-
-        InputValidator validator = new TableSizeValidator();
-
         System.out.println("Let's go!");
-        String line;
-        boolean correctBoardSize;
-
-        do {
-            System.out.println("Enter board size (All dimensions must be higher than 3) [pattern: x y]: ");
-            line = inputTableSize();
-            correctBoardSize = validator.validate(line);
-        } while (!correctBoardSize);
-
+        getInput();
 
         try {
             int[] size = InputParser.parseStringInput(line);
@@ -39,6 +29,21 @@ public class Main {
             e.printStackTrace();
         }
 
+    }
+
+
+    private static void getInput() {
+        InputValidator validator = new TableSizeValidator();
+
+
+        try {
+            System.out.println("Enter board size (All dimensions must be higher than 3) [pattern: x y]: ");
+            line = inputTableSize();
+            validator.validate(line);
+        } catch (NumberFormatException e) {
+            System.out.println("wrong!");
+            getInput();
+        }
     }
 
     private static String inputTableSize() {
