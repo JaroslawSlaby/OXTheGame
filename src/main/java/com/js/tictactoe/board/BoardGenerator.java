@@ -27,7 +27,7 @@ class BoardGenerator {
         int x = coordinates.getIntegerX();
         int y = coordinates.getIntegerY();
 
-        if (x > table.length || y > table[0].length) {
+        if (x >= table.length || y >= table[0].length) {
             return false;
         }
 
