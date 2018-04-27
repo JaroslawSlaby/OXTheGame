@@ -50,7 +50,7 @@ public class Game {
                 added = makeMove(line, currentPlayer);
             } while (!added);
 
-            Judge judge = new Judge(board, 5);
+            Judge judge = new Judge(board, board.getWidth() > board.getHeight() ? board.getHeight() : board.getWidth());
             isWinner = judge.isWinner();
 
             switchPlayers();
