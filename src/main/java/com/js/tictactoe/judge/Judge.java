@@ -36,7 +36,7 @@ public class Judge {
             }
         }
 
-        return counter == amount;
+        return counter >= amount;
     }
 
     private boolean isWinnerInColumn(int column) {
@@ -51,7 +51,7 @@ public class Judge {
             }
         }
 
-        return counter == amount;
+        return counter >= amount;
     }
 
     private boolean isWinnerInDiagonal1(int x, int y) {
@@ -75,7 +75,7 @@ public class Judge {
         }
 
 
-        return counter == amount;
+        return counter >= amount;
 
     }
 
@@ -83,7 +83,31 @@ public class Judge {
 
         int counter = 1;
 
+        int sum = x + y;
+        int startX;
+        int startY;
 
-        return counter == amount;
+        if (sum < board.getWidth()) {
+            startX = x;
+            startY = 0;
+        } else {
+            startX = board.getWidth() - 1;
+            startY = sum - board.getWidth() + 1;
+        }
+
+        int endLoop = (board.getWidth() > board.getHeight()) ? board.getHeight() : board.getWidth();
+
+        for (int i = startX; i < endLoop - 1; i++) {
+
+            for (int j = y - startY; j < endLoop - 1; j++) {
+
+                if (!board.getCell(i, j).isCellEmpty() && board.getCell(i, j).getValue().equals(board.getCell(i + 1, j + 1).getValue())) {
+                    counter++;
+                }
+            }
+        }
+
+
+        return counter >= amount;
     }
 }

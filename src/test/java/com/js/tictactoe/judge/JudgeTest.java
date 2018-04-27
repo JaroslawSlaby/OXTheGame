@@ -19,15 +19,16 @@ public class JudgeTest {
 
     @Test
     public void checkIfCorrectlyFilledColumnReturnsTrue() throws WrongIndexException {
-        Judge judge = new Judge(board, 4);
+        Judge judge = new Judge(board, 5);
 
         board.insertSign(Coordinates.parseCoordinates("3 3"), Sign.O);
         board.insertSign(Coordinates.parseCoordinates("0 0"), Sign.X);
         board.insertSign(Coordinates.parseCoordinates("0 1"), Sign.X);
         board.insertSign(Coordinates.parseCoordinates("1 0"), Sign.O);
         board.insertSign(Coordinates.parseCoordinates("0 2"), Sign.X);
+        board.insertSign(Coordinates.parseCoordinates("0 4"), Sign.X);
         board.insertSign(Coordinates.parseCoordinates("0 3"), Sign.X);
-
+        board.printBoard();
         boolean isWinner = judge.isWinner();
         Assert.assertTrue(isWinner);
     }
@@ -80,5 +81,20 @@ public class JudgeTest {
         Assert.assertFalse(isWinner);
     }
 
+    @Test
+    public void checkIDiagonal() throws WrongIndexException {
+        Judge judge = new Judge(board, 3);
+
+        board.insertSign(Coordinates.parseCoordinates("0 0"), Sign.O);
+        board.insertSign(Coordinates.parseCoordinates("1 1"), Sign.X);
+
+        board.insertSign(Coordinates.parseCoordinates("4 4"), Sign.X);
+        board.insertSign(Coordinates.parseCoordinates("3 3"), Sign.O);
+        board.insertSign(Coordinates.parseCoordinates("2 2"), Sign.X);
+
+        board.printBoard();
+        boolean isWinner = judge.isWinner();
+        Assert.assertFalse(isWinner);
+    }
 
 }
