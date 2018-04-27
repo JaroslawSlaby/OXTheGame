@@ -5,7 +5,6 @@ import com.js.tictactoe.board.game.Game;
 import com.js.tictactoe.exceptions.WrongSizeException;
 import com.js.tictactoe.parser.DigitParser;
 import com.js.tictactoe.parser.InputParser;
-import com.js.tictactoe.player.Sign;
 import com.js.tictactoe.validators.InputValidator;
 import com.js.tictactoe.validators.TableSizeValidator;
 
@@ -34,7 +33,7 @@ public class Main {
             int[] size = InputParser.parseStringInput(line);
             int width = size[0];
             int height = size[1];
-            Game game = new Game(Board.getRectangleBoard(width, height), Sign.X, Sign.O, size[0] * size[1]);
+            Game game = new Game(Board.getRectangleBoard(width, height), size[0] * size[1]);
             game.runGame();
         } catch (WrongSizeException e) {
             e.printStackTrace();

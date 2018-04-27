@@ -10,6 +10,7 @@ import com.js.tictactoe.player.Sign;
 class BoardGenerator {
 
     Cell[][] table;
+    Coordinates latest;
 
     void createEmptyBoard(Dimensions dimensions) {
         table = new Cell[dimensions.getHeight()][dimensions.getWidth()];
@@ -24,8 +25,8 @@ class BoardGenerator {
     }
 
     boolean insertSign(Coordinates coordinates, Sign sign) {
-        int x = coordinates.getIntegerX();
-        int y = coordinates.getIntegerY();
+        int y = coordinates.getIntegerX();
+        int x = coordinates.getIntegerY();
 
         if (x >= table.length || y >= table[0].length) {
             return false;
@@ -40,11 +41,18 @@ class BoardGenerator {
     }
 
     void printBoard() {
-        for (Cell[] aTable : table) {
-            for (Cell cell : aTable) {
-                System.out.print("| " + cell.getValue() + " |");
-            }
 
+        for (int i = 0; i < table[0].length; i++) {
+            System.out.print("\t" + i + "\t");
+        }
+
+        System.out.println();
+        for (int i = 0; i < table.length; i++) {
+            System.out.print(i + " ");
+
+            for (int j = 0; j < table[i].length; j++) {
+                System.out.print("|\t" + table[i][j].getValue() + "\t|");
+            }
             System.out.print("\n");
         }
 
