@@ -1,11 +1,13 @@
 package com.js.tictactoe.board;
 
+import com.js.tictactoe.board.cell.Cell;
 import com.js.tictactoe.board.coords.Coordinates;
 import com.js.tictactoe.engine.Dimensions.Dimensions;
 import com.js.tictactoe.exceptions.WrongSizeException;
 import com.js.tictactoe.player.Sign;
 
 public class Board extends BoardGenerator {
+
 
     private Board(Dimensions sizeOfBoard) {
         createEmptyBoard(sizeOfBoard);
@@ -30,7 +32,27 @@ public class Board extends BoardGenerator {
     }
 
     public boolean insertSign(Coordinates coordinates, Sign sign) {
+        latest = coordinates;
         return super.insertSign(coordinates, sign);
+    }
+
+    public Cell[] getRow(int row) {
+        return table[row];
+    }
+
+    public Cell[] getColumn(int column) {
+
+        Cell[] expectedColumn = new Cell[table.length];
+        for (int row = 0; row < table.length; row++) {
+            expectedColumn[row] = table[row][column];
+        }
+
+        return expectedColumn;
+
+    }
+
+    public Cell getCell(int x, int y) {
+        return table[x][y];
     }
 
     public void printBoard() {
@@ -43,6 +65,10 @@ public class Board extends BoardGenerator {
 
     public int getHeight() {
         return table.length;
+    }
+
+    public Coordinates getLatestMove() {
+        return latest;
     }
 
 }
