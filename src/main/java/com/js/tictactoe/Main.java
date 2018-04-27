@@ -37,7 +37,7 @@ public class Main {
 
 
         try {
-            System.out.println("Enter board size (All dimensions must be higher than 3 or equal 3) [pattern: x y]: ");
+            System.out.println("Enter board size (All dimensions must be higher or equal 3) [pattern: x y]: ");
             line = inputTableSize();
             validator.validate(line);
         } catch (NumberFormatException e) {
