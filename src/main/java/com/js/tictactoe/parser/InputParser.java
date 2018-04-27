@@ -6,7 +6,7 @@ public class InputParser {
 
         String regex = "[0-9]+";
 
-        if (input.contains(" ")) {
+        if (input.trim().contains(" ")) {
             String size[] = input.trim().split("\\s+");
 
 
@@ -24,6 +24,6 @@ public class InputParser {
                 return new int[]{x, x};
             }
         }
-        return new int[]{};
+        return new int[]{-1 - 1};
     }
 }

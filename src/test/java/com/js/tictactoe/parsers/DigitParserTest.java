@@ -1,4 +1,4 @@
-package com.js.tictactoe;
+package com.js.tictactoe.parsers;
 
 import com.js.tictactoe.parser.DigitParser;
 import org.testng.Assert;
