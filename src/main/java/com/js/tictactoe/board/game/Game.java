@@ -44,7 +44,7 @@ public class Game {
             i++;
         }
         board.printBoard();
-        System.out.println("Game ended!1");
+        System.out.println("Game ended!");
     }
 
     private boolean makeMove(String line, Sign currentPlayer) {
