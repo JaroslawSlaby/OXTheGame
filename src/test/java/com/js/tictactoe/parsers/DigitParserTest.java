@@ -3,8 +3,7 @@ package com.js.tictactoe.parsers;
 import com.js.tictactoe.parser.DigitParser;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 @Test
 public class DigitParserTest {
@@ -25,5 +24,10 @@ public class DigitParserTest {
         String line = "12 12";
         boolean isCorrect = DigitParser.isInputContainingDigits(line);
         assertTrue(isCorrect);
+    }
+
+    public void checkIfInputCanBeDifferentThanDigit() {
+        String correct = DigitParser.correctCoordinates(() -> "10 10");
+        assertEquals(correct, "10 10");
     }
 }

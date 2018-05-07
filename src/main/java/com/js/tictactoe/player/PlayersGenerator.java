@@ -5,24 +5,23 @@ import com.js.tictactoe.validators.PlayerSignValidator;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Scanner;
 import java.util.function.Supplier;
 
 public class PlayersGenerator {
 
-    public static List<Player> createPlayers() {
+    public static List<Player> createPlayers(Supplier<String> input) {
 
         List<Player> players = new LinkedList<>();
 
         System.out.println("Enter 1st player name: ");
-        String name = PlayersGenerator.createName(new Scanner(System.in)::nextLine);
-        Sign sign = PlayersGenerator.createSign(new Scanner(System.in)::nextLine);
+        String name = PlayersGenerator.createName(input);
+        Sign sign = PlayersGenerator.createSign(input);
 
         Player player = new Player(sign, name);
         players.add(player);
 
         System.out.println("Enter 2nd player name: ");
-        name = PlayersGenerator.createName(new Scanner(System.in)::nextLine);
+        name = PlayersGenerator.createName(input);
         sign = sign.getOppositePlayer();
 
         Player player1 = new Player(sign, name);

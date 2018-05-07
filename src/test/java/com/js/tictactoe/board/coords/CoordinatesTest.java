@@ -30,4 +30,17 @@ public class CoordinatesTest {
         Coordinates.parseCoordinates("-1 -2");
     }
 
+    @Test(expectedExceptions = WrongIndexException.class)
+    public void insertCorrectSignToBoardInNonIntegerCoordinates() throws WrongIndexException {
+        int[] table = {-1, -2};
+        Coordinates.parseCoordinates(table);
+    }
+
+    @Test
+    public void insertCorrectSignToBoardInCorrectCoordinates() throws WrongIndexException {
+        int[] table = {1, 2};
+        Coordinates coords = Coordinates.parseCoordinates(table);
+        assertEquals(FIRST_COORDINATE_INT, coords.getIntegerX());
+    }
+
 }

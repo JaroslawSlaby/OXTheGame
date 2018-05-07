@@ -1,5 +1,6 @@
 package com.js.tictactoe.board;
 
+import com.js.tictactoe.board.cell.Cell;
 import com.js.tictactoe.board.coords.Coordinates;
 import com.js.tictactoe.exceptions.WrongIndexException;
 import com.js.tictactoe.exceptions.WrongSizeException;
@@ -67,6 +68,16 @@ public class BoardTest {
         Coordinates coordinates = Coordinates.parseCoordinates("10 10");
         boolean isAdded = board.insertSign(coordinates, sign);
         assertFalse(isAdded);
+    }
+
+    public void clearBoardReturnsEmptyCell() throws WrongSizeException, WrongIndexException {
+        Board board = Board.getRectangleBoard(6, 6);
+        Sign sign = Sign.O;
+        Coordinates coordinates = Coordinates.parseCoordinates("4 4");
+        board.insertSign(coordinates, sign);
+        board.clearBoard();
+        Cell cell = board.getCell(4, 4);
+        assertTrue(cell.isCellEmpty());
     }
 
 }

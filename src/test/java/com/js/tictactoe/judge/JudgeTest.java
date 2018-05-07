@@ -104,7 +104,6 @@ public class JudgeTest {
         board.insertSign(Coordinates.parseCoordinates("1 1"), Sign.X);
         board.insertSign(Coordinates.parseCoordinates("0 0"), Sign.X);
 
-        board.printBoard();
         boolean isWinner = judge.isWinner(Sign.X);
         assertTrue(isWinner);
     }
