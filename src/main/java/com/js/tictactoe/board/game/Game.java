@@ -41,7 +41,6 @@ public class Game {
         do {
             currentPlayer = players.get(1);
 
-//            judge = new Judge(board, signsCount);
             boolean winner = move();
 
             if (winner) {

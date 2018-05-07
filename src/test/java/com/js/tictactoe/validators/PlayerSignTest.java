@@ -1,42 +1,40 @@
 package com.js.tictactoe.validators;
 
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
+
+@Test
 public class PlayerSignTest {
 
-    @Test
     public void createCorrectSign() {
         InputValidator validator = new PlayerSignValidator();
         boolean isSignCorrect = validator.validate("X");
-        Assert.assertTrue(isSignCorrect);
+        assertTrue(isSignCorrect);
     }
 
-    @Test
     public void createIncorrectSign() {
         InputValidator validator = new PlayerSignValidator();
         boolean isSignCorrect = validator.validate("Z");
-        Assert.assertFalse(isSignCorrect);
+        assertFalse(isSignCorrect);
     }
 
-    @Test
     public void createIncorrectSignWithMoreThanOneLetterAsInput() {
         InputValidator validator = new PlayerSignValidator();
         boolean isSignCorrect = validator.validate("XAAAA");
-        Assert.assertFalse(isSignCorrect);
+        assertFalse(isSignCorrect);
     }
 
-    @Test
     public void createSignWithNullAsInput() {
         InputValidator validator = new PlayerSignValidator();
         boolean isSignCorrect = validator.validate(null);
-        Assert.assertFalse(isSignCorrect);
+        assertFalse(isSignCorrect);
     }
 
-    @Test
     public void createSignWithNumberAsInput() {
         InputValidator validator = new PlayerSignValidator();
         boolean isSignCorrect = validator.validate("1");
-        Assert.assertFalse(isSignCorrect);
+        assertFalse(isSignCorrect);
     }
 }
