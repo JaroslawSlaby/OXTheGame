@@ -4,7 +4,7 @@ public class InputParser {
 
     public static int[] parseStringInput(String input) {
 
-        String regex = "[0-9]+";
+        String regex = "[3-9]+";
 
         if (input.trim().contains(" ")) {
             String size[] = input.trim().split("\\s+");

@@ -20,7 +20,7 @@ public class DigitParser {
     }
 
     public static boolean isInputContainingDigits(String line) {
-        return line.matches("[0-9 ]+");
+        return line.matches("[3-9 ]+");
     }
 
 

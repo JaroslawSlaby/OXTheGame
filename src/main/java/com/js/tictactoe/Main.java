@@ -13,28 +13,31 @@ import java.util.Scanner;
 public class Main {
     private static Scanner in = new Scanner(System.in);
     private static String line;
+    private static Game game;
 
     public static void main(String[] args) {
 
         System.out.println("Let's go!");
         getInput();
+        createTable();
 
+    }
+
+    private static void createTable() {
         try {
             int[] size = InputParser.parseStringInput(line);
             int width = size[0];
             int height = size[1];
-            Game game = new Game(Board.getRectangleBoard(width, height));
+            game = new Game(Board.getRectangleBoard(width, height));
             game.runGame();
         } catch (WrongSizeException e) {
             e.printStackTrace();
         }
-
     }
 
 
     private static void getInput() {
         InputValidator validator = new TableSizeValidator();
-
 
         try {
             System.out.println("Enter board size (All dimensions must be higher or equal 3) [pattern: x y]: ");
