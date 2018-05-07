@@ -25,7 +25,7 @@ public class Game {
     }
 
     public void runGame() {
-        players = PlayersGenerator.createPlayers();
+        players = PlayersGenerator.createPlayers(scanner::nextLine);
         int signsCount = getNumberOfSignsToWin();
         Match match = new Match();
         match.setPlayers(players);
@@ -131,15 +131,13 @@ public class Game {
         System.out.println("Who does start?");
         String line = scanner.nextLine();
 
-        if (players.get(0).getName().equalsIgnoreCase(line))
+        if (players.get(0).getName().equalsIgnoreCase(line)) {
             return players.get(0);
-        else if (players.get(1).getName().equalsIgnoreCase(line))
+        } else if (players.get(1).getName().equalsIgnoreCase(line)) {
             return players.get(1);
-        else {
+        } else {
             System.out.println("Incorrect player. Try again: ");
             return null;
         }
-
     }
-
 }
