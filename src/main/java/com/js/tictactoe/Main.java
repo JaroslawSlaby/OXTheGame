@@ -23,7 +23,6 @@ public class Main {
 
     private static void createTable() {
         String line = getInput();
-
         try {
             newGame(line);
         } catch (WrongSizeException e) {

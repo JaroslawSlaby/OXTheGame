@@ -15,10 +15,10 @@ import java.util.Scanner;
 public class Game {
 
     private Board board;
-    private Match match;
 
     private Scanner scanner = new Scanner(System.in);
     private Player currentPlayer;
+    private Judge judge;
 
 
     private List<Player> players;
@@ -29,12 +29,51 @@ public class Game {
 
     public void runGame() {
         players = PlayersGenerator.createPlayers();
-        match = new Match();
+
+        int signsCount = getNumberOfSignsToWin();
+        System.out.println(signsCount);
+
+        Match match = new Match();
         match.setPlayers(players);
 
-        currentPlayer = players.get(1);
+        judge = new Judge(board, signsCount);
 
-        Judge judge = new Judge(board, board.getWidth() > board.getHeight() ? board.getHeight() : board.getWidth());
+        do {
+            currentPlayer = players.get(1);
+
+            boolean winner = move();
+
+            if (winner) {
+                match.addGameWinner(currentPlayer);
+            } else {
+                match.addGameDraw();
+            }
+
+            board.printBoard();
+
+            System.out.println("Player: " + players.get(0).getName() + " Score: " + match.getPlayersScore(players.get(0)));
+            System.out.println("Player: " + players.get(1).getName() + " Score: " + match.getPlayersScore(players.get(1)));
+
+            board.clearBoard();
+
+        } while (match.isNextRound());
+    }
+
+    private void switchPlayers() {
+
+        if (currentPlayer.equals(players.get(0))) {
+            currentPlayer = players.get(1);
+        } else {
+            currentPlayer = players.get(0);
+        }
+    }
+
+
+    private int getNumberOfSignsToWin() {
+        return board.getWidth() > board.getHeight() ? board.getHeight() : board.getWidth();
+    }
+
+    private boolean move() {
         boolean isWinner;
         int i = 0;
         do {
@@ -49,31 +88,12 @@ public class Game {
             } while (!added);
 
             isWinner = judge.isWinner(currentPlayer.getSign());
-
-
             i++;
-
         } while (!isWinner && i < board.getHeight() * board.getWidth());
 
-
-        if (isWinner) {
-            match.addGameWinner(currentPlayer);
-        } else {
-            match.addGameDraw();
-        }
-
-        board.printBoard();
-        System.out.println(match.getPlayerWithMorePoints().getName());
+        return isWinner;
     }
 
-    private void switchPlayers() {
-
-        if (currentPlayer.equals(players.get(0))) {
-            currentPlayer = players.get(1);
-        } else {
-            currentPlayer = players.get(0);
-        }
-    }
 
 
     private boolean makeMove(String line, Player currentPlayer) {

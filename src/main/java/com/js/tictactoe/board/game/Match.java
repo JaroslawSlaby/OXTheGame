@@ -7,6 +7,7 @@ import java.util.*;
 public class Match {
 
     private Map<Player, Integer> scores = new HashMap<>();
+    int numberOfGames = 0;
 
 
     public void setPlayers(List<Player> players) {
@@ -16,12 +17,15 @@ public class Match {
 
     public void addGameWinner(Player player) {
         scores.computeIfPresent(player, (k, v) -> v + 3);
+        numberOfGames++;
+
     }
 
     public void addGameDraw() {
         for (Player player : scores.keySet()) {
             scores.computeIfPresent(player, (k, v) -> v + 1);
         }
+        numberOfGames++;
     }
 
     public Player getPlayerWithMorePoints() {
@@ -31,5 +35,9 @@ public class Match {
 
     public Integer getPlayersScore(Player player) {
         return scores.get(player);
+    }
+
+    public boolean isNextRound() {
+        return numberOfGames < 3;
     }
 }
