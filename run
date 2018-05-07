@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -e
+echo 'Installation via Maven'
+mvn clean install
+echo 'Running jar file'
+java -jar target/*.jar
