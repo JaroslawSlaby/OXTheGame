@@ -28,8 +28,8 @@ public class JudgeTest {
         board.insertSign(Coordinates.parseCoordinates("0 2"), Sign.X);
         board.insertSign(Coordinates.parseCoordinates("0 4"), Sign.X);
         board.insertSign(Coordinates.parseCoordinates("0 3"), Sign.X);
-        board.printBoard();
-        boolean isWinner = judge.isWinner();
+
+        boolean isWinner = judge.isWinner(Sign.X);
         Assert.assertTrue(isWinner);
     }
 
@@ -45,7 +45,7 @@ public class JudgeTest {
         board.insertSign(Coordinates.parseCoordinates("1 3"), Sign.O);
         board.insertSign(Coordinates.parseCoordinates("0 4"), Sign.X);
 
-        boolean isWinner = judge.isWinner();
+        boolean isWinner = judge.isWinner(Sign.X);
         Assert.assertFalse(isWinner);
     }
 
@@ -61,7 +61,7 @@ public class JudgeTest {
         board.insertSign(Coordinates.parseCoordinates("3 0"), Sign.X);
         board.insertSign(Coordinates.parseCoordinates("4 0"), Sign.X);
 
-        boolean isWinner = judge.isWinner();
+        boolean isWinner = judge.isWinner(Sign.X);
         Assert.assertTrue(isWinner);
     }
 
@@ -77,7 +77,7 @@ public class JudgeTest {
         board.insertSign(Coordinates.parseCoordinates("3 0"), Sign.X);
         board.insertSign(Coordinates.parseCoordinates("4 0"), Sign.X);
 
-        boolean isWinner = judge.isWinner();
+        boolean isWinner = judge.isWinner(Sign.X);
         Assert.assertFalse(isWinner);
     }
 
@@ -92,9 +92,24 @@ public class JudgeTest {
         board.insertSign(Coordinates.parseCoordinates("3 3"), Sign.O);
         board.insertSign(Coordinates.parseCoordinates("2 2"), Sign.X);
 
-        board.printBoard();
-        boolean isWinner = judge.isWinner();
+        boolean isWinner = judge.isWinner(Sign.X);
         Assert.assertFalse(isWinner);
+    }
+
+    @Test
+    public void checkIDiagonalInOtherWay() throws WrongIndexException {
+        Judge judge = new Judge(board, 5);
+
+        board.insertSign(Coordinates.parseCoordinates("4 4"), Sign.X);
+        board.insertSign(Coordinates.parseCoordinates("3 3"), Sign.X);
+
+        board.insertSign(Coordinates.parseCoordinates("2 2"), Sign.X);
+        board.insertSign(Coordinates.parseCoordinates("1 1"), Sign.X);
+        board.insertSign(Coordinates.parseCoordinates("0 0"), Sign.X);
+
+        board.printBoard();
+        boolean isWinner = judge.isWinner(Sign.X);
+        Assert.assertTrue(isWinner);
     }
 
 }

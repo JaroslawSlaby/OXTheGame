@@ -4,7 +4,7 @@ import com.js.tictactoe.board.cell.Cell;
 import com.js.tictactoe.board.cell.CellWithValue;
 import com.js.tictactoe.board.cell.EmptyCell;
 import com.js.tictactoe.board.coords.Coordinates;
-import com.js.tictactoe.engine.Dimensions.Dimensions;
+import com.js.tictactoe.dimensions.Dimensions;
 import com.js.tictactoe.player.Sign;
 
 class BoardGenerator {

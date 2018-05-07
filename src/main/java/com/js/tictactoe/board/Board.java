@@ -2,7 +2,7 @@ package com.js.tictactoe.board;
 
 import com.js.tictactoe.board.cell.Cell;
 import com.js.tictactoe.board.coords.Coordinates;
-import com.js.tictactoe.engine.Dimensions.Dimensions;
+import com.js.tictactoe.dimensions.Dimensions;
 import com.js.tictactoe.exceptions.WrongSizeException;
 import com.js.tictactoe.player.Sign;
 
