@@ -10,6 +10,10 @@ public class DigitParser {
         String line;
         do {
             line = input.get();
+
+            if (line.equalsIgnoreCase("quit"))
+                System.exit(0);
+
             isNumber = DigitParser.isInputContainingDigits(line);
 
             if (!isNumber)

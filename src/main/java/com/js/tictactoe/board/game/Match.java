@@ -6,8 +6,9 @@ import java.util.*;
 
 public class Match {
 
+    private static final int MAX_GAMES = 3;
     private Map<Player, Integer> scores = new HashMap<>();
-    int numberOfGames = 0;
+    private int numberOfGames = 0;
 
 
     public void setPlayers(List<Player> players) {
@@ -38,6 +39,6 @@ public class Match {
     }
 
     public boolean isNextRound() {
-        return numberOfGames < 3;
+        return numberOfGames < MAX_GAMES;
     }
 }

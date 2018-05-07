@@ -15,12 +15,9 @@ import java.util.Scanner;
 public class Game {
 
     private Board board;
-
     private Scanner scanner = new Scanner(System.in);
     private Player currentPlayer;
     private Judge judge;
-
-
     private List<Player> players;
 
     public Game(Board board) {
@@ -29,17 +26,19 @@ public class Game {
 
     public void runGame() {
         players = PlayersGenerator.createPlayers();
-
         int signsCount = getNumberOfSignsToWin();
-        System.out.println(signsCount);
-
         Match match = new Match();
         match.setPlayers(players);
-
         judge = new Judge(board, signsCount);
+        playingLoop(match);
+        System.out.println("Match is end! Congratulations!");
+    }
 
+    private void playingLoop(Match match) {
         do {
-            currentPlayer = players.get(1);
+            do {
+                currentPlayer = chooseStartingPlayer();
+            } while (currentPlayer == null);
 
             boolean winner = move();
 
@@ -50,13 +49,15 @@ public class Game {
             }
 
             board.printBoard();
-
+            System.out.println("End of round.");
             System.out.println("Player: " + players.get(0).getName() + " Score: " + match.getPlayersScore(players.get(0)));
             System.out.println("Player: " + players.get(1).getName() + " Score: " + match.getPlayersScore(players.get(1)));
 
             board.clearBoard();
 
         } while (match.isNextRound());
+
+
     }
 
     private void switchPlayers() {
@@ -70,14 +71,30 @@ public class Game {
 
 
     private int getNumberOfSignsToWin() {
-        return board.getWidth() > board.getHeight() ? board.getHeight() : board.getWidth();
+        boolean isValid;
+        String line;
+        do {
+            System.out.println("Enter number of signs to win: ");
+            line = scanner.nextLine();
+            isValid = DigitParser.isInputContainingDigits(line);
+        } while (!isValid);
+
+        int number = Integer.parseInt(line);
+        int min = board.getWidth() > board.getHeight() ? board.getHeight() : board.getWidth();
+
+        if (number <= min && number >= 3) {
+            System.out.println("Correct number");
+            return number;
+        } else {
+            System.out.println("Incorrect number. Sequence to win: " + min);
+            return min;
+        }
     }
 
     private boolean move() {
         boolean isWinner;
         int i = 0;
         do {
-            switchPlayers();
             board.printBoard();
             boolean added;
             do {
@@ -89,11 +106,11 @@ public class Game {
 
             isWinner = judge.isWinner(currentPlayer.getSign());
             i++;
+            switchPlayers();
         } while (!isWinner && i < board.getHeight() * board.getWidth());
 
         return isWinner;
     }
-
 
 
     private boolean makeMove(String line, Player currentPlayer) {
@@ -108,5 +125,21 @@ public class Game {
         return true;
     }
 
+
+    private Player chooseStartingPlayer() {
+
+        System.out.println("Who does start?");
+        String line = scanner.nextLine();
+
+        if (players.get(0).getName().equalsIgnoreCase(line))
+            return players.get(0);
+        else if (players.get(1).getName().equalsIgnoreCase(line))
+            return players.get(1);
+        else {
+            System.out.println("Incorrect player. Try again: ");
+            return null;
+        }
+
+    }
 
 }
