@@ -1,7 +1,9 @@
 package com.js.tictactoe.validators;
 
-import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 public class CoordinatesValidatorTest {
 
@@ -9,41 +11,41 @@ public class CoordinatesValidatorTest {
     public void validateCoordinatesIfInputIsCorrect() {
         InputValidator validator = new CoordinatesValidator();
         boolean areCoordinatesValid = validator.validate("1 2");
-        Assert.assertTrue(areCoordinatesValid);
+        assertTrue(areCoordinatesValid);
     }
 
     @Test
     public void validateCoordinatesIfInputContainsOneDigit() {
         InputValidator validator = new CoordinatesValidator();
         boolean areCoordinatesValid = validator.validate("1");
-        Assert.assertFalse(areCoordinatesValid);
+        assertFalse(areCoordinatesValid);
     }
 
     @Test
     public void validateCoordinatesIfInputContainsNegativeNumbers() {
         InputValidator validator = new CoordinatesValidator();
         boolean areCoordinatesValid = validator.validate("-1 2");
-        Assert.assertFalse(areCoordinatesValid);
+        assertFalse(areCoordinatesValid);
     }
 
     @Test
     public void validateCoordinatesIfInputContainsZero() {
         InputValidator validator = new CoordinatesValidator();
         boolean areCoordinatesValid = validator.validate("0 0");
-        Assert.assertTrue(areCoordinatesValid);
+        assertTrue(areCoordinatesValid);
     }
 
     @Test
     public void validateCoordinatesIfInputContainsOnlyZero() {
         InputValidator validator = new CoordinatesValidator();
         boolean areCoordinatesValid = validator.validate("0");
-        Assert.assertFalse(areCoordinatesValid);
+        assertFalse(areCoordinatesValid);
     }
 
     @Test
     public void validateCoordinatesIfInputIsNull() {
         InputValidator validator = new CoordinatesValidator();
         boolean areCoordinatesValid = validator.validate(null);
-        Assert.assertFalse(areCoordinatesValid);
+        assertFalse(areCoordinatesValid);
     }
 }

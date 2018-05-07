@@ -1,4 +1,4 @@
-package com.js.tictactoe.engine.Dimensions;
+package com.js.tictactoe.dimensions;
 
 public class Dimensions {
 

@@ -8,15 +8,14 @@ import com.js.tictactoe.parser.DigitParser;
 import com.js.tictactoe.parser.InputParser;
 import com.js.tictactoe.player.Player;
 import com.js.tictactoe.player.PlayersGenerator;
-import com.js.tictactoe.player.Sign;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Game {
 
     private Board board;
+    private Match match;
 
     private Scanner scanner = new Scanner(System.in);
     private Player currentPlayer;
@@ -29,31 +28,42 @@ public class Game {
     }
 
     public void runGame() {
-        players = new LinkedList<>();
-        createPlayers();
+        players = PlayersGenerator.createPlayers();
+        match = new Match();
+        match.setPlayers(players);
 
-        currentPlayer = players.get(0);
+        currentPlayer = players.get(1);
 
+        Judge judge = new Judge(board, board.getWidth() > board.getHeight() ? board.getHeight() : board.getWidth());
         boolean isWinner;
-
+        int i = 0;
         do {
-
+            switchPlayers();
             board.printBoard();
             boolean added;
             do {
                 System.out.println("Player " + currentPlayer.getName() +
                         " make your move [pattern: x y] and x must be lower than " + board.getWidth() + ", y lower than " + board.getHeight());
-                String line = correctCoordinates();
+                String line = DigitParser.correctCoordinates(scanner::nextLine);
                 added = makeMove(line, currentPlayer);
             } while (!added);
 
-            Judge judge = new Judge(board, board.getWidth() > board.getHeight() ? board.getHeight() : board.getWidth());
-            isWinner = judge.isWinner();
+            isWinner = judge.isWinner(currentPlayer.getSign());
 
-            switchPlayers();
-        } while (!isWinner);
+
+            i++;
+
+        } while (!isWinner && i < board.getHeight() * board.getWidth());
+
+
+        if (isWinner) {
+            match.addGameWinner(currentPlayer);
+        } else {
+            match.addGameDraw();
+        }
+
         board.printBoard();
-        System.out.println("Game ended!");
+        System.out.println(match.getPlayerWithMorePoints().getName());
     }
 
     private void switchPlayers() {
@@ -63,22 +73,6 @@ public class Game {
         } else {
             currentPlayer = players.get(0);
         }
-    }
-
-    private void createPlayers() {
-        System.out.println("Enter 1st player name: ");
-        String name = PlayersGenerator.createName(scanner::nextLine);
-        Sign sign = PlayersGenerator.createSign(scanner::nextLine);
-
-        Player player = new Player(sign, name);
-        players.add(player);
-
-        System.out.println("Enter 2nd player name: ");
-        name = PlayersGenerator.createName(scanner::nextLine);
-        sign = sign.getOppositePlayer();
-
-        Player player1 = new Player(sign, name);
-        players.add(player1);
     }
 
 
@@ -94,17 +88,5 @@ public class Game {
         return true;
     }
 
-    private String correctCoordinates() {
-        boolean isNumber;
-        String line;
-        do {
-            line = scanner.nextLine();
-            isNumber = DigitParser.isInputContainingDigits(line);
 
-            if (!isNumber)
-                System.out.println("Wrong coordinates!");
-
-        } while (!isNumber);
-        return line;
-    }
 }
