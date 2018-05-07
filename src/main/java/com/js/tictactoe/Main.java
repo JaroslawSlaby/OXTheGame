@@ -12,41 +12,42 @@ import java.util.Scanner;
 
 public class Main {
     private static Scanner in = new Scanner(System.in);
-    private static String line;
     private static Game game;
 
     public static void main(String[] args) {
 
         System.out.println("Let's go!");
-        getInput();
         createTable();
 
     }
 
     private static void createTable() {
+        String line = getInput();
+
         try {
-            int[] size = InputParser.parseStringInput(line);
-            int width = size[0];
-            int height = size[1];
-            game = new Game(Board.getRectangleBoard(width, height));
-            game.runGame();
+            newGame(line);
         } catch (WrongSizeException e) {
-            e.printStackTrace();
+            System.out.println("wrong size");
+            createTable();
         }
     }
 
+    private static void newGame(String line) throws WrongSizeException {
+        int[] size = InputParser.parseStringInput(line);
+        int width = size[0];
+        int height = size[1];
+        game = new Game(Board.getRectangleBoard(width, height));
+        game.runGame();
+    }
 
-    private static void getInput() {
+
+    private static String getInput() {
         InputValidator validator = new TableSizeValidator();
-
-        try {
-            System.out.println("Enter board size (All dimensions must be higher or equal 3) [pattern: x y]: ");
-            line = inputTableSize();
-            validator.validate(line);
-        } catch (NumberFormatException e) {
-            System.out.println("wrong!");
-            getInput();
-        }
+        String line;
+        System.out.println("Enter board size (All dimensions must be higher or equal 3) [pattern: x y]: ");
+        line = inputTableSize();
+        validator.validate(line);
+        return line;
     }
 
     private static String inputTableSize() {
