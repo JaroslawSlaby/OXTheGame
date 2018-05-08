@@ -1,4 +1,4 @@
-package com.js.tictactoe.board.game;
+package com.js.tictactoe.game;
 
 import com.js.tictactoe.board.Board;
 import com.js.tictactoe.board.coords.Coordinates;

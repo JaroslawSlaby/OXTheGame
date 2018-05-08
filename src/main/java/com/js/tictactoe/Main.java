@@ -1,8 +1,8 @@
 package com.js.tictactoe;
 
 import com.js.tictactoe.board.Board;
-import com.js.tictactoe.board.game.Game;
 import com.js.tictactoe.exceptions.WrongSizeException;
+import com.js.tictactoe.game.Game;
 import com.js.tictactoe.parser.DigitParser;
 import com.js.tictactoe.parser.InputParser;
 import com.js.tictactoe.validators.InputValidator;
