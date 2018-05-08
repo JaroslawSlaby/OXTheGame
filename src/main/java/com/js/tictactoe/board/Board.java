@@ -9,6 +9,7 @@ import com.js.tictactoe.player.Sign;
 public class Board extends BoardGenerator {
 
     private static final int MIN_SIZE = 3;
+    private static final int MAX_SIZE = 100;
 
     private Board(Dimensions sizeOfBoard) {
         createEmptyBoard(sizeOfBoard);
@@ -25,7 +26,7 @@ public class Board extends BoardGenerator {
 
     public static Board getRectangleBoard(int width, int height) throws WrongSizeException {
 
-        if (width < MIN_SIZE || height < MIN_SIZE) {
+        if (width < MIN_SIZE || height < MIN_SIZE || width > MAX_SIZE || height > MAX_SIZE) {
             throw new WrongSizeException("All dimensions of board must be higher than 3!"); //todo: internationalization
         }
 
