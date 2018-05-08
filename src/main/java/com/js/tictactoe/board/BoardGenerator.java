@@ -4,8 +4,8 @@ import com.js.tictactoe.board.cell.Cell;
 import com.js.tictactoe.board.cell.CellWithValue;
 import com.js.tictactoe.board.cell.EmptyCell;
 import com.js.tictactoe.board.coords.Coordinates;
+import com.js.tictactoe.board.printer.BoardPrinter;
 import com.js.tictactoe.dimensions.Dimensions;
-import com.js.tictactoe.player.Colors;
 import com.js.tictactoe.player.Sign;
 
 class BoardGenerator {
@@ -42,23 +42,7 @@ class BoardGenerator {
     }
 
     void printBoard() {
-        System.out.print(Colors.ANSI_DEFAULT + "y\\x");
-        for (int i = 0; i < table[0].length; i++) {
-            System.out.print(Colors.ANSI_DEFAULT + "\t" + i + Colors.ANSI_DEFAULT + "\t");
-        }
-
-        System.out.println();
-        for (int i = 0; i < table.length; i++) {
-            System.out.print(Colors.ANSI_DEFAULT + "" + i + " ");
-
-            for (int j = 0; j < table[i].length; j++) {
-                if (table[i][j].getValue().toString().equalsIgnoreCase("O"))
-                    System.out.print(Colors.ANSI_DEFAULT + "|\t" + Colors.ANSI_GREEN + table[i][j].getValue() + Colors.ANSI_DEFAULT + "\t|");
-                else
-                    System.out.print(Colors.ANSI_DEFAULT + "|\t" + Colors.ANSI_RED + table[i][j].getValue() + Colors.ANSI_DEFAULT + "\t|");
-            }
-            System.out.print(Colors.ANSI_DEFAULT + "\n");
-        }
+        BoardPrinter.printBoard(table);
     }
 
     public void clearBoard() {
