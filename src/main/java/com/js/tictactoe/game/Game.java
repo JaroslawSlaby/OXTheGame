@@ -25,7 +25,11 @@ public class Game {
     public void runGame() {
 
         Configuration configuration = new Configuration(input);
-        board = configuration.createTable();
+
+        do {
+            board = configuration.createTable();
+        } while (board == null);
+
         int signsToWin = configuration.chooseSequenceNumber();
 
         players = configuration.createPlayers();
@@ -45,7 +49,10 @@ public class Game {
 
     private void playingLoop() {
         do {
-            boolean winner = move();
+            boolean winner;
+
+            winner = move();
+
             switchPlayers();
 
             if (winner) {
