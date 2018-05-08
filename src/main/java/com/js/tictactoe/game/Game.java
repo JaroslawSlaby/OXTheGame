@@ -8,7 +8,6 @@ import com.js.tictactoe.judge.Judge;
 import com.js.tictactoe.parser.DigitParser;
 import com.js.tictactoe.parser.InputParser;
 import com.js.tictactoe.player.Player;
-import com.js.tictactoe.player.PlayersGenerator;
 
 import java.util.List;
 import java.util.Scanner;
@@ -23,14 +22,13 @@ public class Game {
     private List<Player> players;
     private Match match;
 
-
-
     public void runGame() {
+
         Configuration configuration = new Configuration(input);
         board = configuration.createTable();
         int signsToWin = configuration.chooseSequenceNumber();
 
-        players = PlayersGenerator.createPlayers(input);
+        players = configuration.createPlayers();
         setMatch();
 
         judge = new Judge(board, signsToWin);
@@ -40,13 +38,10 @@ public class Game {
         System.out.println("Match is end! Situation: " + match.getWinnerOrDraw() + "! Congratulations!");
     }
 
-
-
     private void setMatch() {
         match = new Match();
         match.setPlayers(players);
     }
-
 
     private void playingLoop() {
         do {
@@ -78,7 +73,6 @@ public class Game {
         }
     }
 
-
     private boolean move() {
         boolean isWinner;
         int i = 0;
@@ -94,7 +88,6 @@ public class Game {
                     match.endMatch();
                     return false;
                 }
-
                 added = makeMove(line, currentPlayer);
             } while (!added);
 
@@ -105,7 +98,6 @@ public class Game {
 
         return isWinner;
     }
-
 
     private boolean makeMove(String line, Player currentPlayer) {
         try {
@@ -118,9 +110,4 @@ public class Game {
         }
         return true;
     }
-
-
-
-
-
 }

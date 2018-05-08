@@ -5,6 +5,7 @@ import com.js.tictactoe.exceptions.WrongSizeException;
 import com.js.tictactoe.parser.DigitParser;
 import com.js.tictactoe.parser.InputParser;
 import com.js.tictactoe.player.Player;
+import com.js.tictactoe.player.PlayersGenerator;
 import com.js.tictactoe.validators.InputValidator;
 import com.js.tictactoe.validators.TableSizeValidator;
 
@@ -91,6 +92,11 @@ public class Configuration {
             System.out.println("Incorrect number. Try again");
             return 0;
         }
+    }
+
+    public List<Player> createPlayers() {
+        List<Player> players = PlayersGenerator.createPlayers(input);
+        return players;
     }
 
     public Player chooseStartingSign(List<Player> players) {
