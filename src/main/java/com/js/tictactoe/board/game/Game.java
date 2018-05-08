@@ -19,6 +19,7 @@ public class Game {
     private Player currentPlayer;
     private Judge judge;
     private List<Player> players;
+    private Match match;
 
     public Game(Board board) {
         this.board = board;
@@ -27,20 +28,25 @@ public class Game {
     public void runGame() {
         players = PlayersGenerator.createPlayers(scanner::nextLine);
         int signsCount = getNumberOfSignsToWin();
-        Match match = new Match();
+        match = new Match();
         match.setPlayers(players);
         judge = new Judge(board, signsCount);
+
+        do {
+            currentPlayer = chooseStartingPlayer();
+        } while (currentPlayer == null);
+
+
         playingLoop(match);
-        System.out.println("Match is end! Congratulations!");
+
+        System.out.println("Match is end! Situation: " + match.getWinnerOrDraw() + "! Congratulations!");
+
     }
 
     private void playingLoop(Match match) {
         do {
-            do {
-                currentPlayer = chooseStartingPlayer();
-            } while (currentPlayer == null);
-
             boolean winner = move();
+            switchPlayers();
 
             if (winner) {
                 match.addGameWinner(currentPlayer);
@@ -52,12 +58,10 @@ public class Game {
             System.out.println("End of round.");
             System.out.println("Player: " + players.get(0).getName() + " Score: " + match.getPlayersScore(players.get(0)));
             System.out.println("Player: " + players.get(1).getName() + " Score: " + match.getPlayersScore(players.get(1)));
-
+            switchPlayers();
             board.clearBoard();
 
         } while (match.isNextRound());
-
-
     }
 
     private void switchPlayers() {
@@ -101,6 +105,12 @@ public class Game {
                 System.out.println("Player " + currentPlayer.getName() +
                         " make your move [pattern: x y] and x must be lower than " + board.getWidth() + ", y lower than " + board.getHeight());
                 String line = DigitParser.correctCoordinates(scanner::nextLine);
+
+                if (line.equalsIgnoreCase("quit")) {
+                    match.endMatch();
+                    return false;
+                }
+
                 added = makeMove(line, currentPlayer);
             } while (!added);
 
@@ -131,13 +141,15 @@ public class Game {
         System.out.println("Who does start?");
         String line = scanner.nextLine();
 
-        if (players.get(0).getName().equalsIgnoreCase(line)) {
+        if (players.get(0).getSign().toString().equalsIgnoreCase(line)) {
             return players.get(0);
-        } else if (players.get(1).getName().equalsIgnoreCase(line)) {
+        } else if (players.get(1).getSign().toString().equalsIgnoreCase(line)) {
             return players.get(1);
         } else {
             System.out.println("Incorrect player. Try again: ");
             return null;
         }
     }
+
+
 }

@@ -11,6 +11,7 @@ public class Match {
     private int numberOfGames = 0;
 
 
+
     public void setPlayers(List<Player> players) {
         for (Player player : players)
             scores.put(player, 0);
@@ -34,6 +35,20 @@ public class Match {
         return max.getKey();
     }
 
+    public String getWinnerOrDraw() {
+
+        Integer max = scores.values().iterator().next();
+
+        for (Map.Entry<Player, Integer> entry : scores.entrySet()) {
+            if (entry.getValue() > max) {
+                return "Winner is: " + getPlayerWithMorePoints().getName();
+            }
+        }
+
+        return "Draw";
+    }
+
+
     public Integer getPlayersScore(Player player) {
         return scores.get(player);
     }
@@ -41,4 +56,9 @@ public class Match {
     public boolean isNextRound() {
         return numberOfGames < MAX_GAMES;
     }
+
+    public void endMatch() {
+        numberOfGames = MAX_GAMES;
+    }
+
 }
