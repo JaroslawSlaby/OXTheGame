@@ -55,7 +55,7 @@ public class Judge {
         return counter >= amount;
     }
 
-    private String isWinnerInDiagonal1(int x, int y, Sign sign) {
+    public String isWinnerInDiagonal1(int x, int y, Sign sign) {
 
         int boundary = -amount + 1;
 
@@ -81,7 +81,7 @@ public class Judge {
 
     }
 
-    private String isWinnerInDiagonal2(int x, int y, Sign sign) { //todo: incorrect
+    public String isWinnerInDiagonal2(int x, int y, Sign sign) { //todo: incorrect
 
         int boundary = -amount + 1;
 
@@ -111,10 +111,10 @@ public class Judge {
     }
 
     private boolean checkPositionX(int position) {
-        return position >= 0 && position < board.getHeight() - 1;
+        return position >= 0 && position < board.getWidth();
     }
 
     private boolean checkPositionY(int position) {
-        return position >= 0 && position < board.getWidth() - 1;
+        return position >= 0 && position < board.getHeight();
     }
 }

@@ -105,7 +105,22 @@ public class JudgeTest {
         board.insertSign(Coordinates.parseCoordinates("0 0"), Sign.X);
 
         boolean isWinner = judge.isWinner(Sign.X);
-        assertFalse(isWinner);
+        assertTrue(isWinner);
+    }
+
+
+    public void checkIDiagonalCorrectWay() throws WrongIndexException {
+        Judge judge = new Judge(board, 5);
+
+        board.insertSign(Coordinates.parseCoordinates("4 4"), Sign.X);
+        board.insertSign(Coordinates.parseCoordinates("3 3"), Sign.X);
+
+        board.insertSign(Coordinates.parseCoordinates("2 2"), Sign.X);
+        board.insertSign(Coordinates.parseCoordinates("1 1"), Sign.X);
+        board.insertSign(Coordinates.parseCoordinates("0 0"), Sign.X);
+
+        boolean isWinner = judge.isWinnerInDiagonal1(0, 0, Sign.X).length() == 5;
+        assertTrue(isWinner);
     }
 
 
