@@ -45,7 +45,7 @@ public class Configuration {
     private String getInput() {
         InputValidator validator = new TableSizeValidator();
         String line;
-        System.out.println("Enter board size (All dimensions must be higher or equal 3 and less than 100) [pattern: x y]: ");
+        System.out.println("Enter board size (All dimensions must be higher or equal 3 and less than 100) [pattern: x y (or x if you want square board)]: ");
         line = inputTableSize();
         validator.validate(line);
         return line;
