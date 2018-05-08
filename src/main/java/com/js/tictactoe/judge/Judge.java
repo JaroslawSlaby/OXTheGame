@@ -21,7 +21,7 @@ public class Judge {
         int x = latest.getIntegerX();
         int y = latest.getIntegerY();
 
-        return isWinnerInRow(y, sign) || isWinnerInColumn(x, sign) || isWinnerInDiagonal1(x, y, sign) || isWinnerInDiagonal2(x, y, sign);
+        return isWinnerInRow(y, sign) || isWinnerInColumn(x, sign) || checkWinningInUnit(sign, isWinnerInDiagonal1(x, y, sign)) || checkWinningInUnit(sign, isWinnerInDiagonal2(x, y, sign));
 
     }
 
@@ -55,9 +55,7 @@ public class Judge {
         return counter >= amount;
     }
 
-    private boolean isWinnerInDiagonal1(int x, int y, Sign sign) {
-
-        int counter = 1;
+    private String isWinnerInDiagonal1(int x, int y, Sign sign) {
 
         int boundary = -amount + 1;
 
@@ -79,35 +77,37 @@ public class Judge {
             }
         }
 
-        return line.toString().length() == amount;
+        return line.toString();
 
     }
 
-    private boolean isWinnerInDiagonal2(int x, int y, Sign sign) { //todo: incorrect
+    private String isWinnerInDiagonal2(int x, int y, Sign sign) { //todo: incorrect
 
-        int counter = 1;
+        int boundary = -amount + 1;
 
-        int sum = x + y;
+        StringBuilder line = new StringBuilder();
 
-        int startX = sum > board.getWidth() ? sum - board.getWidth() + 1 : 0;
-        int startY = sum > board.getHeight() ? board.getHeight() - 1 : sum;
+        for (int i = boundary; i < amount; i++) {
 
-//        for(; startX < board.getWidth() - 1; startX++) {
-//
-//            for (; startY > board.getHeight() - 1; startY--) {
-//
-//                if (!board.getCell(startX, startY).isCellEmpty() && board.getCell(startX, startY).getValue().equals(sign) && board.getCell(startX, startY).getValue().equals(board.getCell(startX + 1, startY - 1).getValue())) {
-//                    counter++;
-//                }
-//            }
-//        }
+            int currX = x + i;
+            int currY = y - i;
 
 
-        return counter >= amount;
+            if (checkPositionX(currX) && checkPositionY(currY)) {
+
+                Cell cell = board.getCell(currX, currY);
+                if (!cell.isCellEmpty() && cell.getValue().equals(sign)) {
+                    line.append(cell.getValue());
+                }
+
+            }
+        }
+
+        return line.toString();
     }
 
-    private boolean checkWinningInUnit(String line) {
-        return line.matches("");
+    private boolean checkWinningInUnit(Sign sign, String line) {
+        return line.matches(".*" + sign.toString() + "{" + amount + "}.*");
     }
 
     private boolean checkPositionX(int position) {

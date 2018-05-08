@@ -105,7 +105,7 @@ public class JudgeTest {
         board.insertSign(Coordinates.parseCoordinates("0 0"), Sign.X);
 
         boolean isWinner = judge.isWinner(Sign.X);
-        assertTrue(isWinner);
+        assertFalse(isWinner);
     }
 
 

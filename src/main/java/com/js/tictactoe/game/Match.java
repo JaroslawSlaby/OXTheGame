@@ -11,7 +11,6 @@ public class Match {
     private int numberOfGames = 0;
 
 
-
     public void setPlayers(List<Player> players) {
         for (Player player : players)
             scores.put(player, 0);
