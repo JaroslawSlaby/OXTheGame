@@ -26,8 +26,8 @@ public class Game {
     }
 
     public void runGame() {
-        players = PlayersGenerator.createPlayers(scanner::nextLine);
         int signsCount = getNumberOfSignsToWin();
+        players = PlayersGenerator.createPlayers(scanner::nextLine);
         match = new Match();
         match.setPlayers(players);
         judge = new Judge(board, signsCount);
@@ -138,7 +138,7 @@ public class Game {
 
     private Player chooseStartingPlayer() {
 
-        System.out.println("Who does start?");
+        System.out.println("Who does start? O/X");
         String line = scanner.nextLine();
 
         if (players.get(0).getSign().toString().equalsIgnoreCase(line)) {
