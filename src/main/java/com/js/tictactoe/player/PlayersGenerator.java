@@ -15,7 +15,7 @@ public class PlayersGenerator {
 
         System.out.println("Enter 1st player name: ");
         String name = PlayersGenerator.createName(input);
-        Sign sign = PlayersGenerator.createSign(input);
+        Sign sign = PlayersGenerator.createSign(input, name);
 
         Player player = new Player(sign, name);
         players.add(player);
@@ -34,17 +34,17 @@ public class PlayersGenerator {
         String name;
         do {
             name = input.get();
-        } while (name.equalsIgnoreCase(""));
+        } while (name.length() == 0);
 
         return name;
     }
 
-    private static Sign createSign(Supplier<String> input) {
+    private static Sign createSign(Supplier<String> input, String name) {
         InputValidator validator = new PlayerSignValidator();
         String sign;
         boolean correct;
         do {
-            System.out.println("Choose sign (O/X)");
+            System.out.println("Choose sign (O/X) for player " + name);
             sign = input.get();
             correct = validator.validate(sign);
         } while (!correct);

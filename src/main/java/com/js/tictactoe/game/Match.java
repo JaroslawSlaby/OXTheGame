@@ -36,18 +36,14 @@ public class Match {
     }
 
     public String getWinnerOrDraw() {
-
         Integer max = scores.values().iterator().next();
-
         for (Map.Entry<Player, Integer> entry : scores.entrySet()) {
             if (entry.getValue() > max) {
                 return "Winner is: " + getPlayerWithMorePoints().getName();
             }
         }
-
         return "Draw";
     }
-
 
     public Integer getPlayersScore(Player player) {
         return scores.get(player);

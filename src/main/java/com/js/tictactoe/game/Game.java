@@ -20,27 +20,37 @@ public class Game {
     private Judge judge;
     private List<Player> players;
     private Match match;
+    private int signsToWin = 0;
 
     public Game(Board board) {
         this.board = board;
     }
 
     public void runGame() {
-        int signsCount = getNumberOfSignsToWin();
+        chooseSequenceName();
         players = PlayersGenerator.createPlayers(scanner::nextLine);
-        match = new Match();
-        match.setPlayers(players);
-        judge = new Judge(board, signsCount);
+        setMatch();
+        judge = new Judge(board, signsToWin);
+        chooseStartingSign();
+        playingLoop(match);
+        System.out.println("Match is end! Situation: " + match.getWinnerOrDraw() + "! Congratulations!");
+    }
 
+    private void chooseStartingSign() {
         do {
             currentPlayer = chooseStartingPlayer();
         } while (currentPlayer == null);
+    }
 
+    private void setMatch() {
+        match = new Match();
+        match.setPlayers(players);
+    }
 
-        playingLoop(match);
-
-        System.out.println("Match is end! Situation: " + match.getWinnerOrDraw() + "! Congratulations!");
-
+    private void chooseSequenceName() {
+        do {
+            signsToWin = getNumberOfSignsToWin();
+        } while (signsToWin == 0);
     }
 
     private void playingLoop(Match match) {
@@ -87,11 +97,10 @@ public class Game {
         int min = board.getWidth() > board.getHeight() ? board.getHeight() : board.getWidth();
 
         if (number <= min && number >= 3) {
-            System.out.println("Correct number");
             return number;
         } else {
-            System.out.println("Incorrect number. Sequence to win: " + min);
-            return min;
+            System.out.println("Incorrect number. Try again");
+            return 0;
         }
     }
 
