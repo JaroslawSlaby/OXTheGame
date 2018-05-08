@@ -12,7 +12,7 @@ public enum Sign {
         public Sign getOppositePlayer() {
             return X;
         }
-    }, EMPTY("_") {
+    }, EMPTY("") {
         @Override
         public Sign getOppositePlayer() {
             return EMPTY;
@@ -32,3 +32,4 @@ public enum Sign {
 
     public abstract Sign getOppositePlayer();
 }
+

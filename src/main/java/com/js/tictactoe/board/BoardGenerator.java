@@ -5,6 +5,7 @@ import com.js.tictactoe.board.cell.CellWithValue;
 import com.js.tictactoe.board.cell.EmptyCell;
 import com.js.tictactoe.board.coords.Coordinates;
 import com.js.tictactoe.dimensions.Dimensions;
+import com.js.tictactoe.player.Colors;
 import com.js.tictactoe.player.Sign;
 
 class BoardGenerator {
@@ -51,7 +52,10 @@ class BoardGenerator {
             System.out.print(i + " ");
 
             for (int j = 0; j < table[i].length; j++) {
-                System.out.print("|\t" + table[i][j].getValue() + "\t|");
+                if (table[i][j].getValue().toString().equalsIgnoreCase("O"))
+                    System.out.print("|\t" + Colors.ANSI_GREEN + table[i][j].getValue() + Colors.ANSI_DEFAULT + "\t|");
+                else
+                    System.out.print("|\t" + Colors.ANSI_RED + table[i][j].getValue() + Colors.ANSI_DEFAULT + "\t|");
             }
             System.out.print("\n");
         }
