@@ -3,6 +3,7 @@ package com.js.tictactoe.game;
 import com.js.tictactoe.board.Board;
 import com.js.tictactoe.board.coords.Coordinates;
 import com.js.tictactoe.exceptions.WrongIndexException;
+import com.js.tictactoe.game.configuration.Configuration;
 import com.js.tictactoe.judge.Judge;
 import com.js.tictactoe.parser.DigitParser;
 import com.js.tictactoe.parser.InputParser;
@@ -11,49 +12,45 @@ import com.js.tictactoe.player.PlayersGenerator;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.function.Supplier;
 
 public class Game {
 
     private Board board;
-    private Scanner scanner = new Scanner(System.in);
+    private Supplier<String> input = new Scanner(System.in)::nextLine;
     private Player currentPlayer;
     private Judge judge;
     private List<Player> players;
     private Match match;
-    private int signsToWin = 0;
+
 
     public Game(Board board) {
         this.board = board;
     }
 
     public void runGame() {
-        chooseSequenceName();
-        players = PlayersGenerator.createPlayers(scanner::nextLine);
+        Configuration configuration = new Configuration(input, board);
+        int signsToWin = configuration.chooseSequenceNumber();
+
+        players = PlayersGenerator.createPlayers(input);
         setMatch();
+
         judge = new Judge(board, signsToWin);
-        chooseStartingSign();
-        playingLoop(match);
+        currentPlayer = configuration.chooseStartingSign(players);
+        playingLoop();
+
         System.out.println("Match is end! Situation: " + match.getWinnerOrDraw() + "! Congratulations!");
     }
 
-    private void chooseStartingSign() {
-        do {
-            currentPlayer = chooseStartingPlayer();
-        } while (currentPlayer == null);
-    }
+
 
     private void setMatch() {
         match = new Match();
         match.setPlayers(players);
     }
 
-    private void chooseSequenceName() {
-        do {
-            signsToWin = getNumberOfSignsToWin();
-        } while (signsToWin == 0);
-    }
 
-    private void playingLoop(Match match) {
+    private void playingLoop() {
         do {
             boolean winner = move();
             switchPlayers();
@@ -84,26 +81,6 @@ public class Game {
     }
 
 
-    private int getNumberOfSignsToWin() {
-        boolean isValid;
-        String line;
-        do {
-            System.out.println("Enter number of signs to win: ");
-            line = scanner.nextLine();
-            isValid = DigitParser.isInputContainingDigits(line);
-        } while (!isValid);
-
-        int number = Integer.parseInt(line);
-        int min = board.getWidth() > board.getHeight() ? board.getHeight() : board.getWidth();
-
-        if (number <= min && number >= 3) {
-            return number;
-        } else {
-            System.out.println("Incorrect number. Try again");
-            return 0;
-        }
-    }
-
     private boolean move() {
         boolean isWinner;
         int i = 0;
@@ -113,7 +90,7 @@ public class Game {
             do {
                 System.out.println("Player " + currentPlayer.getName() +
                         " make your move [pattern: x y] and x must be lower than " + board.getWidth() + ", y lower than " + board.getHeight());
-                String line = DigitParser.correctCoordinates(scanner::nextLine);
+                String line = DigitParser.correctCoordinates(input);
 
                 if (line.equalsIgnoreCase("quit")) {
                     match.endMatch();
@@ -138,27 +115,14 @@ public class Game {
             return board.insertSign(Coordinates.parseCoordinates(coords), currentPlayer.getSign());
         } catch (WrongIndexException | NumberFormatException e) {
             System.out.println("Wrong coordinates, please try again.");
-            line = scanner.nextLine();
+            line = input.get();
             makeMove(line, currentPlayer);
         }
         return true;
     }
 
 
-    private Player chooseStartingPlayer() {
 
-        System.out.println("Who does start? O/X");
-        String line = scanner.nextLine();
-
-        if (players.get(0).getSign().toString().equalsIgnoreCase(line)) {
-            return players.get(0);
-        } else if (players.get(1).getSign().toString().equalsIgnoreCase(line)) {
-            return players.get(1);
-        } else {
-            System.out.println("Incorrect player. Try again: ");
-            return null;
-        }
-    }
 
 
 }
