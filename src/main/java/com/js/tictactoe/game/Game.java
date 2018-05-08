@@ -87,7 +87,7 @@ public class Game {
             board.printBoard();
             boolean added;
             do {
-                System.out.println("Player " + currentPlayer.getName() +
+                System.out.println("Player " + currentPlayer.getName() + "(" + currentPlayer.getSign() + ")" +
                         " make your move [pattern: x y] and x must be lower than " + board.getWidth() + ", y lower than " + board.getHeight());
                 String line = DigitParser.correctCoordinates(input);
 
