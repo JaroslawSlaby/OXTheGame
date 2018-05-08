@@ -1,6 +1,5 @@
 package com.js.tictactoe.game;
 
-import com.js.tictactoe.board.game.Match;
 import com.js.tictactoe.player.Player;
 import com.js.tictactoe.player.Sign;
 import org.testng.annotations.BeforeMethod;

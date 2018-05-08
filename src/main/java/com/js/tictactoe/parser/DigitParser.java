@@ -12,7 +12,7 @@ public class DigitParser {
             line = input.get();
 
             if (line.equalsIgnoreCase("quit"))
-                System.exit(0);
+                return line;
 
             isNumber = DigitParser.isInputContainingDigits(line);
 
