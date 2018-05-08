@@ -30,7 +30,7 @@ public class Match {
         numberOfGames++;
     }
 
-    public Player getPlayerWithMorePoints() {
+    private Player getPlayerWithMorePoints() {
         Map.Entry<Player, Integer> max = Collections.max(scores.entrySet(), Comparator.comparingInt(Map.Entry::getValue));
         return max.getKey();
     }

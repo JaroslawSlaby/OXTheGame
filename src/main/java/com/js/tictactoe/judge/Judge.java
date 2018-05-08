@@ -59,24 +59,27 @@ public class Judge {
 
         int counter = 1;
 
-        int min = x < y ? x : y;
+        int boundary = -amount + 1;
+
+        StringBuilder line = new StringBuilder();
+
+        for (int i = boundary; i < amount; i++) {
+
+            int currX = x + i;
+            int currY = y + i;
 
 
-        int endLoop = (board.getWidth() > board.getHeight()) ? board.getHeight() : board.getWidth();
+            if (checkPositionX(currX) && checkPositionY(currY)) {
 
-
-        for (int startX = x - min; startX < endLoop - 1; startX++) {
-
-            for (int startY = y - min; startY < endLoop - 1; startY++) {
-
-                if (!board.getCell(startX, startY).isCellEmpty() && board.getCell(startX, startY).getValue().equals(sign) && board.getCell(startX, startY).getValue().equals(board.getCell(startX + 1, startY + 1).getValue())) {
-                    counter++;
+                Cell cell = board.getCell(currX, currY);
+                if (!cell.isCellEmpty() && cell.getValue().equals(sign)) {
+                    line.append(cell.getValue());
                 }
+
             }
         }
 
-
-        return counter >= amount;
+        return line.toString().length() == amount;
 
     }
 
@@ -85,29 +88,33 @@ public class Judge {
         int counter = 1;
 
         int sum = x + y;
-        int startX;
-        int startY;
 
-        if (sum > board.getWidth() - 1) {
-            startX = board.getWidth() - 1;
-            startY = sum - board.getWidth() + 1;
-        } else {
-            startX = sum;
-            startY = 0;
-        }
+        int startX = sum > board.getWidth() ? sum - board.getWidth() + 1 : 0;
+        int startY = sum > board.getHeight() ? board.getHeight() - 1 : sum;
 
-        int endLoop = (board.getWidth() > board.getHeight()) ? board.getHeight() : board.getWidth();
-
-
-        for (int i = x; i > 0; i--) {
-            for (int j = y; j < sum - 1; j++) {
-
-//                if (board.getCell(i, j).getValue().equals(sign) && board.getCell(i, j).getValue().equals(board.getCell(i - 1, j + 1).getValue())) {
+//        for(; startX < board.getWidth() - 1; startX++) {
+//
+//            for (; startY > board.getHeight() - 1; startY--) {
+//
+//                if (!board.getCell(startX, startY).isCellEmpty() && board.getCell(startX, startY).getValue().equals(sign) && board.getCell(startX, startY).getValue().equals(board.getCell(startX + 1, startY - 1).getValue())) {
 //                    counter++;
 //                }
-            }
-        }
+//            }
+//        }
+
 
         return counter >= amount;
+    }
+
+    private boolean checkWinningInUnit(String line) {
+        return line.matches("");
+    }
+
+    private boolean checkPositionX(int position) {
+        return position >= 0 && position < board.getHeight() - 1;
+    }
+
+    private boolean checkPositionY(int position) {
+        return position >= 0 && position < board.getWidth() - 1;
     }
 }

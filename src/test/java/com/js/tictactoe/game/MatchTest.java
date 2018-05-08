@@ -8,7 +8,6 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 @Test
@@ -40,9 +39,4 @@ public class MatchTest {
         assertTrue(match.getPlayersScore(players.get(0)) == 4);
     }
 
-    public void getPlayerWithMorePointsWhenPlayerOneIsWinning() {
-        match.addGameWinner(players.get(0));
-        match.addGameDraw();
-        assertEquals(players.get(0), match.getPlayerWithMorePoints());
-    }
 }
