@@ -24,12 +24,10 @@ public class Game {
     private Match match;
 
 
-    public Game(Board board) {
-        this.board = board;
-    }
 
     public void runGame() {
-        Configuration configuration = new Configuration(input, board);
+        Configuration configuration = new Configuration(input);
+        board = configuration.createTable();
         int signsToWin = configuration.chooseSequenceNumber();
 
         players = PlayersGenerator.createPlayers(input);

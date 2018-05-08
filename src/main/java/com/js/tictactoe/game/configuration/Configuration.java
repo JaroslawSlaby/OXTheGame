@@ -1,8 +1,12 @@
 package com.js.tictactoe.game.configuration;
 
 import com.js.tictactoe.board.Board;
+import com.js.tictactoe.exceptions.WrongSizeException;
 import com.js.tictactoe.parser.DigitParser;
+import com.js.tictactoe.parser.InputParser;
 import com.js.tictactoe.player.Player;
+import com.js.tictactoe.validators.InputValidator;
+import com.js.tictactoe.validators.TableSizeValidator;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -11,14 +15,57 @@ public class Configuration {
 
     private Supplier<String> input;
     private Board board;
-    private int signSequence = 0;
 
-    public Configuration(Supplier<String> input, Board board) {
+    public Configuration(Supplier<String> input) {
         this.input = input;
-        this.board = board;
+    }
+
+
+    public Board createTable() {
+        String line = getInput();
+        try {
+            return newBoardAfterParsing(line);
+        } catch (WrongSizeException e) {
+            System.out.println("wrong size");
+            createTable();
+        }
+        return null;
+    }
+
+    private Board newBoardAfterParsing(String line) throws WrongSizeException {
+        int[] size = InputParser.parseStringInput(line);
+        int width = size[0];
+        int height = size[1];
+        board = Board.getRectangleBoard(width, height);
+        return board;
+    }
+
+
+    private String getInput() {
+        InputValidator validator = new TableSizeValidator();
+        String line;
+        System.out.println("Enter board size (All dimensions must be higher or equal 3) [pattern: x y]: ");
+        line = inputTableSize();
+        validator.validate(line);
+        return line;
+    }
+
+    private String inputTableSize() {
+        boolean isNumber;
+        String line;
+        do {
+            line = input.get();
+            isNumber = DigitParser.isInputContainingDigits(line);
+
+            if (!isNumber)
+                System.out.println("Wrong table size!");
+        } while (!isNumber);
+
+        return line;
     }
 
     public int chooseSequenceNumber() {
+        int signSequence;
         do {
             signSequence = getNumberOfSignsToWin();
         } while (signSequence == 0);
