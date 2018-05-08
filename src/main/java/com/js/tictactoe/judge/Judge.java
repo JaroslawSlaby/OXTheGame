@@ -66,14 +66,10 @@ public class Judge {
             int currX = x + i;
             int currY = y + i;
 
-            System.out.println(currX + " / " + currY);
-
             if (checkPositionX(currX) && checkPositionY(currY)) {
 
                 Cell cell = board.getCell(currY, currX);
-                System.out.println(cell.getValue());
                 line.append(cell.getValue());
-
             }
         }
         return line.toString();
@@ -93,7 +89,6 @@ public class Judge {
 
 
             if (checkPositionX(currX) && checkPositionY(currY)) {
-
                 Cell cell = board.getCell(currY, currX);
                 line.append(cell.getValue());
 
