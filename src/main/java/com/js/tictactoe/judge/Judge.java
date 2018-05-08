@@ -21,7 +21,7 @@ public class Judge {
         int x = latest.getIntegerX();
         int y = latest.getIntegerY();
 
-        return isWinnerInRow(y, sign) || isWinnerInColumn(x, sign) || checkWinningInUnit(sign, isWinnerInDiagonal1(x, y, sign)) || checkWinningInUnit(sign, isWinnerInDiagonal2(x, y, sign));
+        return isWinnerInRow(y, sign) || isWinnerInColumn(x, sign) || checkWinningInUnit(sign, isWinnerInDiagonal1(x, y)) || checkWinningInUnit(sign, isWinnerInDiagonal2(x, y));
 
     }
 
@@ -55,7 +55,7 @@ public class Judge {
         return counter >= amount;
     }
 
-    public String isWinnerInDiagonal1(int x, int y, Sign sign) {
+    public String isWinnerInDiagonal1(int x, int y) {
 
         int boundary = -amount + 1;
 
@@ -66,22 +66,21 @@ public class Judge {
             int currX = x + i;
             int currY = y + i;
 
+            System.out.println(currX + " / " + currY);
 
             if (checkPositionX(currX) && checkPositionY(currY)) {
 
-                Cell cell = board.getCell(currX, currY);
-                if (!cell.isCellEmpty() && cell.getValue().equals(sign)) {
-                    line.append(cell.getValue());
-                }
+                Cell cell = board.getCell(currY, currX);
+                System.out.println(cell.getValue());
+                line.append(cell.getValue());
 
             }
         }
-
         return line.toString();
 
     }
 
-    public String isWinnerInDiagonal2(int x, int y, Sign sign) { //todo: incorrect
+    public String isWinnerInDiagonal2(int x, int y) {
 
         int boundary = -amount + 1;
 
@@ -95,10 +94,8 @@ public class Judge {
 
             if (checkPositionX(currX) && checkPositionY(currY)) {
 
-                Cell cell = board.getCell(currX, currY);
-                if (!cell.isCellEmpty() && cell.getValue().equals(sign)) {
-                    line.append(cell.getValue());
-                }
+                Cell cell = board.getCell(currY, currX);
+                line.append(cell.getValue());
 
             }
         }
@@ -107,7 +104,8 @@ public class Judge {
     }
 
     private boolean checkWinningInUnit(Sign sign, String line) {
-        return line.matches(".*" + sign.toString() + "{" + amount + "}.*");
+        String regex = ".*" + sign.toString() + "{" + amount + "}.*";
+        return line.matches(regex);
     }
 
     private boolean checkPositionX(int position) {

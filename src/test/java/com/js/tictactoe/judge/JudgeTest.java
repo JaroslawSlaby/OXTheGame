@@ -8,8 +8,7 @@ import com.js.tictactoe.player.Sign;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 @Test
 public class JudgeTest {
@@ -119,9 +118,66 @@ public class JudgeTest {
         board.insertSign(Coordinates.parseCoordinates("1 1"), Sign.X);
         board.insertSign(Coordinates.parseCoordinates("0 0"), Sign.X);
 
-        boolean isWinner = judge.isWinnerInDiagonal1(0, 0, Sign.X).length() == 5;
+        String winnerInDiagonal1 = judge.isWinnerInDiagonal1(0, 0);
+        boolean isWinner = winnerInDiagonal1.equals("XXXXX");
         assertTrue(isWinner);
     }
 
+    public void checkIDiagonalInCorrectWay() throws WrongIndexException {
+        Judge judge = new Judge(board, 5);
+
+        board.insertSign(Coordinates.parseCoordinates("4 4"), Sign.X);
+        board.insertSign(Coordinates.parseCoordinates("3 3"), Sign.X);
+
+        board.insertSign(Coordinates.parseCoordinates("2 2"), Sign.O);
+        board.insertSign(Coordinates.parseCoordinates("1 1"), Sign.X);
+        board.insertSign(Coordinates.parseCoordinates("0 0"), Sign.X);
+
+        String winnerInDiagonal1 = judge.isWinnerInDiagonal1(0, 0);
+        assertEquals(winnerInDiagonal1, "XXOXX");
+    }
+
+    public void checkIDiagonalInCorrectWayAnother() throws WrongIndexException {
+        Judge judge = new Judge(board, 4);
+
+        board.insertSign(Coordinates.parseCoordinates("1 0"), Sign.X);
+        board.insertSign(Coordinates.parseCoordinates("2 1"), Sign.X);
+
+        board.insertSign(Coordinates.parseCoordinates("3 2"), Sign.O);
+        board.insertSign(Coordinates.parseCoordinates("4 3"), Sign.X);
+
+        String winnerInDiagonal1 = judge.isWinnerInDiagonal1(4, 3);
+        board.printBoard();
+        assertEquals(winnerInDiagonal1, "XXOX");
+    }
+
+
+    public void checkIDiagonal2InCorrectWay() throws WrongIndexException {
+        Judge judge = new Judge(board, 5);
+
+        board.insertSign(Coordinates.parseCoordinates("0 4"), Sign.X);
+        board.insertSign(Coordinates.parseCoordinates("1 3"), Sign.X);
+
+        board.insertSign(Coordinates.parseCoordinates("2 2"), Sign.X);
+        board.insertSign(Coordinates.parseCoordinates("3 1"), Sign.X);
+        board.insertSign(Coordinates.parseCoordinates("4 0"), Sign.X);
+
+        String winnerInDiagonal1 = judge.isWinnerInDiagonal2(4, 0);
+        assertEquals(winnerInDiagonal1, "XXXXX");
+    }
+
+    public void checkIDiagonal2InInCorrectWay() throws WrongIndexException {
+        Judge judge = new Judge(board, 5);
+
+        board.insertSign(Coordinates.parseCoordinates("0 4"), Sign.X);
+        board.insertSign(Coordinates.parseCoordinates("1 3"), Sign.X);
+
+        board.insertSign(Coordinates.parseCoordinates("2 2"), Sign.O);
+        board.insertSign(Coordinates.parseCoordinates("3 1"), Sign.X);
+        board.insertSign(Coordinates.parseCoordinates("4 0"), Sign.X);
+
+        String winnerInDiagonal1 = judge.isWinnerInDiagonal2(4, 0);
+        assertEquals(winnerInDiagonal1, "XXOXX");
+    }
 
 }
