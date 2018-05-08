@@ -26,7 +26,7 @@ public class Configuration {
         String line = getInput();
         try {
             return newBoardAfterParsing(line);
-        } catch (WrongSizeException e) {
+        } catch (WrongSizeException | OutOfMemoryError e) {
             System.out.println("wrong size");
             createTable();
         }
