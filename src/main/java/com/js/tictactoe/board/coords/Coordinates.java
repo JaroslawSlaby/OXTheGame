@@ -18,14 +18,14 @@ public class Coordinates {
     if (areCoordinatesPositive(elements))
       return new Coordinates(elements[0], elements[1]);
     else
-      throw new WrongIndexException("Both coordinates must be positive numbers!"); //TODO: internationalization
+      throw new WrongIndexException("Both coordinates must be positive numbers!"); //coordsPositive
   }
 
   public static Coordinates parseCoordinates(int[] coordinates) throws WrongIndexException {
     if (coordinates[0] >= 0 && coordinates[1] >= 0)
       return new Coordinates(String.valueOf(coordinates[0]), String.valueOf(coordinates[1]));
     else
-      throw new WrongIndexException("Coordinates must be integers!");
+      throw new WrongIndexException("Coordinates must be integers!"); //coordsPositive
   }
 
   public int getIntegerX() {

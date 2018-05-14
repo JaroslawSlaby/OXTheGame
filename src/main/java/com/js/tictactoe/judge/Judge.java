@@ -70,7 +70,7 @@ public class Judge {
   }
 
 
-  String isWinnerInDiagonal(int x, int y, ToIntBiFunction<Integer, Integer> function) {
+  private String isWinnerInDiagonal(int x, int y, ToIntBiFunction<Integer, Integer> function) {
 
     int boundary = -amount + 1;
 

@@ -5,6 +5,7 @@ import com.js.tictactoe.board.coords.Coordinates;
 import com.js.tictactoe.exceptions.WrongIndexException;
 import com.js.tictactoe.game.configuration.Configuration;
 import com.js.tictactoe.judge.Judge;
+import com.js.tictactoe.language.FileReader;
 import com.js.tictactoe.parser.DigitParser;
 import com.js.tictactoe.parser.InputParser;
 import com.js.tictactoe.player.Player;
@@ -23,10 +24,13 @@ public class Game {
   private Judge judge;
   private List<Player> players;
   private Match match;
+  private FileReader reader;
 
   public void runGame() {
 
-    Configuration configuration = new Configuration(input, output);
+    setLanguage();
+
+    Configuration configuration = new Configuration(input, output, reader);
 
     do {
       board = configuration.createTable();
@@ -41,10 +45,18 @@ public class Game {
     currentPlayer = configuration.chooseStartingSign(players);
     playingLoop();
 
-    output.accept("\nMatch is end! Congratulations!");
+    output.accept(reader.loadString("endMatch"));
   }
 
+  private void setLanguage() {
+    String in;
+    do {
+      output.accept("Language/Język: PL/EN: ");
+      in = input.get();
+    } while (!in.equalsIgnoreCase("PL") && !in.equalsIgnoreCase("EN"));
 
+    reader = new FileReader(in);
+  }
 
   private void setMatch() {
     match = new Match();
@@ -67,7 +79,7 @@ public class Game {
       }
 
       board.printBoard();
-      output.accept("Winner is: " + currentPlayer.getSign() + ". ");
+      output.accept(reader.loadString("winner") + currentPlayer.getSign() + ". ");
       output.accept(players.get(0).getSign() + ": " + match.getPlayersScore(players.get(0)) + " ");
       output.accept(players.get(1).getSign() + ": " + match.getPlayersScore(players.get(1)) + "\n");
 
@@ -93,10 +105,9 @@ public class Game {
       board.printBoard();
       boolean added;
       do {
-        output.accept("Player " + currentPlayer.getName() + "(" + currentPlayer.getSign() + ")" +
-                " make your move: [pattern: x y (or x if you want the same coordinates) where x must be lower than "
-                + board.getWidth() + ", y lower than " + board.getHeight() + " ] ");
-        String line = DigitParser.correctCoordinates(input, output);
+        output.accept(reader.loadString("player") + currentPlayer.getName() + "(" + currentPlayer.getSign() + ")" +
+                reader.loadString("move") + board.getWidth() + reader.loadString("movePt2") + board.getHeight() + ": ");
+        String line = DigitParser.correctCoordinates(input, output, reader);
 
         if (line.equalsIgnoreCase("quit")) {
           match.endMatch();
@@ -118,7 +129,7 @@ public class Game {
       int[] coords = InputParser.parseStringInput(line);
       return board.insertSign(Coordinates.parseCoordinates(coords), currentPlayer.getSign());
     } catch (WrongIndexException | NumberFormatException e) {
-      output.accept("Wrong coordinates, please try again.");
+      output.accept(reader.loadString("coords"));
       line = input.get();
       makeMove(line, currentPlayer);
     }

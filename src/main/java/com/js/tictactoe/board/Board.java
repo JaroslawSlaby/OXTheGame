@@ -18,7 +18,7 @@ public class Board extends BoardGenerator {
   public static Board getSquareBoard(int size) throws WrongSizeException {
 
     if (size < 3) {
-      throw new WrongSizeException("Size of square board must be higher than 3!"); //TODO: internationalization
+      throw new WrongSizeException("Size of square board must be higher than 3!");
     }
 
     return new Board(new Dimensions(size));
@@ -27,7 +27,7 @@ public class Board extends BoardGenerator {
   public static Board getRectangleBoard(int width, int height) throws WrongSizeException {
 
     if (width < MIN_SIZE || height < MIN_SIZE || width > MAX_SIZE || height > MAX_SIZE) {
-      throw new WrongSizeException("All dimensions of board must be higher than 3!"); //todo: internationalization
+      throw new WrongSizeException("All dimensions of board must be higher than 3!");
     }
 
     return new Board(new Dimensions(width, height));

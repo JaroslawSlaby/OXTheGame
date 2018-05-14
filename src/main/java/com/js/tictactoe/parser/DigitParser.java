@@ -1,12 +1,14 @@
 package com.js.tictactoe.parser;
 
+import com.js.tictactoe.language.FileReader;
+
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class DigitParser {
 
 
-  public static String correctCoordinates(Supplier<String> input, Consumer<String> output) {
+  public static String correctCoordinates(Supplier<String> input, Consumer<String> output, FileReader reader) {
     boolean isNumber;
     String line;
     do {
@@ -18,7 +20,7 @@ public class DigitParser {
       isNumber = DigitParser.isInputContainingDigits(line);
 
       if (!isNumber)
-        output.accept("Wrong coordinates!\n");
+        output.accept(reader.loadString("coords"));
 
     } while (!isNumber);
     return line;
