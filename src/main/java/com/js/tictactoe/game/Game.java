@@ -18,8 +18,8 @@ import java.util.function.Supplier;
 public class Game {
 
   private Board board;
-  private Supplier<String> input = new Scanner(System.in)::nextLine;
-  private Consumer<String> output = System.out::print;
+  private final Supplier<String> input = new Scanner(System.in)::nextLine;
+  private final Consumer<String> output = System.out::print;
   private Player currentPlayer;
   private Judge judge;
   private List<Player> players;

@@ -4,8 +4,8 @@ import com.js.tictactoe.exceptions.WrongIndexException;
 
 public class Coordinates {
 
-  private String X;
-  private String Y;
+  private final String X;
+  private final String Y;
 
   private Coordinates(String firstCorrectCoordinate, String secondCorrectCoordinate) {
     this.X = firstCorrectCoordinate;
@@ -18,14 +18,14 @@ public class Coordinates {
     if (areCoordinatesPositive(elements))
       return new Coordinates(elements[0], elements[1]);
     else
-      throw new WrongIndexException("Both coordinates must be positive numbers!"); //coordsPositive
+      throw new WrongIndexException("Both coordinates must be positive numbers!");
   }
 
   public static Coordinates parseCoordinates(int[] coordinates) throws WrongIndexException {
     if (coordinates[0] >= 0 && coordinates[1] >= 0)
       return new Coordinates(String.valueOf(coordinates[0]), String.valueOf(coordinates[1]));
     else
-      throw new WrongIndexException("Coordinates must be integers!"); //coordsPositive
+      throw new WrongIndexException("Coordinates must be integers!");
   }
 
   public int getIntegerX() {

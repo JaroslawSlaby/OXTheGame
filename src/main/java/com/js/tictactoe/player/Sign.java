@@ -19,7 +19,7 @@ public enum Sign {
     }
   };
 
-  private String sign;
+  private final String sign;
 
   Sign(String sign) {
     this.sign = sign;

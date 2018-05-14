@@ -2,8 +2,8 @@ package com.js.tictactoe.dimensions;
 
 public class Dimensions {
 
-  private int width;
-  private int height;
+  private final int width;
+  private final int height;
 
   public Dimensions(int sizeOfBoard) {
     this.height = sizeOfBoard;

@@ -2,8 +2,8 @@ package com.js.tictactoe.player;
 
 public class Player {
 
-  private Sign sign;
-  private String name;
+  private final Sign sign;
+  private final String name;
 
   public Player(Sign sign, String name) {
     this.sign = sign;

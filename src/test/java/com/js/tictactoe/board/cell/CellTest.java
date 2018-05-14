@@ -3,8 +3,7 @@ package com.js.tictactoe.board.cell;
 import com.js.tictactoe.player.Sign;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.*;
 
 @Test
 public class CellTest {
@@ -16,7 +15,7 @@ public class CellTest {
 
     public void createNonEmptyCellWithEmptyValue() {
         Cell cell = new CellWithValue(null);
-        assertEquals(null, cell.getValue());
+        assertNull(cell.getValue());
     }
 
     public void createCellWithCorrectValueAndCheckIfItIsEmpty() {

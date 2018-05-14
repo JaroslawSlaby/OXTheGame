@@ -16,10 +16,10 @@ import java.util.function.Supplier;
 
 public class Configuration {
 
-  private Supplier<String> input;
-  private Consumer<String> output;
+  private final Supplier<String> input;
+  private final Consumer<String> output;
   private Board board;
-  private FileReader reader;
+  private final FileReader reader;
 
   public Configuration(Supplier<String> input, Consumer<String> output, FileReader reader) {
     this.input = input;

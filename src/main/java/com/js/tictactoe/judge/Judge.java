@@ -9,8 +9,8 @@ import java.util.function.ToIntBiFunction;
 
 public class Judge {
 
-  private Board board;
-  private int amount;
+  private final Board board;
+  private final int amount;
 
   public Judge(Board board, int amount) {
     this.board = board;
@@ -96,7 +96,7 @@ public class Judge {
   }
 
   private boolean checkWinningInUnit(Sign sign, String line) {
-    String regex = ".*" + sign.toString() + "{" + amount + "}.*";
+    String regex = ".*" + sign.toString() + "*{" + amount + "}.*";
     return line.matches(regex);
   }
 

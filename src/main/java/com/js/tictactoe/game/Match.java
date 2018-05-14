@@ -7,7 +7,7 @@ import java.util.*;
 class Match {
 
   private static final int MAX_GAMES = 3;
-  private Map<Player, Integer> scores = new HashMap<>();
+  private final Map<Player, Integer> scores = new HashMap<>();
   private int numberOfGames = 0;
 
 

@@ -4,7 +4,7 @@ import com.js.tictactoe.player.Sign;
 
 public class CellWithValue implements Cell {
 
-  private Sign sign;
+  private final Sign sign;
 
   public CellWithValue(Sign sign) {
     this.sign = sign;
