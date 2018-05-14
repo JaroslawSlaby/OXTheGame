@@ -4,13 +4,13 @@ import com.js.tictactoe.player.Sign;
 
 public class EmptyCell implements Cell {
 
-    @Override
-    public boolean isCellEmpty() {
-        return true;
-    }
+  @Override
+  public boolean isCellEmpty() {
+    return true;
+  }
 
-    @Override
-    public Sign getValue() {
-        return Sign.EMPTY;
-    }
+  @Override
+  public Sign getValue() {
+    return Sign.EMPTY;
+  }
 }

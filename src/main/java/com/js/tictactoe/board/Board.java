@@ -8,69 +8,69 @@ import com.js.tictactoe.player.Sign;
 
 public class Board extends BoardGenerator {
 
-    private static final int MIN_SIZE = 3;
-    private static final int MAX_SIZE = 100;
+  private static final int MIN_SIZE = 3;
+  private static final int MAX_SIZE = 100;
 
-    private Board(Dimensions sizeOfBoard) {
-        createEmptyBoard(sizeOfBoard);
+  private Board(Dimensions sizeOfBoard) {
+    createEmptyBoard(sizeOfBoard);
+  }
+
+  public static Board getSquareBoard(int size) throws WrongSizeException {
+
+    if (size < 3) {
+      throw new WrongSizeException("Size of square board must be higher than 3!"); //TODO: internationalization
     }
 
-    public static Board getSquareBoard(int size) throws WrongSizeException {
+    return new Board(new Dimensions(size));
+  }
 
-        if (size < 3) {
-            throw new WrongSizeException("Size of square board must be higher than 3!"); //TODO: internationalization
-        }
+  public static Board getRectangleBoard(int width, int height) throws WrongSizeException {
 
-        return new Board(new Dimensions(size));
+    if (width < MIN_SIZE || height < MIN_SIZE || width > MAX_SIZE || height > MAX_SIZE) {
+      throw new WrongSizeException("All dimensions of board must be higher than 3!"); //todo: internationalization
     }
 
-    public static Board getRectangleBoard(int width, int height) throws WrongSizeException {
+    return new Board(new Dimensions(width, height));
+  }
 
-        if (width < MIN_SIZE || height < MIN_SIZE || width > MAX_SIZE || height > MAX_SIZE) {
-            throw new WrongSizeException("All dimensions of board must be higher than 3!"); //todo: internationalization
-        }
+  public boolean insertSign(Coordinates coordinates, Sign sign) {
+    latest = coordinates;
+    return super.insertSign(coordinates, sign);
+  }
 
-        return new Board(new Dimensions(width, height));
+  public Cell[] getRow(int row) {
+    return table[row];
+  }
+
+  public Cell[] getColumn(int column) {
+
+    Cell[] expectedColumn = new Cell[table.length];
+    for (int row = 0; row < table.length; row++) {
+      expectedColumn[row] = table[row][column];
     }
 
-    public boolean insertSign(Coordinates coordinates, Sign sign) {
-        latest = coordinates;
-        return super.insertSign(coordinates, sign);
-    }
+    return expectedColumn;
 
-    public Cell[] getRow(int row) {
-        return table[row];
-    }
+  }
 
-    public Cell[] getColumn(int column) {
+  public Cell getCell(int x, int y) {
+    return table[x][y];
+  }
 
-        Cell[] expectedColumn = new Cell[table.length];
-        for (int row = 0; row < table.length; row++) {
-            expectedColumn[row] = table[row][column];
-        }
+  public void printBoard() {
+    super.printBoard();
+  }
 
-        return expectedColumn;
+  public int getWidth() {
+    return table[0].length;
+  }
 
-    }
+  public int getHeight() {
+    return table.length;
+  }
 
-    public Cell getCell(int x, int y) {
-        return table[x][y];
-    }
-
-    public void printBoard() {
-        super.printBoard();
-    }
-
-    public int getWidth() {
-        return table[0].length;
-    }
-
-    public int getHeight() {
-        return table.length;
-    }
-
-    public Coordinates getLatestMove() {
-        return latest;
-    }
+  public Coordinates getLatestMove() {
+    return latest;
+  }
 
 }

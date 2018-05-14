@@ -10,46 +10,46 @@ import com.js.tictactoe.player.Sign;
 
 class BoardGenerator {
 
-    Cell[][] table;
-    Coordinates latest;
+  Cell[][] table;
+  Coordinates latest;
 
-    void createEmptyBoard(Dimensions dimensions) {
-        table = new Cell[dimensions.getHeight()][dimensions.getWidth()];
-        fillTableEmptyValues(dimensions);
+  void createEmptyBoard(Dimensions dimensions) {
+    table = new Cell[dimensions.getHeight()][dimensions.getWidth()];
+    fillTableEmptyValues(dimensions);
 
+  }
+
+  private void fillTableEmptyValues(Dimensions dimensions) {
+    for (int i = 0; i < dimensions.getHeight(); i++)
+      for (int j = 0; j < dimensions.getWidth(); j++)
+        table[i][j] = new EmptyCell();
+  }
+
+  boolean insertSign(Coordinates coordinates, Sign sign) {
+    int y = coordinates.getIntegerX();
+    int x = coordinates.getIntegerY();
+
+    if (x >= table.length || y >= table[0].length) {
+      return false;
     }
 
-    private void fillTableEmptyValues(Dimensions dimensions) {
-        for (int i = 0; i < dimensions.getHeight(); i++)
-            for (int j = 0; j < dimensions.getWidth(); j++)
-                table[i][j] = new EmptyCell();
+    if (table[x][y].isCellEmpty()) {
+      table[x][y] = new CellWithValue(sign);
+      return true;
     }
 
-    boolean insertSign(Coordinates coordinates, Sign sign) {
-        int y = coordinates.getIntegerX();
-        int x = coordinates.getIntegerY();
+    return false;
+  }
 
-        if (x >= table.length || y >= table[0].length) {
-            return false;
-        }
+  void printBoard() {
+    BoardPrinter.printBoard(table);
+  }
 
-        if (table[x][y].isCellEmpty()) {
-            table[x][y] = new CellWithValue(sign);
-            return true;
-        }
-
-        return false;
+  public void clearBoard() {
+    for (int i = 0; i < table.length; i++) {
+      for (int j = 0; j < table[i].length; j++) {
+        table[i][j] = new EmptyCell();
+      }
     }
-
-    void printBoard() {
-        BoardPrinter.printBoard(table);
-    }
-
-    public void clearBoard() {
-        for (int i = 0; i < table.length; i++) {
-            for (int j = 0; j < table[i].length; j++) {
-                table[i][j] = new EmptyCell();
-            }
-        }
-    }
+  }
 }

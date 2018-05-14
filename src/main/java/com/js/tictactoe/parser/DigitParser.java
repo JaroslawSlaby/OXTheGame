@@ -5,25 +5,25 @@ import java.util.function.Supplier;
 public class DigitParser {
 
 
-    public static String correctCoordinates(Supplier<String> input) {
-        boolean isNumber;
-        String line;
-        do {
-            line = input.get();
+  public static String correctCoordinates(Supplier<String> input) {
+    boolean isNumber;
+    String line;
+    do {
+      line = input.get();
 
-            if (line.equalsIgnoreCase("quit"))
-                return line;
-
-            isNumber = DigitParser.isInputContainingDigits(line);
-
-            if (!isNumber)
-                System.out.println("Wrong coordinates!");
-
-        } while (!isNumber);
+      if (line.equalsIgnoreCase("quit"))
         return line;
-    }
 
-    public static boolean isInputContainingDigits(String line) {
-        return line.matches("[0-9 ]+");
-    }
+      isNumber = DigitParser.isInputContainingDigits(line);
+
+      if (!isNumber)
+        System.out.println("Wrong coordinates!");
+
+    } while (!isNumber);
+    return line;
+  }
+
+  public static boolean isInputContainingDigits(String line) {
+    return line.matches("[0-9 ]+");
+  }
 }

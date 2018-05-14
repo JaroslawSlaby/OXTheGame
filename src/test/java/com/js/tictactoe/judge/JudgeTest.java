@@ -147,7 +147,6 @@ public class JudgeTest {
         board.insertSign(Coordinates.parseCoordinates("4 3"), Sign.X);
 
         String winnerInDiagonal1 = judge.isWinnerInDiagonal1(4, 3);
-        board.printBoard();
         assertEquals(winnerInDiagonal1, "XXOX");
     }
 
