@@ -11,12 +11,14 @@ import com.js.tictactoe.player.Player;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class Game {
 
   private Board board;
   private Supplier<String> input = new Scanner(System.in)::nextLine;
+  private Consumer<String> output = System.out::print;
   private Player currentPlayer;
   private Judge judge;
   private List<Player> players;
@@ -24,7 +26,7 @@ public class Game {
 
   public void runGame() {
 
-    Configuration configuration = new Configuration(input);
+    Configuration configuration = new Configuration(input, output);
 
     do {
       board = configuration.createTable();
@@ -39,8 +41,10 @@ public class Game {
     currentPlayer = configuration.chooseStartingSign(players);
     playingLoop();
 
-    System.out.println("Match is end! Situation: " + match.getWinnerOrDraw() + "! Congratulations!");
+    output.accept("\nMatch is end! Congratulations!");
   }
+
+
 
   private void setMatch() {
     match = new Match();
@@ -49,6 +53,7 @@ public class Game {
 
   private void playingLoop() {
     do {
+
       boolean winner;
 
       winner = move();
@@ -62,11 +67,12 @@ public class Game {
       }
 
       board.printBoard();
-      System.out.println("End of round.");
-      System.out.println("Player: " + players.get(0).getName() + " Score: " + match.getPlayersScore(players.get(0)));
-      System.out.println("Player: " + players.get(1).getName() + " Score: " + match.getPlayersScore(players.get(1)));
-      switchPlayers();
+      output.accept("Winner is: " + currentPlayer.getSign() + ". ");
+      output.accept(players.get(0).getSign() + ": " + match.getPlayersScore(players.get(0)) + " ");
+      output.accept(players.get(1).getSign() + ": " + match.getPlayersScore(players.get(1)) + "\n");
+
       board.clearBoard();
+      switchPlayers();
 
     } while (match.isNextRound());
   }
@@ -87,10 +93,10 @@ public class Game {
       board.printBoard();
       boolean added;
       do {
-        System.out.println("Player " + currentPlayer.getName() + "(" + currentPlayer.getSign() + ")" +
+        output.accept("Player " + currentPlayer.getName() + "(" + currentPlayer.getSign() + ")" +
                 " make your move: [pattern: x y (or x if you want the same coordinates) where x must be lower than "
-                + board.getWidth() + ", y lower than " + board.getHeight() + " ]");
-        String line = DigitParser.correctCoordinates(input);
+                + board.getWidth() + ", y lower than " + board.getHeight() + " ] ");
+        String line = DigitParser.correctCoordinates(input, output);
 
         if (line.equalsIgnoreCase("quit")) {
           match.endMatch();
@@ -112,7 +118,7 @@ public class Game {
       int[] coords = InputParser.parseStringInput(line);
       return board.insertSign(Coordinates.parseCoordinates(coords), currentPlayer.getSign());
     } catch (WrongIndexException | NumberFormatException e) {
-      System.out.println("Wrong coordinates, please try again.");
+      output.accept("Wrong coordinates, please try again.");
       line = input.get();
       makeMove(line, currentPlayer);
     }

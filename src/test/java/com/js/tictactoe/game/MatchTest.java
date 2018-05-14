@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 @Test
@@ -25,18 +26,18 @@ public class MatchTest {
     }
 
     public void addNewEmptyListWithPlayersAndCheckIfAllHaveZeroPoints() {
-        assertTrue(match.getPlayersScore(players.get(0)) == 0);
+        assertEquals(0, (int) match.getPlayersScore(players.get(0)));
     }
 
     public void addWinningToFirstPlayer() {
         match.addGameWinner(players.get(0));
-        assertTrue(match.getPlayersScore(players.get(0)) == 3);
+        assertEquals(3, (int) match.getPlayersScore(players.get(0)));
     }
 
     public void addDrawAfterWinningToFirstPlayer() {
         match.addGameWinner(players.get(0));
         match.addGameDraw();
-        assertTrue(match.getPlayersScore(players.get(0)) == 4);
+        assertEquals(4, (int) match.getPlayersScore(players.get(0)));
     }
 
 }

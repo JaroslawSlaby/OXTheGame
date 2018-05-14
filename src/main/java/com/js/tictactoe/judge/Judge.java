@@ -58,19 +58,19 @@ public class Judge {
   }
 
   String isWinnerInDiagonal1(int x, int y) {
-    return isWinnerInDiagonal(x, y, plusSizeFuntion());
+    return isWinnerInDiagonal(x, y, plusSizeFunction());
   }
 
   String isWinnerInDiagonal2(int x, int y) {
-    return isWinnerInDiagonal(x, y, minusSizeFuntion());
+    return isWinnerInDiagonal(x, y, minusSizeFunction());
   }
 
-  private ToIntBiFunction<Integer, Integer> plusSizeFuntion() {
+  private ToIntBiFunction<Integer, Integer> plusSizeFunction() {
     return (integer, integer2) -> integer + integer2;
   }
 
 
-  String isWinnerInDiagonal(int x, int y, ToIntBiFunction function) {
+  String isWinnerInDiagonal(int x, int y, ToIntBiFunction<Integer, Integer> function) {
 
     int boundary = -amount + 1;
 
@@ -91,7 +91,7 @@ public class Judge {
 
   }
 
-  private ToIntBiFunction<Integer, Integer> minusSizeFuntion() {
+  private ToIntBiFunction<Integer, Integer> minusSizeFunction() {
     return (integer, integer2) -> integer - integer2;
   }
 

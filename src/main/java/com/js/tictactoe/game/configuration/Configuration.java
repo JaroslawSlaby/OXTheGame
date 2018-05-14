@@ -10,15 +10,18 @@ import com.js.tictactoe.validators.InputValidator;
 import com.js.tictactoe.validators.TableSizeValidator;
 
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class Configuration {
 
   private Supplier<String> input;
+  private Consumer<String> output;
   private Board board;
 
-  public Configuration(Supplier<String> input) {
+  public Configuration(Supplier<String> input, Consumer<String> output) {
     this.input = input;
+    this.output = output;
   }
 
 
@@ -27,7 +30,7 @@ public class Configuration {
     try {
       return newBoardAfterParsing(line);
     } catch (WrongSizeException | OutOfMemoryError e) {
-      System.out.println("wrong size");
+      output.accept("wrong size\n");
       createTable();
     }
     return null;
@@ -45,7 +48,7 @@ public class Configuration {
   private String getInput() {
     InputValidator validator = new TableSizeValidator();
     String line;
-    System.out.println("Enter board size (All dimensions must be higher or equal 3 and less than 100) [pattern: x y (or x if you want square board)]: ");
+    output.accept("Enter board size (All dimensions must be higher or equal 3 and less than 100) [pattern: x y (or x if you want square board)]: \n");
     line = inputTableSize();
     validator.validate(line);
     return line;
@@ -59,7 +62,7 @@ public class Configuration {
       isNumber = DigitParser.isInputContainingDigits(line);
 
       if (!isNumber)
-        System.out.println("Wrong table size!");
+        output.accept("Wrong table size!\n");
     } while (!isNumber);
 
     return line;
@@ -78,7 +81,7 @@ public class Configuration {
     boolean isValid;
     String line;
     do {
-      System.out.println("Enter number of signs to win: ");
+      output.accept("Enter number of signs to win: ");
       line = input.get();
       isValid = DigitParser.isInputContainingDigits(line);
     } while (!isValid);
@@ -89,13 +92,13 @@ public class Configuration {
     if (number <= min && number >= 3) {
       return number;
     } else {
-      System.out.println("Incorrect number. Try again");
+      output.accept("Incorrect number. Try again");
       return 0;
     }
   }
 
   public List<Player> createPlayers() {
-    List<Player> players = PlayersGenerator.createPlayers(input);
+    List<Player> players = PlayersGenerator.createPlayers(input, output);
     return players;
   }
 
@@ -111,7 +114,7 @@ public class Configuration {
 
   private Player chooseStartingPlayer(List<Player> players) {
 
-    System.out.println("Who does start? O/X");
+    output.accept("Who does start? O/X : ");
     String line = input.get();
 
     if (players.get(0).getSign().toString().equalsIgnoreCase(line)) {
@@ -119,7 +122,7 @@ public class Configuration {
     } else if (players.get(1).getSign().toString().equalsIgnoreCase(line)) {
       return players.get(1);
     } else {
-      System.out.println("Incorrect player. Try again: ");
+      output.accept("Incorrect player. Try again: ");
       return null;
     }
   }

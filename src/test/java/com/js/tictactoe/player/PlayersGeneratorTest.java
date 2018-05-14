@@ -11,12 +11,12 @@ import static org.testng.Assert.assertTrue;
 public class PlayersGeneratorTest {
 
     public void testCreatePlayers() {
-        List<Player> players = PlayersGenerator.createPlayers(() -> "O");
+        List<Player> players = PlayersGenerator.createPlayers(() -> "O", e -> {});
         assertTrue(players.get(0).getName().equalsIgnoreCase("O"));
     }
 
     public void testCreatePlayersWithCorrectInput() {
-        List<Player> players = PlayersGenerator.createPlayers(() -> "X");
+        List<Player> players = PlayersGenerator.createPlayers(() -> "X", e -> {});
         assertFalse(players.get(0).getName().equalsIgnoreCase("O"));
     }
 }
