@@ -134,7 +134,7 @@ public class Configuration {
     }
   }
 
-  public void setReader(FileReader reader) {
+  void setReader(FileReader reader) {
     this.reader = reader;
   }
 }
