@@ -19,14 +19,23 @@ public class Configuration {
   private final Supplier<String> input;
   private final Consumer<String> output;
   private Board board;
-  private final FileReader reader;
+  private FileReader reader;
 
-  public Configuration(Supplier<String> input, Consumer<String> output, FileReader reader) {
+  public Configuration(Supplier<String> input, Consumer<String> output) {
     this.input = input;
     this.output = output;
-    this.reader = reader;
   }
 
+  public FileReader setLanguage() {
+    String in;
+    do {
+      output.accept("Language/Język/язык: PL/EN/RU: ");
+      in = input.get();
+    } while (!in.equalsIgnoreCase("PL") && !in.equalsIgnoreCase("EN") && !in.equalsIgnoreCase("RU"));
+
+    reader = new FileReader(in);
+    return reader;
+  }
 
   public Board createTable() {
     String line = getInput();

@@ -28,9 +28,8 @@ public class Game {
 
   public void runGame() {
 
-    setLanguage();
-
-    Configuration configuration = new Configuration(input, output, reader);
+    Configuration configuration = new Configuration(input, output);
+    reader = configuration.setLanguage();
 
     do {
       board = configuration.createTable();
@@ -48,15 +47,6 @@ public class Game {
     output.accept(reader.loadString("endMatch"));
   }
 
-  private void setLanguage() {
-    String in;
-    do {
-      output.accept("Language/Język: PL/EN: ");
-      in = input.get();
-    } while (!in.equalsIgnoreCase("PL") && !in.equalsIgnoreCase("EN"));
-
-    reader = new FileReader(in);
-  }
 
   private void setMatch() {
     match = new Match();
