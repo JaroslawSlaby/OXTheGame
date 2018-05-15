@@ -3,6 +3,7 @@ package com.js.tictactoe.game.configuration;
 import com.js.tictactoe.board.Board;
 import com.js.tictactoe.exceptions.WrongSizeException;
 import com.js.tictactoe.language.FileReader;
+import com.js.tictactoe.language.LanguageConfigurator;
 import com.js.tictactoe.parser.DigitParser;
 import com.js.tictactoe.parser.InputParser;
 import com.js.tictactoe.player.Player;
@@ -26,14 +27,9 @@ public class Configuration {
     this.output = output;
   }
 
-  public FileReader setLanguage() {
-    String in;
-    do {
-      output.accept("Language/Język/язык: PL/EN/RU: ");
-      in = input.get();
-    } while (!in.equalsIgnoreCase("PL") && !in.equalsIgnoreCase("EN") && !in.equalsIgnoreCase("RU"));
 
-    reader = new FileReader(in);
+  public FileReader setLanguage() {
+    reader = LanguageConfigurator.setLanguage(input, output);
     return reader;
   }
 
@@ -136,5 +132,9 @@ public class Configuration {
       output.accept(reader.loadString("incorrectPlayer")); //incorrectPlayer
       return null;
     }
+  }
+
+  public void setReader(FileReader reader) {
+    this.reader = reader;
   }
 }

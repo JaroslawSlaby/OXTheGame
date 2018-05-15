@@ -27,7 +27,6 @@ public class Game {
   private FileReader reader;
 
   public void runGame() {
-
     Configuration configuration = new Configuration(input, output);
     reader = configuration.setLanguage();
 
@@ -36,14 +35,11 @@ public class Game {
     } while (board == null);
 
     int signsToWin = configuration.chooseSequenceNumber();
-
     players = configuration.createPlayers();
     setMatch();
-
     judge = new Judge(board, signsToWin);
     currentPlayer = configuration.chooseStartingSign(players);
     playingLoop();
-
     output.accept(reader.loadString("endMatch"));
   }
 
@@ -57,9 +53,7 @@ public class Game {
     do {
 
       boolean winner;
-
       winner = move();
-
       switchPlayers();
 
       if (winner) {

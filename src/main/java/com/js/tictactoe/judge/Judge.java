@@ -69,6 +69,9 @@ public class Judge {
     return (integer, integer2) -> integer + integer2;
   }
 
+  private ToIntBiFunction<Integer, Integer> minusSizeFunction() {
+    return (integer, integer2) -> integer - integer2;
+  }
 
   String isWinnerInDiagonal(int x, int y, ToIntBiFunction<Integer, Integer> function) {
 
@@ -89,10 +92,6 @@ public class Judge {
     }
     return line.toString();
 
-  }
-
-  private ToIntBiFunction<Integer, Integer> minusSizeFunction() {
-    return (integer, integer2) -> integer - integer2;
   }
 
   private boolean checkWinningInUnit(Sign sign, String line) {
