@@ -129,7 +129,7 @@ public class Configuration {
     } else if (players.get(1).getSign().toString().equalsIgnoreCase(line)) {
       return players.get(1);
     } else {
-      output.accept(reader.loadString("incorrectPlayer")); //incorrectPlayer
+      output.accept(reader.loadString("incorrectPlayer"));
       return null;
     }
   }
