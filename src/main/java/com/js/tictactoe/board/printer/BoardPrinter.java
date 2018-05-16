@@ -14,12 +14,19 @@ public class BoardPrinter {
 
     System.out.println();
     for (int i = 0; i < table.length; i++) {
-      output.accept(Colors.ANSI_DEFAULT + "" + i + " ");
-
+      printRightMargin(output, i);
       for (int j = 0; j < table[i].length; j++) {
         colorCell(table[i][j], output);
       }
       output.accept(Colors.ANSI_DEFAULT + "\n");
+    }
+  }
+
+  private static void printRightMargin(Consumer<String> output, int i) {
+    if(i < 10) {
+      output.accept(Colors.ANSI_DEFAULT + "" + i + " ");
+    } else {
+      output.accept(Colors.ANSI_DEFAULT + "" + i + "");
     }
   }
 
