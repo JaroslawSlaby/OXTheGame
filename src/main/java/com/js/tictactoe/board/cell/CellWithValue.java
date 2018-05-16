@@ -4,19 +4,19 @@ import com.js.tictactoe.player.Sign;
 
 public class CellWithValue implements Cell {
 
-    private Sign sign;
+  private final Sign sign;
 
-    public CellWithValue(Sign sign) {
-        this.sign = sign;
-    }
+  public CellWithValue(Sign sign) {
+    this.sign = sign;
+  }
 
-    @Override
-    public boolean isCellEmpty() {
-        return false;
-    }
+  @Override
+  public boolean isCellEmpty() {
+    return false;
+  }
 
-    @Override
-    public Sign getValue() {
-        return sign;
-    }
+  @Override
+  public Sign getValue() {
+    return sign;
+  }
 }

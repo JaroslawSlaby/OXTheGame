@@ -12,72 +12,79 @@ import static org.testng.Assert.*;
 @Test
 public class BoardTest {
 
-    private static final int DEFAULT_SIZE_OF_BOARD = 3;
-    private static final int DEFAULT_WIDTH = 4;
-    private static final int DEFAULT_HEIGHT = 5;
+  private static final int DEFAULT_SIZE_OF_BOARD = 3;
+  private static final int DEFAULT_WIDTH = 4;
+  private static final int DEFAULT_HEIGHT = 5;
 
-    public void createBoard() throws WrongSizeException {
-        Board board = Board.getSquareBoard(DEFAULT_SIZE_OF_BOARD);
-        assertEquals(DEFAULT_SIZE_OF_BOARD, board.getWidth());
-    }
+  public void createBoard() throws WrongSizeException {
+    Board board = Board.getSquareBoard(DEFAULT_SIZE_OF_BOARD);
+    assertEquals(DEFAULT_SIZE_OF_BOARD, board.getWidth());
+  }
 
-    public void createTwoDimensionalBoard() throws WrongSizeException {
-        Board board = Board.getRectangleBoard(DEFAULT_WIDTH, DEFAULT_HEIGHT);
-        assertEquals(DEFAULT_WIDTH, board.getWidth());
-    }
+  public void createTwoDimensionalBoard() throws WrongSizeException {
+    Board board = Board.getRectangleBoard(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+    assertEquals(DEFAULT_WIDTH, board.getWidth());
+  }
 
-    @Test(expectedExceptions = WrongSizeException.class)
-    public void createSquareBoardWithZeroDimension() throws WrongSizeException {
-        Board.getSquareBoard(0);
-    }
+  @Test(expectedExceptions = WrongSizeException.class)
+  public void createSquareBoardWithZeroDimension() throws WrongSizeException {
+    Board.getSquareBoard(0);
+  }
 
-    @Test(expectedExceptions = WrongSizeException.class)
-    public void createRectangleBoardWithZeroDimension() throws WrongSizeException {
-        Board.getRectangleBoard(0, 0);
-    }
+  @Test(expectedExceptions = WrongSizeException.class)
+  public void createRectangleBoardWithZeroDimension() throws WrongSizeException {
+    Board.getRectangleBoard(0, 0);
+  }
 
-    public void insertCorrectSignToBoardInCorrectCoordinates() throws WrongSizeException, WrongIndexException {
-        Board board = Board.getSquareBoard(DEFAULT_SIZE_OF_BOARD);
-        Sign sign = Sign.X;
-        Coordinates coordinates = Coordinates.parseCoordinates("1 2");
-        boolean isAdded = board.insertSign(coordinates, sign);
-        assertTrue(isAdded);
-    }
+  public void insertCorrectSignToBoardInCorrectCoordinates() throws WrongSizeException, WrongIndexException {
+    Board board = Board.getSquareBoard(DEFAULT_SIZE_OF_BOARD);
+    Sign sign = Sign.X;
+    Coordinates coordinates = Coordinates.parseCoordinates("1 2");
+    boolean isAdded = board.tryToInsertSign(coordinates, sign);
+    assertTrue(isAdded);
+  }
 
-    @Test(expectedExceptions = WrongIndexException.class)
-    public void insertCorrectSignToBoardInIncorrectCoordinates() throws WrongSizeException, WrongIndexException {
-        Board board = Board.getSquareBoard(DEFAULT_SIZE_OF_BOARD);
-        Sign sign = Sign.X;
-        Coordinates coordinates = Coordinates.parseCoordinates("-1 -2");
-        board.insertSign(coordinates, sign);
-    }
+  @Test(expectedExceptions = WrongIndexException.class)
+  public void insertCorrectSignToBoardInIncorrectCoordinates() throws WrongSizeException, WrongIndexException {
+    Board board = Board.getSquareBoard(DEFAULT_SIZE_OF_BOARD);
+    Sign sign = Sign.X;
+    Coordinates coordinates = Coordinates.parseCoordinates("-1 -2");
+    board.tryToInsertSign(coordinates, sign);
+  }
 
-    public void insertCorrectSignToFilledCellInBoard() throws WrongIndexException, WrongSizeException {
-        Board board = Board.getSquareBoard(DEFAULT_SIZE_OF_BOARD);
-        Sign sign = Sign.X;
-        Coordinates coordinates = Coordinates.parseCoordinates("1 2");
-        board.insertSign(coordinates, sign);
-        sign = sign.getOppositePlayer();
-        boolean isAdded = board.insertSign(coordinates, sign);
-        assertFalse(isAdded);
-    }
+  public void insertCorrectSignToFilledCellInBoard() throws WrongIndexException, WrongSizeException {
+    Board board = Board.getSquareBoard(DEFAULT_SIZE_OF_BOARD);
+    Sign sign = Sign.X;
+    Coordinates coordinates = Coordinates.parseCoordinates("1 2");
+    board.tryToInsertSign(coordinates, sign);
+    sign = sign.getOppositePlayer();
+    boolean isAdded = board.tryToInsertSign(coordinates, sign);
+    assertFalse(isAdded);
+  }
 
-    public void insertSingInCoordinatesBiggerThanTableSize() throws WrongSizeException, WrongIndexException {
-        Board board = Board.getSquareBoard(5);
-        Sign sign = Sign.O;
-        Coordinates coordinates = Coordinates.parseCoordinates("10 10");
-        boolean isAdded = board.insertSign(coordinates, sign);
-        assertFalse(isAdded);
-    }
+  public void insertSingInCoordinatesBiggerThanTableSize() throws WrongSizeException, WrongIndexException {
+    Board board = Board.getSquareBoard(5);
+    Sign sign = Sign.O;
+    Coordinates coordinates = Coordinates.parseCoordinates("10 10");
+    boolean isAdded = board.tryToInsertSign(coordinates, sign);
+    assertFalse(isAdded);
+  }
 
-    public void clearBoardReturnsEmptyCell() throws WrongSizeException, WrongIndexException {
-        Board board = Board.getRectangleBoard(6, 6);
-        Sign sign = Sign.O;
-        Coordinates coordinates = Coordinates.parseCoordinates("4 4");
-        board.insertSign(coordinates, sign);
-        board.clearBoard();
-        Cell cell = board.getCell(4, 4);
-        assertTrue(cell.isCellEmpty());
-    }
+  public void clearBoardReturnsEmptyCell() throws WrongSizeException, WrongIndexException {
+    Board board = Board.getRectangleBoard(6, 6);
+    Sign sign = Sign.O;
+    Coordinates coordinates = Coordinates.parseCoordinates("4 4");
+    board.tryToInsertSign(coordinates, sign);
+    board.clearBoard();
+    Cell cell = board.getCell(4, 4);
+    assertTrue(cell.isCellEmpty());
+  }
+
+  public void printingBoardThrowsNoExceptions() throws WrongSizeException, WrongIndexException {
+    Board board = Board.getRectangleBoard(6, 6);
+    Sign sign = Sign.O;
+    board.tryToInsertSign(Coordinates.parseCoordinates("1 1"), sign);
+    board.printBoard(e -> {});
+  }
 
 }

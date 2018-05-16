@@ -4,7 +4,7 @@ import com.js.tictactoe.player.Sign;
 
 public interface Cell {
 
-    Sign getValue();
+  Sign getValue();
 
-    boolean isCellEmpty();
+  boolean isCellEmpty();
 }

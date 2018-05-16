@@ -1,29 +1,38 @@
 package com.js.tictactoe.parser;
 
+import com.js.tictactoe.language.ILanguage;
+
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class DigitParser {
 
 
-    public static String correctCoordinates(Supplier<String> input) {
-        boolean isNumber;
-        String line;
-        do {
-            line = input.get();
+  public static String getCorrectCoordinates(Supplier<String> input, Consumer<String> output, ILanguage reader) {
+    boolean isNumber;
+    String line;
+    do {
+      line = input.get();
 
-            if (line.equalsIgnoreCase("quit"))
-                return line;
+      if (returnQuitLine(line)) return line;
 
-            isNumber = DigitParser.isInputContainingDigits(line);
+      isNumber = DigitParser.isInputContainingDigits(line);
+      showIncorrectNumberMessage(output, reader, isNumber);
 
-            if (!isNumber)
-                System.out.println("Wrong coordinates!");
+    } while (!isNumber);
+    return line;
+  }
 
-        } while (!isNumber);
-        return line;
-    }
+  public static boolean returnQuitLine(String line) {
+    return line.equalsIgnoreCase("quit");
+  }
 
-    public static boolean isInputContainingDigits(String line) {
-        return line.matches("[0-9 ]+");
-    }
+  private static void showIncorrectNumberMessage(Consumer<String> output, ILanguage reader, boolean isNumber) {
+    if (!isNumber)
+      output.accept(reader.loadString("coords"));
+  }
+
+  public static boolean isInputContainingDigits(String line) {
+    return line.replaceAll("\\s", "").matches("[0-9 ]+");
+  }
 }

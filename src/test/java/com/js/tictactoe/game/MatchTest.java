@@ -9,40 +9,40 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.assertFalse;
 
 @Test
 public class MatchTest {
 
-    private List<Player> players = new ArrayList<>();
-    private Match match;
+  private final List<Player> players = new ArrayList<>();
+  private Match match;
 
-    @BeforeMethod
-    public void setUp() {
-        match = new Match();
-        players.add(new Player(Sign.X, "Jarek"));
-        players.add(new Player(Sign.O, "Rafal"));
-        match.setPlayers(players);
-    }
+  @BeforeMethod
+  public void setUp() {
+    match = new Match();
+    players.add(new Player(Sign.X, "Jarek"));
+    players.add(new Player(Sign.O, "Rafal"));
+    match.setPlayers(players);
+  }
 
-    public void addNewEmptyListWithPlayersAndCheckIfAllHaveZeroPoints() {
-        assertTrue(match.getPlayersScore(players.get(0)) == 0);
-    }
+  public void addNewEmptyListWithPlayersAndCheckIfAllHaveZeroPoints() {
+    assertEquals(0, (int) match.getPlayersScore(players.get(0)));
+  }
 
-    public void addWinningToFirstPlayer() {
-        match.addGameWinner(players.get(0));
-        assertTrue(match.getPlayersScore(players.get(0)) == 3);
-    }
+  public void addWinningToFirstPlayer() {
+    match.addGameWinner(players.get(0));
+    assertEquals(3, (int) match.getPlayersScore(players.get(0)));
+  }
 
-    public void addDrawAfterWinningToFirstPlayer() {
-        match.addGameWinner(players.get(0));
-        match.addGameDraw();
-        assertTrue(match.getPlayersScore(players.get(0)) == 4);
-    }
+  public void addDrawAfterWinningToFirstPlayer() {
+    match.addGameWinner(players.get(0));
+    match.addGameDraw();
+    assertEquals(4, (int) match.getPlayersScore(players.get(0)));
+  }
 
-    public void getPlayerWithMorePointsWhenPlayerOneIsWinning() {
-        match.addGameWinner(players.get(0));
-        match.addGameDraw();
-        assertEquals(players.get(0), match.getPlayerWithMorePoints());
-    }
+  public void checkIfEndMatchEndsMatch() {
+    match.endMatch();
+    assertFalse(match.isNextRound());
+  }
+
 }

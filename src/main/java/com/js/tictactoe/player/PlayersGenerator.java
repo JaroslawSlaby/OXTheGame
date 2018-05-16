@@ -1,54 +1,62 @@
 package com.js.tictactoe.player;
 
+import com.js.tictactoe.language.ILanguage;
 import com.js.tictactoe.validators.InputValidator;
 import com.js.tictactoe.validators.PlayerSignValidator;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class PlayersGenerator {
 
-    public static List<Player> createPlayers(Supplier<String> input) {
+  public static List<Player> createPlayers(Supplier<String> input, Consumer<String> output, ILanguage reader) {
 
-        List<Player> players = new LinkedList<>();
+    List<Player> players = new LinkedList<>();
+    String name = PlayersGenerator.createFirstPlayerName(input, output, reader);
+    Sign sign = PlayersGenerator.createSign(input, output, name, reader);
 
-        System.out.println("Enter 1st player name: ");
-        String name = PlayersGenerator.createName(input);
-        Sign sign = PlayersGenerator.createSign(input, name);
+    Player player = new Player(sign, name);
+    players.add(player);
 
-        Player player = new Player(sign, name);
-        players.add(player);
+    name = PlayersGenerator.createSecondPlayerName(input, output, reader);
+    sign = sign.getOppositePlayer();
 
-        System.out.println("Enter 2nd player name: ");
-        name = PlayersGenerator.createName(input);
-        sign = sign.getOppositePlayer();
+    Player player1 = new Player(sign, name);
+    players.add(player1);
 
-        Player player1 = new Player(sign, name);
-        players.add(player1);
+    return players;
+  }
 
-        return players;
-    }
+  private static String createFirstPlayerName(Supplier<String> input, Consumer<String> output, ILanguage reader) {
+    return createName(input, output, reader, true);
+  }
 
-    private static String createName(Supplier<String> input) {
-        String name;
-        do {
-            name = input.get();
-        } while (name.length() == 0);
+  private static String createSecondPlayerName(Supplier<String> input, Consumer<String> output, ILanguage reader) {
+    return createName(input, output, reader, false);
+  }
 
-        return name;
-    }
+  private static String createName(Supplier<String> input, Consumer<String> output, ILanguage reader, boolean first) {
+    String name;
+    do {
+      output.accept(reader.loadString(first ? "stplayerName" : "ndplayerName"));
+      name = input.get();
+    } while (name.length() == 0);
 
-    private static Sign createSign(Supplier<String> input, String name) {
-        InputValidator validator = new PlayerSignValidator();
-        String sign;
-        boolean correct;
-        do {
-            System.out.println("Choose sign (O/X) for player " + name);
-            sign = input.get();
-            correct = validator.validate(sign);
-        } while (!correct);
+    return name;
+  }
 
-        return Sign.valueOf(sign.toUpperCase());
-    }
+  private static Sign createSign(Supplier<String> input, Consumer<String> output, String name, ILanguage reader) {
+    InputValidator validator = new PlayerSignValidator();
+    String sign;
+    boolean correct;
+    do {
+      output.accept(reader.loadString("playerSign") + name + ": ");
+      sign = input.get();
+      correct = validator.validate(sign);
+    } while (!correct);
+
+    return Sign.valueOf(sign.toUpperCase());
+  }
 }
