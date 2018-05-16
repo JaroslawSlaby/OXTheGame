@@ -16,3 +16,5 @@ incorrectPlayer=Zły gracz. Spróbuj ponownie:\u0020
 playerSign=Wybierz znak (O/X) dla gracza\u0020
 coordsPositive=Obydwa koordynaty muszą być pozytywne!\u0020
 coordsIntegers=Koordynaty muszą być liczbami całkowitymi!\u00200
+cell=Pole jest zajęte!\u0020
+draw=Remis!\u0020

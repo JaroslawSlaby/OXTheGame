@@ -16,3 +16,5 @@ incorrectPlayer=Wrong player, try again!:\u0020
 playerSign=Choose sign (O/X) for player\u0020
 coordsPositive=Both coordinates must be positive!\u0020
 coordsIntegers=Coordinates must be integers!\u0020
+cell=Cell is not empty!\u0020
+draw=Draw!\u0020

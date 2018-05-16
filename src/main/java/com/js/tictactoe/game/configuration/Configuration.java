@@ -100,7 +100,7 @@ public class Configuration {
     String line;
     do {
       output.accept(reader.loadString("signsNo"));
-      line = input.get();
+      line = input.get().replaceAll(" ","");
       isValid = DigitParser.isInputContainingDigits(line);
     } while (!isValid);
 

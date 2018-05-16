@@ -12,6 +12,6 @@ public class LanguageConfigurator {
       in = input.get();
     } while (!in.equalsIgnoreCase("PL") && !in.equalsIgnoreCase("EN") && !in.equalsIgnoreCase("RU"));
 
-    return new FileReader(in);
+    return new FileReader(in.toUpperCase());
   }
 }

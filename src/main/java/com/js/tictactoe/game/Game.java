@@ -54,15 +54,16 @@ public class Game {
       switchPlayers();
 
       if (winner) {
+        output.accept(reader.loadString("winner") + currentPlayer.getSign() + ". ");
         match.addGameWinner(currentPlayer);
       } else {
+        output.accept(reader.loadString("draw"));
         match.addGameDraw();
       }
 
-      board.printBoard(output);
-      output.accept(reader.loadString("winner") + currentPlayer.getSign() + ". ");
       output.accept(players.get(0).getSign() + ": " + match.getPlayersScore(players.get(0)) + " ");
-      output.accept(players.get(1).getSign() + ": " + match.getPlayersScore(players.get(1)) + "\n");
+      output.accept(players.get(1).getSign() + ": " + match.getPlayersScore(players.get(1)) + "\n\n");
+
 
       board.clearBoard();
       switchPlayers();
@@ -120,14 +121,16 @@ public class Game {
   }
 
   private boolean makeMove(String line, Player currentPlayer) {
+    boolean added = false;
     try {
       int[] coords = InputParser.parseStringInput(line);
-      return board.insertSign(Coordinates.parseCoordinates(coords), currentPlayer.getSign());
+      added = board.insertSign(Coordinates.parseCoordinates(coords), currentPlayer.getSign());
+      if(!added) {
+        output.accept(reader.loadString("cell"));
+      }
     } catch (WrongIndexException | NumberFormatException e) {
       output.accept(reader.loadString("coords"));
-      line = input.get();
-      makeMove(line, currentPlayer);
     }
-    return true;
+    return added;
   }
 }
