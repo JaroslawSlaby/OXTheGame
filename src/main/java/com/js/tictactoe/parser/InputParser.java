@@ -18,7 +18,7 @@ public class InputParser {
       }
 
     } else {
-      input = input.replaceAll(" ", "");
+      input = input.replaceAll("\\s", "");
 
       if (input.matches(regex)) {
 

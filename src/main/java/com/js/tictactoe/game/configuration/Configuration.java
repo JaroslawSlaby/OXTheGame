@@ -65,11 +65,9 @@ public class Configuration {
 
 
   private String getInput() {
-    InputValidator validator = new TableSizeValidator();
     String line;
     output.accept(reader.loadString("boardSize"));
     line = inputTableSize();
-    validator.validate(line);
     return line;
   }
 
@@ -101,7 +99,7 @@ public class Configuration {
     String line;
     do {
       output.accept(reader.loadString("signsNo"));
-      line = input.get().replaceAll(" ","");
+      line = input.get().replaceAll("\\s","");
       isValid = DigitParser.isInputContainingDigits(line);
     } while (!isValid);
 

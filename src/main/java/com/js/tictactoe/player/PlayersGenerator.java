@@ -15,19 +15,27 @@ public class PlayersGenerator {
   public static List<Player> createPlayers(Supplier<String> input, Consumer<String> output, ILanguage reader) {
 
     List<Player> players = new LinkedList<>();
-    String name = PlayersGenerator.createName(input, output, reader, true);
+    String name = PlayersGenerator.createFirstName(input, output, reader);
     Sign sign = PlayersGenerator.createSign(input, output, name, reader);
 
     Player player = new Player(sign, name);
     players.add(player);
 
-    name = PlayersGenerator.createName(input, output, reader, false);
+    name = PlayersGenerator.createSecondName(input, output, reader);
     sign = sign.getOppositePlayer();
 
     Player player1 = new Player(sign, name);
     players.add(player1);
 
     return players;
+  }
+
+  private static String createFirstName(Supplier<String> input, Consumer<String> output, ILanguage reader) {
+    return createName(input, output, reader, true);
+  }
+
+  private static String createSecondName(Supplier<String> input, Consumer<String> output, ILanguage reader) {
+    return createName(input, output, reader, false);
   }
 
   private static String createName(Supplier<String> input, Consumer<String> output, ILanguage reader, boolean first) {

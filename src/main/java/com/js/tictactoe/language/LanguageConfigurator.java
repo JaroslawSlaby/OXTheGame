@@ -9,7 +9,7 @@ public class LanguageConfigurator {
     String in;
     do {
       output.accept("Language/Język/язык: PL/EN/RU: ");
-      in = input.get();
+      in = input.get().replaceAll("\\s", "");
     } while (!in.equalsIgnoreCase("PL") && !in.equalsIgnoreCase("EN") && !in.equalsIgnoreCase("RU"));
 
     try {
