@@ -15,6 +15,7 @@ public class LanguageConfigurator {
     try {
       return new Language(in.toUpperCase());
     } catch (Exception e) {
+      output.accept("File not found. Loaded default language.\n");
       return new DefaultLanguage();
     }
   }
