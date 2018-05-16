@@ -80,7 +80,7 @@ public class Configuration {
       isNumber = DigitParser.isInputContainingDigits(line);
 
       if (!isNumber)
-        output.accept(reader.loadString("wrongTableSize"));
+        output.accept(reader.loadString("wrongTableSize") + " " + reader.loadString("boardSize"));
     } while (!isNumber);
 
     return line;

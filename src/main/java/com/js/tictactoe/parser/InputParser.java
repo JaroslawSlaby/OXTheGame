@@ -18,6 +18,7 @@ public class InputParser {
       }
 
     } else {
+      input = input.replaceAll(" ", "");
 
       if (input.matches(regex)) {
 

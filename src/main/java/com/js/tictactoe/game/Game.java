@@ -29,7 +29,6 @@ public class Game {
   public void runGame() {
     Configuration configuration = new Configuration(input, output);
     reader = configuration.setLanguage();
-
     board = configuration.generateTable();
 
     int signsToWin = configuration.chooseSequenceNumber();
