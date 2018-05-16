@@ -30,9 +30,7 @@ public class Game {
     Configuration configuration = new Configuration(input, output);
     reader = configuration.setLanguage();
 
-    do {
-      board = configuration.createTable();
-    } while (board == null);
+    board = configuration.generateTable();
 
     int signsToWin = configuration.chooseSequenceNumber();
     players = configuration.createPlayers();
@@ -87,17 +85,23 @@ public class Game {
     int i = 0;
     do {
       board.printBoard(output);
+      output.accept(reader.loadString("player") + currentPlayer.getName() + "(" + currentPlayer.getSign() + ")" +
+              reader.loadString("move") + board.getWidth() + reader.loadString("movePt2") + board.getHeight() + ": ");
       boolean added;
       do {
-        output.accept(reader.loadString("player") + currentPlayer.getName() + "(" + currentPlayer.getSign() + ")" +
-                reader.loadString("move") + board.getWidth() + reader.loadString("movePt2") + board.getHeight() + ": ");
+
         String line = DigitParser.correctCoordinates(input, output, reader);
 
-        if (line.equalsIgnoreCase("quit")) {
-          match.endMatch();
+        if (isExit(line)) {
           return false;
         }
+
         added = makeMove(line, currentPlayer);
+
+        if(!added) {
+          output.accept(reader.loadString("coords"));
+        }
+
       } while (!added);
 
       isWinner = judge.isWinner(currentPlayer.getSign());
@@ -106,6 +110,14 @@ public class Game {
     } while (!isWinner && i < board.getHeight() * board.getWidth());
 
     return isWinner;
+  }
+
+  private boolean isExit(String line) {
+    if (line.equalsIgnoreCase("quit")) {
+      match.endMatch();
+      return true;
+    }
+    return false;
   }
 
   private boolean makeMove(String line, Player currentPlayer) {

@@ -14,13 +14,13 @@ public class PlayersGenerator {
   public static List<Player> createPlayers(Supplier<String> input, Consumer<String> output, FileReader reader) {
 
     List<Player> players = new LinkedList<>();
-    String name = PlayersGenerator.createName(input, output, reader);
+    String name = PlayersGenerator.createName(input, output, reader, true);
     Sign sign = PlayersGenerator.createSign(input, output, name, reader);
 
     Player player = new Player(sign, name);
     players.add(player);
 
-    name = PlayersGenerator.createName(input, output, reader);
+    name = PlayersGenerator.createName(input, output, reader, false);
     sign = sign.getOppositePlayer();
 
     Player player1 = new Player(sign, name);
@@ -29,10 +29,10 @@ public class PlayersGenerator {
     return players;
   }
 
-  private static String createName(Supplier<String> input, Consumer<String> output, FileReader reader) {
+  private static String createName(Supplier<String> input, Consumer<String> output, FileReader reader, boolean first) {
     String name;
     do {
-      output.accept(reader.loadString("playerName"));
+      output.accept(reader.loadString(first ? "1stplayerName" : "2ndplayerName"));
       name = input.get();
     } while (name.length() == 0);
 

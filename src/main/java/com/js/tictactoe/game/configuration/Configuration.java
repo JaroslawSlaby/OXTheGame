@@ -33,13 +33,23 @@ public class Configuration {
     return reader;
   }
 
-  public Board createTable() {
+  public Board generateTable() {
+    Board board;
+
+    do {
+      board = createTable();
+    }
+    while (board == null);
+
+    return board;
+  }
+
+  private Board createTable() {
     String line = getInput();
     try {
       return newBoardAfterParsing(line);
     } catch (WrongSizeException | OutOfMemoryError e) {
       output.accept(reader.loadString("size"));
-      createTable();
     }
     return null;
   }

@@ -13,7 +13,7 @@ public class ConfigurationTest {
   public void checkIfCorrectInputForBoardCreatorReturnsCorrectBoard() {
     Configuration configuration = new Configuration(() -> "3", e -> {});
     configuration.setReader(LanguageConfigurator.setLanguage( () -> "PL", e -> {}));
-    Board board = configuration.createTable();
+    Board board = configuration.generateTable();
     assertEquals(3, board.getWidth());
   }
 
@@ -21,14 +21,14 @@ public class ConfigurationTest {
   public void checkIfIncorrectInputForBoardCreatorReturnsCorrectBoard() {
     Configuration configuration = new Configuration(() -> "0", e -> {});
     configuration.setReader(LanguageConfigurator.setLanguage( () -> "PL", e -> {}));
-    Board board = configuration.createTable();
+    Board board = configuration.generateTable();
     assertNull(board);
   }
 
   public void checkIfCorrectInputForSequenceReturnsCorrectValue() {
     Configuration configuration = new Configuration(() -> "3", e -> {});
     configuration.setReader(LanguageConfigurator.setLanguage( () -> "PL", e -> {}));
-    configuration.createTable();
+    configuration.generateTable();
     int sequenceNumber = configuration.chooseSequenceNumber();
     assertEquals(3, sequenceNumber);
   }
