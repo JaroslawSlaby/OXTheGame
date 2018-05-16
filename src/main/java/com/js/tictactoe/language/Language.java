@@ -14,26 +14,22 @@ public class Language implements ILanguage {
 
   private final Logger logger = Logger.getLogger(getClass().getName());
 
-  public Language(String fileName) {
+  public Language(String fileName) throws FileNotFoundException {
     this.fileName = fileName;
+    setUpReaders();
   }
 
   public String loadString(String string) {
     try {
-      setUpReaders();
+
       langProperties.load(new InputStreamReader(input, Charset.forName("UTF-8")));
     } catch (NullPointerException | IOException e) {
       logger.log(Level.CONFIG, e.getLocalizedMessage());
     }
-
     return langProperties.getProperty(string);
   }
-  private void setUpReaders() {
+  private void setUpReaders() throws FileNotFoundException {
     String path = ("languages/" + fileName + ".lang");
-    try {
       input = new FileInputStream(new File(path));
-    } catch (FileNotFoundException e) {
-      logger.log(Level.INFO, e.getCause() + e.getLocalizedMessage());
-    }
   }
 }
