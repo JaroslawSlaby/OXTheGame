@@ -28,7 +28,7 @@ public class DigitParserTest {
   }
 
   public void checkIfInputCanBeDifferentThanDigit() {
-    String correct = DigitParser.correctCoordinates(() -> "10 10", e -> {
+    String correct = DigitParser.getCorrectCoordinates(() -> "10 10", e -> {
     }, new Language("PL"));
     assertEquals(correct, "10 10");
   }

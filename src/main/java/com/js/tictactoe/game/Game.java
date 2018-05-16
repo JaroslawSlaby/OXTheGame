@@ -83,12 +83,13 @@ public class Game {
 
   private boolean move() {
     boolean isWinner = false;
-    int i = 0;
+    int moveCounter = 0;
+    int maxMoves = board.getWidth() * board.getHeight();
     do {
       printOutputDuringMove();
-      String line = DigitParser.correctCoordinates(input, output, reader);
+      String line = DigitParser.getCorrectCoordinates(input, output, reader);
 
-      if(isExit(line)) {
+      if(DigitParser.returnQuitLine(line)) {
         match.endMatch();
         return false;
       }
@@ -96,11 +97,11 @@ public class Game {
       boolean isAdded = tryToMakeMove(line);
       if (isAdded) {
         isWinner = judge.isWinner(currentPlayer.getSign());
-        i++;
+        moveCounter++;
         switchPlayers();
       }
 
-    } while (!isWinner && i < board.getHeight() * board.getWidth() && match.isNextRound());
+    } while (!isWinner && moveCounter < maxMoves && match.isNextRound());
 
     return isWinner;
   }
@@ -137,9 +138,5 @@ public class Game {
       output.accept(reader.loadString("coords"));
     }
     return added;
-  }
-
-  private boolean isExit(String line) {
-    return line.equalsIgnoreCase("quit");
   }
 }

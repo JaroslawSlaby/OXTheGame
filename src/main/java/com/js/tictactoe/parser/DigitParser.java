@@ -8,7 +8,7 @@ import java.util.function.Supplier;
 public class DigitParser {
 
 
-  public static String correctCoordinates(Supplier<String> input, Consumer<String> output, ILanguage reader) {
+  public static String getCorrectCoordinates(Supplier<String> input, Consumer<String> output, ILanguage reader) {
     boolean isNumber;
     String line;
     do {
@@ -23,7 +23,7 @@ public class DigitParser {
     return line;
   }
 
-  private static boolean returnQuitLine(String line) {
+  public static boolean returnQuitLine(String line) {
     return line.equalsIgnoreCase("quit");
   }
 

@@ -1,7 +1,6 @@
 package com.js.tictactoe.player;
 
 import com.js.tictactoe.language.ILanguage;
-import com.js.tictactoe.language.Language;
 import com.js.tictactoe.validators.InputValidator;
 import com.js.tictactoe.validators.PlayerSignValidator;
 
@@ -15,13 +14,13 @@ public class PlayersGenerator {
   public static List<Player> createPlayers(Supplier<String> input, Consumer<String> output, ILanguage reader) {
 
     List<Player> players = new LinkedList<>();
-    String name = PlayersGenerator.createFirstName(input, output, reader);
+    String name = PlayersGenerator.createFirstPlayerName(input, output, reader);
     Sign sign = PlayersGenerator.createSign(input, output, name, reader);
 
     Player player = new Player(sign, name);
     players.add(player);
 
-    name = PlayersGenerator.createSecondName(input, output, reader);
+    name = PlayersGenerator.createSecondPlayerName(input, output, reader);
     sign = sign.getOppositePlayer();
 
     Player player1 = new Player(sign, name);
@@ -30,11 +29,11 @@ public class PlayersGenerator {
     return players;
   }
 
-  private static String createFirstName(Supplier<String> input, Consumer<String> output, ILanguage reader) {
+  private static String createFirstPlayerName(Supplier<String> input, Consumer<String> output, ILanguage reader) {
     return createName(input, output, reader, true);
   }
 
-  private static String createSecondName(Supplier<String> input, Consumer<String> output, ILanguage reader) {
+  private static String createSecondPlayerName(Supplier<String> input, Consumer<String> output, ILanguage reader) {
     return createName(input, output, reader, false);
   }
 
