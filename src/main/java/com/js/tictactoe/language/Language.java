@@ -6,7 +6,7 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class FileReader {
+public class Language implements ILanguage {
 
   private final Properties langProperties  = new Properties();
   private final String fileName;
@@ -14,7 +14,7 @@ public class FileReader {
 
   private final Logger logger = Logger.getLogger(getClass().getName());
 
-  public FileReader(String fileName) {
+  public Language(String fileName) {
     this.fileName = fileName;
   }
 

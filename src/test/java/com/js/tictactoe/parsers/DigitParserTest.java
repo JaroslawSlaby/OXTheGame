@@ -1,6 +1,6 @@
 package com.js.tictactoe.parsers;
 
-import com.js.tictactoe.language.FileReader;
+import com.js.tictactoe.language.Language;
 import com.js.tictactoe.parser.DigitParser;
 import org.testng.annotations.Test;
 
@@ -29,7 +29,7 @@ public class DigitParserTest {
 
   public void checkIfInputCanBeDifferentThanDigit() {
     String correct = DigitParser.correctCoordinates(() -> "10 10", e -> {
-    }, new FileReader("PL"));
+    }, new Language("PL"));
     assertEquals(correct, "10 10");
   }
 }

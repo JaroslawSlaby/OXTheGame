@@ -5,7 +5,6 @@ import com.js.tictactoe.language.LanguageConfigurator;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNull;
 
 @Test
 public class ConfigurationTest {

@@ -1,6 +1,7 @@
 package com.js.tictactoe.player;
 
-import com.js.tictactoe.language.FileReader;
+import com.js.tictactoe.language.ILanguage;
+import com.js.tictactoe.language.Language;
 import com.js.tictactoe.validators.InputValidator;
 import com.js.tictactoe.validators.PlayerSignValidator;
 
@@ -11,7 +12,7 @@ import java.util.function.Supplier;
 
 public class PlayersGenerator {
 
-  public static List<Player> createPlayers(Supplier<String> input, Consumer<String> output, FileReader reader) {
+  public static List<Player> createPlayers(Supplier<String> input, Consumer<String> output, ILanguage reader) {
 
     List<Player> players = new LinkedList<>();
     String name = PlayersGenerator.createName(input, output, reader, true);
@@ -29,7 +30,7 @@ public class PlayersGenerator {
     return players;
   }
 
-  private static String createName(Supplier<String> input, Consumer<String> output, FileReader reader, boolean first) {
+  private static String createName(Supplier<String> input, Consumer<String> output, ILanguage reader, boolean first) {
     String name;
     do {
       output.accept(reader.loadString(first ? "1stplayerName" : "2ndplayerName"));
@@ -39,7 +40,7 @@ public class PlayersGenerator {
     return name;
   }
 
-  private static Sign createSign(Supplier<String> input, Consumer<String> output, String name, FileReader reader) {
+  private static Sign createSign(Supplier<String> input, Consumer<String> output, String name, ILanguage reader) {
     InputValidator validator = new PlayerSignValidator();
     String sign;
     boolean correct;

@@ -5,7 +5,8 @@ import com.js.tictactoe.board.coords.Coordinates;
 import com.js.tictactoe.exceptions.WrongIndexException;
 import com.js.tictactoe.game.configuration.Configuration;
 import com.js.tictactoe.judge.Judge;
-import com.js.tictactoe.language.FileReader;
+import com.js.tictactoe.language.ILanguage;
+import com.js.tictactoe.language.Language;
 import com.js.tictactoe.parser.DigitParser;
 import com.js.tictactoe.parser.InputParser;
 import com.js.tictactoe.player.Player;
@@ -24,7 +25,7 @@ public class Game {
   private Judge judge;
   private List<Player> players;
   private Match match;
-  private FileReader reader;
+  private ILanguage reader;
 
   public void runGame() {
     Configuration configuration = new Configuration(input, output);

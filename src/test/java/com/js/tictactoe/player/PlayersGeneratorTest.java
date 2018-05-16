@@ -1,6 +1,6 @@
 package com.js.tictactoe.player;
 
-import com.js.tictactoe.language.FileReader;
+import com.js.tictactoe.language.Language;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -13,13 +13,13 @@ public class PlayersGeneratorTest {
 
   public void testCreatePlayers() {
     List<Player> players = PlayersGenerator.createPlayers(() -> "O", e -> {
-    }, new FileReader("PL"));
+    }, new Language("PL"));
     assertTrue(players.get(0).getName().equalsIgnoreCase("O"));
   }
 
   public void testCreatePlayersWithCorrectInput() {
     List<Player> players = PlayersGenerator.createPlayers(() -> "X", e -> {
-    }, new FileReader("PL"));
+    }, new Language("PL"));
     assertFalse(players.get(0).getName().equalsIgnoreCase("O"));
   }
 }

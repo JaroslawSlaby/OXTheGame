@@ -1,6 +1,6 @@
 package com.js.tictactoe.filereader;
 
-import com.js.tictactoe.language.FileReader;
+import com.js.tictactoe.language.Language;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertNull;
@@ -9,12 +9,12 @@ import static org.testng.Assert.assertNull;
 public class FileReaderTest {
 
   public void notExistingFileThrowsNPException() {
-    FileReader fileReader = new FileReader("PG");
+    Language fileReader = new Language("PG");
     fileReader.loadString("test");
   }
 
   public void readingFromExistingFileNotExistingValue() {
-    FileReader fileReader = new FileReader("EN");
+    Language fileReader = new Language("EN");
     String test = fileReader.loadString("test");
     assertNull(test);
   }

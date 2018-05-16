@@ -2,7 +2,8 @@ package com.js.tictactoe.game.configuration;
 
 import com.js.tictactoe.board.Board;
 import com.js.tictactoe.exceptions.WrongSizeException;
-import com.js.tictactoe.language.FileReader;
+import com.js.tictactoe.language.ILanguage;
+import com.js.tictactoe.language.Language;
 import com.js.tictactoe.language.LanguageConfigurator;
 import com.js.tictactoe.parser.DigitParser;
 import com.js.tictactoe.parser.InputParser;
@@ -20,7 +21,7 @@ public class Configuration {
   private final Supplier<String> input;
   private final Consumer<String> output;
   private Board board;
-  private FileReader reader;
+  private ILanguage reader;
 
   public Configuration(Supplier<String> input, Consumer<String> output) {
     this.input = input;
@@ -28,7 +29,7 @@ public class Configuration {
   }
 
 
-  public FileReader setLanguage() {
+  public ILanguage setLanguage() {
     reader = LanguageConfigurator.setLanguage(input, output);
     return reader;
   }
@@ -144,7 +145,7 @@ public class Configuration {
     }
   }
 
-  void setReader(FileReader reader) {
+  void setReader(ILanguage reader) {
     this.reader = reader;
   }
 }
