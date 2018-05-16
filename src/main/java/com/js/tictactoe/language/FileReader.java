@@ -2,7 +2,6 @@ package com.js.tictactoe.language;
 
 import java.io.*;
 import java.nio.charset.Charset;
-import java.util.Objects;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,17 +23,17 @@ public class FileReader {
       setUpReaders();
       langProperties.load(new InputStreamReader(input, Charset.forName("UTF-8")));
     } catch (NullPointerException | IOException e) {
-      logger.log(Level.WARNING, e.getCause() + e.getLocalizedMessage());
+      logger.log(Level.INFO, e.getCause() + e.getLocalizedMessage());
     }
 
     return langProperties.getProperty(string);
   }
   private void setUpReaders() {
-    String path = Objects.requireNonNull(this.getClass().getClassLoader().getResource(fileName + ".lang")).getFile();
+    String path = ("languages/" + fileName + ".lang");
     try {
       input = new FileInputStream(new File(path));
     } catch (FileNotFoundException e) {
-      e.printStackTrace();
+      logger.log(Level.INFO, e.getCause() + e.getLocalizedMessage());
     }
   }
 }
