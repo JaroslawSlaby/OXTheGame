@@ -17,14 +17,6 @@ public class ConfigurationTest {
     assertEquals(3, board.getWidth());
   }
 
-  @Test(expectedExceptions = StackOverflowError.class)
-  public void checkIfIncorrectInputForBoardCreatorReturnsCorrectBoard() {
-    Configuration configuration = new Configuration(() -> "0", e -> {});
-    configuration.setReader(LanguageConfigurator.setLanguage( () -> "PL", e -> {}));
-    Board board = configuration.generateTable();
-    assertNull(board);
-  }
-
   public void checkIfCorrectInputForSequenceReturnsCorrectValue() {
     Configuration configuration = new Configuration(() -> "3", e -> {});
     configuration.setReader(LanguageConfigurator.setLanguage( () -> "PL", e -> {}));
