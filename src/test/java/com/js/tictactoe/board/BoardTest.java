@@ -84,7 +84,7 @@ public class BoardTest {
     Board board = Board.getRectangleBoard(6, 6);
     Sign sign = Sign.O;
     board.insertSign(Coordinates.parseCoordinates("1 1"), sign);
-    board.printBoard();
+    board.printBoard(e -> {});
   }
 
 }

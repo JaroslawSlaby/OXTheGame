@@ -62,7 +62,7 @@ public class Game {
         match.addGameDraw();
       }
 
-      board.printBoard();
+      board.printBoard(output);
       output.accept(reader.loadString("winner") + currentPlayer.getSign() + ". ");
       output.accept(players.get(0).getSign() + ": " + match.getPlayersScore(players.get(0)) + " ");
       output.accept(players.get(1).getSign() + ": " + match.getPlayersScore(players.get(1)) + "\n");
@@ -86,7 +86,7 @@ public class Game {
     boolean isWinner;
     int i = 0;
     do {
-      board.printBoard();
+      board.printBoard(output);
       boolean added;
       do {
         output.accept(reader.loadString("player") + currentPlayer.getName() + "(" + currentPlayer.getSign() + ")" +

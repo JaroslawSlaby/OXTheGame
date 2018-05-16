@@ -6,6 +6,8 @@ import com.js.tictactoe.dimensions.Dimensions;
 import com.js.tictactoe.exceptions.WrongSizeException;
 import com.js.tictactoe.player.Sign;
 
+import java.util.function.Consumer;
+
 public class Board extends BoardGenerator {
 
   private static final int MIN_SIZE = 3;
@@ -57,8 +59,8 @@ public class Board extends BoardGenerator {
     return table[x][y];
   }
 
-  public void printBoard() {
-    super.printBoard();
+  public void printBoard(Consumer<String> output) {
+    super.printBoard(output);
   }
 
   public int getWidth() {

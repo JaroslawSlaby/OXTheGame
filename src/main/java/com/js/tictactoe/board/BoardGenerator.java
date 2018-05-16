@@ -8,6 +8,8 @@ import com.js.tictactoe.board.printer.BoardPrinter;
 import com.js.tictactoe.dimensions.Dimensions;
 import com.js.tictactoe.player.Sign;
 
+import java.util.function.Consumer;
+
 class BoardGenerator {
 
   Cell[][] table;
@@ -41,8 +43,8 @@ class BoardGenerator {
     return false;
   }
 
-  void printBoard() {
-    BoardPrinter.printBoard(table);
+  void printBoard(Consumer<String> output) {
+    BoardPrinter.printBoard(table, output);
   }
 
   public void clearBoard() {
