@@ -4,6 +4,8 @@ import com.js.tictactoe.language.Language;
 import com.js.tictactoe.parser.DigitParser;
 import org.testng.annotations.Test;
 
+import java.io.FileNotFoundException;
+
 import static org.testng.Assert.*;
 
 @Test
@@ -27,7 +29,7 @@ public class DigitParserTest {
     assertTrue(isCorrect);
   }
 
-  public void checkIfInputCanBeDifferentThanDigit() {
+  public void checkIfInputCanBeDifferentThanDigit() throws FileNotFoundException {
     String correct = DigitParser.getCorrectCoordinates(() -> "10 10", e -> {
     }, new Language("PL"));
     assertEquals(correct, "10 10");
