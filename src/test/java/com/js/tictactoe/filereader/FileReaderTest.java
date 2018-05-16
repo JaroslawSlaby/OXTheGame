@@ -8,6 +8,7 @@ import static org.testng.Assert.assertNull;
 @Test
 public class FileReaderTest {
 
+  @Test(expectedExceptions = NullPointerException.class)
   public void notExistingFileThrowsNPException() {
     Language fileReader = new Language("PG");
     fileReader.loadString("test");

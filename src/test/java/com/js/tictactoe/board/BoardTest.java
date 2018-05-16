@@ -40,7 +40,7 @@ public class BoardTest {
     Board board = Board.getSquareBoard(DEFAULT_SIZE_OF_BOARD);
     Sign sign = Sign.X;
     Coordinates coordinates = Coordinates.parseCoordinates("1 2");
-    boolean isAdded = board.insertSign(coordinates, sign);
+    boolean isAdded = board.tryToInsertSign(coordinates, sign);
     assertTrue(isAdded);
   }
 
@@ -49,16 +49,16 @@ public class BoardTest {
     Board board = Board.getSquareBoard(DEFAULT_SIZE_OF_BOARD);
     Sign sign = Sign.X;
     Coordinates coordinates = Coordinates.parseCoordinates("-1 -2");
-    board.insertSign(coordinates, sign);
+    board.tryToInsertSign(coordinates, sign);
   }
 
   public void insertCorrectSignToFilledCellInBoard() throws WrongIndexException, WrongSizeException {
     Board board = Board.getSquareBoard(DEFAULT_SIZE_OF_BOARD);
     Sign sign = Sign.X;
     Coordinates coordinates = Coordinates.parseCoordinates("1 2");
-    board.insertSign(coordinates, sign);
+    board.tryToInsertSign(coordinates, sign);
     sign = sign.getOppositePlayer();
-    boolean isAdded = board.insertSign(coordinates, sign);
+    boolean isAdded = board.tryToInsertSign(coordinates, sign);
     assertFalse(isAdded);
   }
 
@@ -66,7 +66,7 @@ public class BoardTest {
     Board board = Board.getSquareBoard(5);
     Sign sign = Sign.O;
     Coordinates coordinates = Coordinates.parseCoordinates("10 10");
-    boolean isAdded = board.insertSign(coordinates, sign);
+    boolean isAdded = board.tryToInsertSign(coordinates, sign);
     assertFalse(isAdded);
   }
 
@@ -74,7 +74,7 @@ public class BoardTest {
     Board board = Board.getRectangleBoard(6, 6);
     Sign sign = Sign.O;
     Coordinates coordinates = Coordinates.parseCoordinates("4 4");
-    board.insertSign(coordinates, sign);
+    board.tryToInsertSign(coordinates, sign);
     board.clearBoard();
     Cell cell = board.getCell(4, 4);
     assertTrue(cell.isCellEmpty());
@@ -83,7 +83,7 @@ public class BoardTest {
   public void printingBoardThrowsNoExceptions() throws WrongSizeException, WrongIndexException {
     Board board = Board.getRectangleBoard(6, 6);
     Sign sign = Sign.O;
-    board.insertSign(Coordinates.parseCoordinates("1 1"), sign);
+    board.tryToInsertSign(Coordinates.parseCoordinates("1 1"), sign);
     board.printBoard(e -> {});
   }
 

@@ -22,13 +22,13 @@ public class JudgeTest {
   public void checkIfCorrectlyFilledColumnReturnsTrue() throws WrongIndexException {
     Judge judge = new Judge(board, 5);
 
-    board.insertSign(Coordinates.parseCoordinates("3 3"), Sign.O);
-    board.insertSign(Coordinates.parseCoordinates("0 0"), Sign.X);
-    board.insertSign(Coordinates.parseCoordinates("0 1"), Sign.X);
-    board.insertSign(Coordinates.parseCoordinates("1 0"), Sign.O);
-    board.insertSign(Coordinates.parseCoordinates("0 2"), Sign.X);
-    board.insertSign(Coordinates.parseCoordinates("0 4"), Sign.X);
-    board.insertSign(Coordinates.parseCoordinates("0 3"), Sign.X);
+    board.tryToInsertSign(Coordinates.parseCoordinates("3 3"), Sign.O);
+    board.tryToInsertSign(Coordinates.parseCoordinates("0 0"), Sign.X);
+    board.tryToInsertSign(Coordinates.parseCoordinates("0 1"), Sign.X);
+    board.tryToInsertSign(Coordinates.parseCoordinates("1 0"), Sign.O);
+    board.tryToInsertSign(Coordinates.parseCoordinates("0 2"), Sign.X);
+    board.tryToInsertSign(Coordinates.parseCoordinates("0 4"), Sign.X);
+    board.tryToInsertSign(Coordinates.parseCoordinates("0 3"), Sign.X);
 
     boolean isWinner = judge.isWinner(Sign.X);
     assertTrue(isWinner);
@@ -37,13 +37,13 @@ public class JudgeTest {
   public void checkIfIncorrectlyFilledColumnReturnsFalse() throws WrongIndexException {
     Judge judge = new Judge(board, 4);
 
-    board.insertSign(Coordinates.parseCoordinates("3 3"), Sign.O);
-    board.insertSign(Coordinates.parseCoordinates("0 0"), Sign.X);
-    board.insertSign(Coordinates.parseCoordinates("0 1"), Sign.X);
-    board.insertSign(Coordinates.parseCoordinates("2 2"), Sign.X);
-    board.insertSign(Coordinates.parseCoordinates("0 3"), Sign.X);
-    board.insertSign(Coordinates.parseCoordinates("1 3"), Sign.O);
-    board.insertSign(Coordinates.parseCoordinates("0 4"), Sign.X);
+    board.tryToInsertSign(Coordinates.parseCoordinates("3 3"), Sign.O);
+    board.tryToInsertSign(Coordinates.parseCoordinates("0 0"), Sign.X);
+    board.tryToInsertSign(Coordinates.parseCoordinates("0 1"), Sign.X);
+    board.tryToInsertSign(Coordinates.parseCoordinates("2 2"), Sign.X);
+    board.tryToInsertSign(Coordinates.parseCoordinates("0 3"), Sign.X);
+    board.tryToInsertSign(Coordinates.parseCoordinates("1 3"), Sign.O);
+    board.tryToInsertSign(Coordinates.parseCoordinates("0 4"), Sign.X);
 
     boolean isWinner = judge.isWinner(Sign.X);
     assertFalse(isWinner);
@@ -52,13 +52,13 @@ public class JudgeTest {
   public void checkIfCorrectlyFilledRowReturnsTrue() throws WrongIndexException {
     Judge judge = new Judge(board, 4);
 
-    board.insertSign(Coordinates.parseCoordinates("1 3"), Sign.O);
-    board.insertSign(Coordinates.parseCoordinates("0 4"), Sign.X);
-    board.insertSign(Coordinates.parseCoordinates("3 3"), Sign.O);
-    board.insertSign(Coordinates.parseCoordinates("1 0"), Sign.X);
-    board.insertSign(Coordinates.parseCoordinates("2 0"), Sign.X);
-    board.insertSign(Coordinates.parseCoordinates("3 0"), Sign.X);
-    board.insertSign(Coordinates.parseCoordinates("4 0"), Sign.X);
+    board.tryToInsertSign(Coordinates.parseCoordinates("1 3"), Sign.O);
+    board.tryToInsertSign(Coordinates.parseCoordinates("0 4"), Sign.X);
+    board.tryToInsertSign(Coordinates.parseCoordinates("3 3"), Sign.O);
+    board.tryToInsertSign(Coordinates.parseCoordinates("1 0"), Sign.X);
+    board.tryToInsertSign(Coordinates.parseCoordinates("2 0"), Sign.X);
+    board.tryToInsertSign(Coordinates.parseCoordinates("3 0"), Sign.X);
+    board.tryToInsertSign(Coordinates.parseCoordinates("4 0"), Sign.X);
 
     boolean isWinner = judge.isWinner(Sign.X);
     assertTrue(isWinner);
@@ -67,13 +67,13 @@ public class JudgeTest {
   public void checkIfIncorrectlyFilledRowReturnsFalse() throws WrongIndexException {
     Judge judge = new Judge(board, 4);
 
-    board.insertSign(Coordinates.parseCoordinates("1 3"), Sign.O);
-    board.insertSign(Coordinates.parseCoordinates("0 4"), Sign.X);
-    board.insertSign(Coordinates.parseCoordinates("3 3"), Sign.O);
-    board.insertSign(Coordinates.parseCoordinates("1 0"), Sign.X);
-    board.insertSign(Coordinates.parseCoordinates("2 1"), Sign.X);
-    board.insertSign(Coordinates.parseCoordinates("3 0"), Sign.X);
-    board.insertSign(Coordinates.parseCoordinates("4 0"), Sign.X);
+    board.tryToInsertSign(Coordinates.parseCoordinates("1 3"), Sign.O);
+    board.tryToInsertSign(Coordinates.parseCoordinates("0 4"), Sign.X);
+    board.tryToInsertSign(Coordinates.parseCoordinates("3 3"), Sign.O);
+    board.tryToInsertSign(Coordinates.parseCoordinates("1 0"), Sign.X);
+    board.tryToInsertSign(Coordinates.parseCoordinates("2 1"), Sign.X);
+    board.tryToInsertSign(Coordinates.parseCoordinates("3 0"), Sign.X);
+    board.tryToInsertSign(Coordinates.parseCoordinates("4 0"), Sign.X);
 
     boolean isWinner = judge.isWinner(Sign.X);
     assertFalse(isWinner);
@@ -82,12 +82,12 @@ public class JudgeTest {
   public void checkIDiagonal() throws WrongIndexException {
     Judge judge = new Judge(board, 3);
 
-    board.insertSign(Coordinates.parseCoordinates("0 0"), Sign.O);
-    board.insertSign(Coordinates.parseCoordinates("1 1"), Sign.X);
+    board.tryToInsertSign(Coordinates.parseCoordinates("0 0"), Sign.O);
+    board.tryToInsertSign(Coordinates.parseCoordinates("1 1"), Sign.X);
 
-    board.insertSign(Coordinates.parseCoordinates("4 4"), Sign.X);
-    board.insertSign(Coordinates.parseCoordinates("3 3"), Sign.O);
-    board.insertSign(Coordinates.parseCoordinates("2 2"), Sign.X);
+    board.tryToInsertSign(Coordinates.parseCoordinates("4 4"), Sign.X);
+    board.tryToInsertSign(Coordinates.parseCoordinates("3 3"), Sign.O);
+    board.tryToInsertSign(Coordinates.parseCoordinates("2 2"), Sign.X);
 
     boolean isWinner = judge.isWinner(Sign.X);
     assertFalse(isWinner);
@@ -96,12 +96,12 @@ public class JudgeTest {
   public void checkIDiagonalInOtherWay() throws WrongIndexException {
     Judge judge = new Judge(board, 5);
 
-    board.insertSign(Coordinates.parseCoordinates("4 4"), Sign.X);
-    board.insertSign(Coordinates.parseCoordinates("3 3"), Sign.X);
+    board.tryToInsertSign(Coordinates.parseCoordinates("4 4"), Sign.X);
+    board.tryToInsertSign(Coordinates.parseCoordinates("3 3"), Sign.X);
 
-    board.insertSign(Coordinates.parseCoordinates("2 2"), Sign.X);
-    board.insertSign(Coordinates.parseCoordinates("1 1"), Sign.X);
-    board.insertSign(Coordinates.parseCoordinates("0 0"), Sign.X);
+    board.tryToInsertSign(Coordinates.parseCoordinates("2 2"), Sign.X);
+    board.tryToInsertSign(Coordinates.parseCoordinates("1 1"), Sign.X);
+    board.tryToInsertSign(Coordinates.parseCoordinates("0 0"), Sign.X);
 
     boolean isWinner = judge.isWinner(Sign.X);
     assertTrue(isWinner);
@@ -111,12 +111,12 @@ public class JudgeTest {
   public void checkIDiagonalCorrectWay() throws WrongIndexException {
     Judge judge = new Judge(board, 5);
 
-    board.insertSign(Coordinates.parseCoordinates("4 4"), Sign.X);
-    board.insertSign(Coordinates.parseCoordinates("3 3"), Sign.X);
+    board.tryToInsertSign(Coordinates.parseCoordinates("4 4"), Sign.X);
+    board.tryToInsertSign(Coordinates.parseCoordinates("3 3"), Sign.X);
 
-    board.insertSign(Coordinates.parseCoordinates("2 2"), Sign.X);
-    board.insertSign(Coordinates.parseCoordinates("1 1"), Sign.X);
-    board.insertSign(Coordinates.parseCoordinates("0 0"), Sign.X);
+    board.tryToInsertSign(Coordinates.parseCoordinates("2 2"), Sign.X);
+    board.tryToInsertSign(Coordinates.parseCoordinates("1 1"), Sign.X);
+    board.tryToInsertSign(Coordinates.parseCoordinates("0 0"), Sign.X);
 
     String winnerInDiagonal1 = judge.isWinnerInDiagonal1(0, 0);
     boolean isWinner = winnerInDiagonal1.equals("XXXXX");
@@ -126,12 +126,12 @@ public class JudgeTest {
   public void checkIDiagonalInCorrectWay() throws WrongIndexException {
     Judge judge = new Judge(board, 5);
 
-    board.insertSign(Coordinates.parseCoordinates("4 4"), Sign.X);
-    board.insertSign(Coordinates.parseCoordinates("3 3"), Sign.X);
+    board.tryToInsertSign(Coordinates.parseCoordinates("4 4"), Sign.X);
+    board.tryToInsertSign(Coordinates.parseCoordinates("3 3"), Sign.X);
 
-    board.insertSign(Coordinates.parseCoordinates("2 2"), Sign.O);
-    board.insertSign(Coordinates.parseCoordinates("1 1"), Sign.X);
-    board.insertSign(Coordinates.parseCoordinates("0 0"), Sign.X);
+    board.tryToInsertSign(Coordinates.parseCoordinates("2 2"), Sign.O);
+    board.tryToInsertSign(Coordinates.parseCoordinates("1 1"), Sign.X);
+    board.tryToInsertSign(Coordinates.parseCoordinates("0 0"), Sign.X);
 
     String winnerInDiagonal1 = judge.isWinnerInDiagonal1(0, 0);
     assertEquals(winnerInDiagonal1, "XXOXX");
@@ -140,11 +140,11 @@ public class JudgeTest {
   public void checkIDiagonalInCorrectWayAnother() throws WrongIndexException {
     Judge judge = new Judge(board, 4);
 
-    board.insertSign(Coordinates.parseCoordinates("1 0"), Sign.X);
-    board.insertSign(Coordinates.parseCoordinates("2 1"), Sign.X);
+    board.tryToInsertSign(Coordinates.parseCoordinates("1 0"), Sign.X);
+    board.tryToInsertSign(Coordinates.parseCoordinates("2 1"), Sign.X);
 
-    board.insertSign(Coordinates.parseCoordinates("3 2"), Sign.O);
-    board.insertSign(Coordinates.parseCoordinates("4 3"), Sign.X);
+    board.tryToInsertSign(Coordinates.parseCoordinates("3 2"), Sign.O);
+    board.tryToInsertSign(Coordinates.parseCoordinates("4 3"), Sign.X);
 
     String winnerInDiagonal1 = judge.isWinnerInDiagonal1(4, 3);
     assertEquals(winnerInDiagonal1, "XXOX");
@@ -154,12 +154,12 @@ public class JudgeTest {
   public void checkIDiagonal2InCorrectWay() throws WrongIndexException {
     Judge judge = new Judge(board, 5);
 
-    board.insertSign(Coordinates.parseCoordinates("0 4"), Sign.X);
-    board.insertSign(Coordinates.parseCoordinates("1 3"), Sign.X);
+    board.tryToInsertSign(Coordinates.parseCoordinates("0 4"), Sign.X);
+    board.tryToInsertSign(Coordinates.parseCoordinates("1 3"), Sign.X);
 
-    board.insertSign(Coordinates.parseCoordinates("2 2"), Sign.X);
-    board.insertSign(Coordinates.parseCoordinates("3 1"), Sign.X);
-    board.insertSign(Coordinates.parseCoordinates("4 0"), Sign.X);
+    board.tryToInsertSign(Coordinates.parseCoordinates("2 2"), Sign.X);
+    board.tryToInsertSign(Coordinates.parseCoordinates("3 1"), Sign.X);
+    board.tryToInsertSign(Coordinates.parseCoordinates("4 0"), Sign.X);
 
     String winnerInDiagonal1 = judge.isWinnerInDiagonal2(4, 0);
     assertEquals(winnerInDiagonal1, "XXXXX");
@@ -168,12 +168,12 @@ public class JudgeTest {
   public void checkIDiagonal2InInCorrectWay() throws WrongIndexException {
     Judge judge = new Judge(board, 5);
 
-    board.insertSign(Coordinates.parseCoordinates("0 4"), Sign.X);
-    board.insertSign(Coordinates.parseCoordinates("1 3"), Sign.X);
+    board.tryToInsertSign(Coordinates.parseCoordinates("0 4"), Sign.X);
+    board.tryToInsertSign(Coordinates.parseCoordinates("1 3"), Sign.X);
 
-    board.insertSign(Coordinates.parseCoordinates("2 2"), Sign.O);
-    board.insertSign(Coordinates.parseCoordinates("3 1"), Sign.X);
-    board.insertSign(Coordinates.parseCoordinates("4 0"), Sign.X);
+    board.tryToInsertSign(Coordinates.parseCoordinates("2 2"), Sign.O);
+    board.tryToInsertSign(Coordinates.parseCoordinates("3 1"), Sign.X);
+    board.tryToInsertSign(Coordinates.parseCoordinates("4 0"), Sign.X);
 
     String winnerInDiagonal1 = judge.isWinnerInDiagonal2(4, 0);
     assertEquals(winnerInDiagonal1, "XXOXX");

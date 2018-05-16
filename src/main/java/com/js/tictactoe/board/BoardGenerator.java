@@ -27,7 +27,7 @@ class BoardGenerator {
         table[i][j] = new EmptyCell();
   }
 
-  boolean insertSign(Coordinates coordinates, Sign sign) {
+  boolean tryToInsertSign(Coordinates coordinates, Sign sign) {
     int y = coordinates.getIntegerX();
     int x = coordinates.getIntegerY();
 

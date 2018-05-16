@@ -6,6 +6,9 @@ import com.js.tictactoe.player.Colors;
 import java.util.function.Consumer;
 
 public class BoardPrinter {
+
+  private static final int FIRST_NUMBER_WITH_TWO_DIGITS = 10;
+
   public static void printBoard(Cell[][] table, Consumer<String> output) {
     output.accept(Colors.ANSI_DEFAULT + "y\\x");
     for (int i = 0; i < table[0].length; i++) {
@@ -23,7 +26,7 @@ public class BoardPrinter {
   }
 
   private static void printRightMargin(Consumer<String> output, int i) {
-    if(i < 10) {
+    if(i < FIRST_NUMBER_WITH_TWO_DIGITS) {
       output.accept(Colors.ANSI_DEFAULT + "" + i + " ");
     } else {
       output.accept(Colors.ANSI_DEFAULT + "" + i + "");

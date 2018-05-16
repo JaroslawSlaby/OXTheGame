@@ -33,7 +33,7 @@ public class PlayersGenerator {
   private static String createName(Supplier<String> input, Consumer<String> output, ILanguage reader, boolean first) {
     String name;
     do {
-      output.accept(reader.loadString(first ? "1stplayerName" : "2ndplayerName"));
+      output.accept(reader.loadString(first ? "stplayerName" : "ndplayerName"));
       name = input.get();
     } while (name.length() == 0);
 

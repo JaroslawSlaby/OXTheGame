@@ -35,9 +35,9 @@ public class Board extends BoardGenerator {
     return new Board(new Dimensions(width, height));
   }
 
-  public boolean insertSign(Coordinates coordinates, Sign sign) {
+  public boolean tryToInsertSign(Coordinates coordinates, Sign sign) {
     latest = coordinates;
-    return super.insertSign(coordinates, sign);
+    return super.tryToInsertSign(coordinates, sign);
   }
 
   public Cell[] getRow(int row) {

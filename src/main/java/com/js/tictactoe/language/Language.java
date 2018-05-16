@@ -23,7 +23,11 @@ public class Language implements ILanguage {
       setUpReaders();
       langProperties.load(new InputStreamReader(input, Charset.forName("UTF-8")));
     } catch (NullPointerException | IOException e) {
-      logger.log(Level.INFO, e.getCause() + e.getLocalizedMessage());
+      try {
+        throw e;
+      } catch (IOException e1) {
+        e1.printStackTrace();
+      }
     }
 
     return langProperties.getProperty(string);

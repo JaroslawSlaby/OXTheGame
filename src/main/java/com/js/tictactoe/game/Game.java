@@ -6,7 +6,6 @@ import com.js.tictactoe.exceptions.WrongIndexException;
 import com.js.tictactoe.game.configuration.Configuration;
 import com.js.tictactoe.judge.Judge;
 import com.js.tictactoe.language.ILanguage;
-import com.js.tictactoe.language.Language;
 import com.js.tictactoe.parser.DigitParser;
 import com.js.tictactoe.parser.InputParser;
 import com.js.tictactoe.player.Player;
@@ -51,7 +50,7 @@ public class Game {
     do {
       boolean winner = move();
       switchPlayers();
-      chooseWinner(winner);
+      addCurrentSituation(winner);
       printResults();
       board.clearBoard();
       switchPlayers();
@@ -63,7 +62,7 @@ public class Game {
     output.accept(players.get(1).getSign() + ": " + match.getPlayersScore(players.get(1)) + "\n\n");
   }
 
-  private void chooseWinner(boolean winner) {
+  private void addCurrentSituation(boolean winner) {
     if (winner) {
       output.accept(reader.loadString("winner") + currentPlayer.getSign() + ". ");
       match.addGameWinner(currentPlayer);
@@ -83,50 +82,54 @@ public class Game {
   }
 
   private boolean move() {
-    boolean isWinner;
+    boolean isWinner = false;
     int i = 0;
     do {
-      board.printBoard(output);
-      output.accept(reader.loadString("player") + currentPlayer.getName() + "(" + currentPlayer.getSign() + ")" +
-              reader.loadString("move") + board.getWidth() + reader.loadString("movePt2") + board.getHeight() + ": ");
-      boolean added;
-      do {
+      printOutputDuringMove();
+      String line = DigitParser.correctCoordinates(input, output, reader);
 
-        String line = DigitParser.correctCoordinates(input, output, reader);
+      if(isExit(line)) {
+        match.endMatch();
+        return false;
+      }
 
-        if (isExit(line)) {
-          return false;
-        }
+      boolean isAdded = tryToMakeMove(line);
+      if (isAdded) {
+        isWinner = judge.isWinner(currentPlayer.getSign());
+        i++;
+        switchPlayers();
+      }
 
-        added = makeMove(line, currentPlayer);
-
-        if(!added) {
-          output.accept(reader.loadString("coords"));
-        }
-
-      } while (!added);
-
-      isWinner = judge.isWinner(currentPlayer.getSign());
-      i++;
-      switchPlayers();
-    } while (!isWinner && i < board.getHeight() * board.getWidth());
+    } while (!isWinner && i < board.getHeight() * board.getWidth() && match.isNextRound());
 
     return isWinner;
   }
 
-  private boolean isExit(String line) {
-    if (line.equalsIgnoreCase("quit")) {
-      match.endMatch();
-      return true;
-    }
-    return false;
+  private void printOutputDuringMove() {
+    board.printBoard(output);
+    output.accept(reader.loadString("player") + currentPlayer.getName() + "(" + currentPlayer.getSign() + ")" +
+            reader.loadString("move") + board.getWidth() + reader.loadString("movePt2") + board.getHeight() + ": ");
+  }
+
+  private boolean tryToMakeMove(String line) {
+    boolean added;
+    do {
+      added = makeMove(line, currentPlayer);
+
+      if(!added) {
+        output.accept(reader.loadString("coords"));
+      }
+
+    } while (!added);
+
+    return true;
   }
 
   private boolean makeMove(String line, Player currentPlayer) {
     boolean added = false;
     try {
       int[] coords = InputParser.parseStringInput(line);
-      added = board.insertSign(Coordinates.parseCoordinates(coords), currentPlayer.getSign());
+      added = board.tryToInsertSign(Coordinates.parseCoordinates(coords), currentPlayer.getSign());
       if(!added) {
         output.accept(reader.loadString("cell"));
       }
@@ -134,5 +137,9 @@ public class Game {
       output.accept(reader.loadString("coords"));
     }
     return added;
+  }
+
+  private boolean isExit(String line) {
+    return line.equalsIgnoreCase("quit");
   }
 }
