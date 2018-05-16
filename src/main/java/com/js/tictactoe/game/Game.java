@@ -48,27 +48,28 @@ public class Game {
 
   private void playingLoop() {
     do {
-
-      boolean winner;
-      winner = move();
+      boolean winner = move();
       switchPlayers();
-
-      if (winner) {
-        output.accept(reader.loadString("winner") + currentPlayer.getSign() + ". ");
-        match.addGameWinner(currentPlayer);
-      } else {
-        output.accept(reader.loadString("draw"));
-        match.addGameDraw();
-      }
-
-      output.accept(players.get(0).getSign() + ": " + match.getPlayersScore(players.get(0)) + " ");
-      output.accept(players.get(1).getSign() + ": " + match.getPlayersScore(players.get(1)) + "\n\n");
-
-
+      chooseWinner(winner);
+      printResults();
       board.clearBoard();
       switchPlayers();
-
     } while (match.isNextRound());
+  }
+
+  private void printResults() {
+    output.accept(players.get(0).getSign() + ": " + match.getPlayersScore(players.get(0)) + " ");
+    output.accept(players.get(1).getSign() + ": " + match.getPlayersScore(players.get(1)) + "\n\n");
+  }
+
+  private void chooseWinner(boolean winner) {
+    if (winner) {
+      output.accept(reader.loadString("winner") + currentPlayer.getSign() + ". ");
+      match.addGameWinner(currentPlayer);
+    } else {
+      output.accept(reader.loadString("draw"));
+      match.addGameDraw();
+    }
   }
 
   private void switchPlayers() {
